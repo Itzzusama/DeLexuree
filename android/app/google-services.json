@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "2034899931",
+    "project_id": "tide-tidey",
+    "storage_bucket": "tide-tidey.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2034899931:android:702d09150cce562f5425fe",
+        "android_client_info": {
+          "package_name": "com.tidetidycustomer.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHbKLzdkEAIhPOZgoure1ZqoCBoKStewo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2034899931:android:edef1dfa1e0886ec5425fe",
+        "android_client_info": {
+          "package_name": "com.tidetidyemployee.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHbKLzdkEAIhPOZgoure1ZqoCBoKStewo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
