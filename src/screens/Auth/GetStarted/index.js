@@ -1,79 +1,70 @@
-import {StyleSheet, Dimensions, View} from 'react-native';
-import React from 'react';
+import {
+  StyleSheet,
+  Dimensions,
+  View,
+  ImageBackground,
+  StatusBar,
+} from "react-native";
+import React from "react";
 
-import ScreenWrapper from '../../../components/ScreenWrapper';
-import CustomButton from '../../../components/CustomButton';
-import CustomText from '../../../components/CustomText';
-import ImageFast from '../../../components/ImageFast';
+import ScreenWrapper from "../../../components/ScreenWrapper";
+import CustomText from "../../../components/CustomText";
+import CustomButton from "../../../components/CustomButton";
 
-import {Images} from '../../../assets/images';
-import {COLORS} from '../../../utils/COLORS';
-import fonts from '../../../assets/fonts';
+import { Images } from "../../../assets/images";
+import { COLORS } from "../../../utils/COLORS";
 
-const {width, height} = Dimensions.get('window');
-
-const GetStarted = ({navigation}) => {
+const GetStarted = ({ navigation }) => {
   return (
-    <ScreenWrapper
-      translucent
-      statusBarColor="transparent"
-      paddingHorizontal={0.1}>
-      <View style={styles.imgContainer}>
-        <ImageFast
-          style={styles.img}
-          source={Images.getStarted}
-          resizeMode="contain"
-        />
-      </View>
-      <View style={styles.container}>
-        <CustomText
-          label="getStartHeading"
-          fontSize={27}
-          marginBottom={15}
-          textAlign="center"
-          lineHeight={40}
-          fontFamily={fonts.bold}
-          color={COLORS.white}
-        />
-        <CustomText
-          label="getStartDesc"
-          color={COLORS.white}
-          fontSize={20}
-          marginBottom={30}
-          textAlign="center"
-          lineHeight={28}
-          fontFamily={fonts.medium}
+    <ImageBackground source={Images.getStarted} style={styles.imgContainer}>
+      <StatusBar translucent backgroundColor="transparent" />
+
+      <View
+        style={{ paddingHorizontal: 12, justifyContent: "flex-end", flex: 1 }}
+      >
+        <CustomButton
+          title={"Continue with Email"}
+          image={Images.apple}
+          customStyle={styles.socialButton}
+          customText={styles.socialText}
         />
         <CustomButton
-          backgroundColor={COLORS.white}
-          color={COLORS.primaryColor}
-          title="Get Started"
-          onPress={() => navigation.navigate('Category')}
+          title={"Continue with Google"}
+          image={Images.google}
+          customStyle={styles.socialButton}
+          customText={styles.socialText}
+          marginTop={12}
+          // onPress={onGoogleButtonPress}
         />
       </View>
-    </ScreenWrapper>
+      <CustomText
+        onPress={() => navigation.navigate("Login")}
+        label={"Already have an Account?  Login"}
+        color={COLORS.white}
+        marginTop={26}
+        marginBottom={30}
+        textAlign={"center"}
+        alignSelf={"center"}
+      />
+    </ImageBackground>
   );
 };
 export default GetStarted;
 const styles = StyleSheet.create({
   imgContainer: {
-    width: width,
-    height: height / 1.35,
-    backgroundColor: COLORS.white,
-    padding: 40,
+    flex: 1,
   },
   img: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
+    flex: 1,
   },
-
-  container: {
-    width: width,
-    height: height / 3.2,
-    alignItems: 'center',
-    backgroundColor: COLORS.primaryColor,
-    position: 'absolute',
-    bottom: 0,
-    padding: 25,
+  socialButton: {
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderRadius: 12,
+  },
+  socialText: {
+    color: COLORS.black,
   },
 });
