@@ -1,42 +1,47 @@
-import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import {
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React from "react";
 
-import Icons from '../../../../components/Icons';
+import Icons from "../../../../components/Icons";
 
-import {COLORS} from '../../../../utils/COLORS';
-import fonts from '../../../../assets/fonts';
+import { COLORS } from "../../../../utils/COLORS";
+import fonts from "../../../../assets/fonts";
+import { Images } from "../../../../assets/images";
 
-const Footer = ({inputText, setInputText, sendMessage}) => {
+const Footer = ({ inputText, setInputText, sendMessage }) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Type a message..."
+          placeholder="Type your message..."
           value={inputText}
           multiline
-          textAlignVertical="top"
-          onChangeText={text => setInputText(text)}
+          onChangeText={(text) => setInputText(text)}
         />
 
         {inputText?.length ? (
-          <TouchableOpacity style={{marginRight: 15}} onPress={sendMessage}>
-            <Icons
-              family="FontAwesome"
-              name="send"
-              size={22}
-              color={COLORS.primaryColor}
+          <TouchableOpacity style={{ marginRight: 15 }} onPress={sendMessage}>
+            <Image
+              source={Images.sendButton}
+              style={{ height: 42, width: 42 }}
             />
           </TouchableOpacity>
         ) : (
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              width: '20%',
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-around",
+              width: "20%",
               marginRight: 5,
-            }}>
+            }}
+          >
             <Icons
               family="AntDesign"
               name="plus"
@@ -62,18 +67,17 @@ export default Footer;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    padding: 20,
-    paddingBottom: 30,
-    backgroundColor: COLORS.white,
+    padding: 16,
+    // paddingBottom: 30,
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    height: 52,
-    width: '100%',
-    backgroundColor: COLORS.lightGray,
-    borderRadius: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 64,
+    width: "100%",
+    backgroundColor: "#e4f0ec",
+    borderRadius: 99,
   },
   input: {
     flex: 1,

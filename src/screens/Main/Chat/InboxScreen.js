@@ -163,7 +163,7 @@ const InboxScreen = ({route}) => {
         />
       )}
       headerUnScrollable={() => (
-        <Header source={Images.mess} title={data?.name} desc={data?.type} />
+        <Header source={Images.user} title={'Jeff D. Powell'} desc={'Service Expert'} />
       )}>
       <FlatList
         ref={flatListRef}

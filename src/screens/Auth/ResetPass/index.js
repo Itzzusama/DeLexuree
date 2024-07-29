@@ -1,25 +1,26 @@
-import {StyleSheet} from 'react-native';
-import React, {useEffect, useMemo, useState} from 'react';
+import { StyleSheet } from "react-native";
+import React, { useEffect, useMemo, useState } from "react";
 
-import ResetSuccessModal from './molecules/ResetSuccessModal';
-import ScreenWrapper from '../../../components/ScreenWrapper';
-import CustomButton from '../../../components/CustomButton';
-import AuthWrapper from '../../../components/AuthWrapper';
-import CustomInput from '../../../components/CustomInput';
-import { passwordRegex } from '../../../utils/constants';
-import { put } from '../../../Services/ApiRequest';
-import { ToastMessage } from '../../../utils/ToastMessage';
+import ResetSuccessModal from "./molecules/ResetSuccessModal";
+import ScreenWrapper from "../../../components/ScreenWrapper";
+import CustomButton from "../../../components/CustomButton";
+import AuthWrapper from "../../../components/AuthWrapper";
+import CustomInput from "../../../components/CustomInput";
+import { passwordRegex } from "../../../utils/constants";
+import { put } from "../../../Services/ApiRequest";
+import { ToastMessage } from "../../../utils/ToastMessage";
+import Header from "../../../components/Header";
 
-const ResetPass = ({navigation,route}) => {
+const ResetPass = ({ navigation, route }) => {
   const token = route?.params?.token;
 
   const init = {
-    password: '',
-    confirmPassword: '',
+    password: "",
+    confirmPassword: "",
   };
   const inits = {
-    passwordError: '',
-    confirmPasswordError: '',
+    passwordError: "",
+    confirmPasswordError: "",
   };
   const [state, setState] = useState(init);
   const [errors, setErrors] = useState(inits);
@@ -30,16 +31,18 @@ const ResetPass = ({navigation,route}) => {
   const array = [
     {
       id: 1,
-      placeholder: 'Password',
+      placeholder: "Password",
+      label: "New Password",
       value: state.password,
-      onChange: text => setState({...state, password: text}),
+      onChange: (text) => setState({ ...state, password: text }),
       error: errors?.passwordError,
     },
     {
       id: 2,
-      placeholder: 'Confirm Password',
+      placeholder: "Confirm Password",
       value: state.confirmPassword,
-      onChange: text => setState({...state, confirmPassword: text}),
+      label: "Confirm Password",
+      onChange: (text) => setState({ ...state, confirmPassword: text }),
       error: errors?.confirmPasswordError,
     },
   ];
@@ -51,11 +54,11 @@ const ResetPass = ({navigation,route}) => {
         token: token,
         password: state.password,
       };
-      const response = await put('users/update-password/', body);
+      const response = await put("users/update-password/", body);
       if (response.data?.success) {
-        setResetModal(true)
+        setResetModal(true);
       }
-      console.log('res-------------', response.data);
+      console.log("res-------------", response.data);
     } catch (error) {
       console.log(error.response.data);
       ToastMessage(error?.response?.data?.message);
@@ -67,38 +70,43 @@ const ResetPass = ({navigation,route}) => {
   const errorCheck = useMemo(() => {
     return () => {
       let newErrors = {};
-      if (!state.password) newErrors.passwordError = 'Enter New Password';
+      if (!state.password) newErrors.passwordError = "Enter New Password";
       else if (!passwordRegex.test(state.password))
-        newErrors.passwordError = 'Password must contain 1 number, 1 special character, Uppercase and 8 digits';
+        newErrors.passwordError =
+          "Password must contain 1 number, 1 special character, Uppercase and 8 digits";
       else if (!state.confirmPassword)
-        newErrors.confirmPasswordError = 'Please enter Password';
+        newErrors.confirmPasswordError = "Please enter Password";
       else if (!passwordRegex.test(state.confirmPassword))
-        newErrors.confirmPasswordError = 'Password must contain 1 number, 1 special character, Uppercase and 8 digits';
+        newErrors.confirmPasswordError =
+          "Password must contain 1 number, 1 special character, Uppercase and 8 digits";
       else if (state.password !== state.confirmPassword)
-        newErrors.confirmPasswordError = 'Passwords do not match';
+        newErrors.confirmPasswordError = "Passwords do not match";
       setErrors(newErrors);
     };
   }, [state]);
-  
 
   useEffect(() => {
     errorCheck();
   }, [errorCheck]);
   return (
     <ScreenWrapper
+      headerUnScrollable={() => <Header />}
       footerUnScrollable={() => (
         <CustomButton
           title="Reset Password"
           marginBottom={30}
           width="90%"
-          // onPress={() => setResetModal(true)}
-          onPress={handleSetNewPassword}
-          disabled={!Object.values(errors).every(error => error === '')}
+          onPress={() => setResetModal(true)}
+          // onPress={handleSetNewPassword}
+          disabled={!Object.values(errors).every((error) => error === "")}
           loading={loading}
-
         />
-      )}>
-      <AuthWrapper heading="Reset Password" desc="resetDesc">
+      )}
+    >
+      <AuthWrapper
+        heading="Create New Password"
+        desc="Create a new password and confirm it to login next time."
+      >
         <ResetSuccessModal
           isVisible={isResetModal}
           onDisable={() => {
@@ -107,13 +115,13 @@ const ResetPass = ({navigation,route}) => {
               index: 0,
               routes: [
                 {
-                  name: 'Login',
+                  name: "Login",
                 },
               ],
             });
           }}
         />
-        {array.map(item => (
+        {array.map((item) => (
           <CustomInput
             key={item?.id}
             placeholder={item.placeholder}
@@ -121,6 +129,7 @@ const ResetPass = ({navigation,route}) => {
             onChangeText={item.onChange}
             error={item.error}
             secureTextEntry
+            withLabel={item.label}
           />
         ))}
       </AuthWrapper>

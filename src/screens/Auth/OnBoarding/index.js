@@ -65,7 +65,11 @@ const OnBoarding = () => {
         pagingEnabled
         renderItem={({ item }) => (
           <Animated.View style={styles.sliderItem}>
-            <Animated.Image style={styles.img} source={item.img} resizeMode={'cover'} />
+            <Animated.Image
+              style={styles.img}
+              source={item.img}
+              resizeMode={"cover"}
+            />
           </Animated.View>
         )}
       />
@@ -117,6 +121,7 @@ const OnBoarding = () => {
       <View style={{ padding: 20 }}>
         <CustomButton
           marginBottom={10}
+          
           title={currentIndex == 2 ? "Get Started" : "Next"}
           onPress={
             currentIndex == 2

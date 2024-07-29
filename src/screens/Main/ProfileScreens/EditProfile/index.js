@@ -1,34 +1,45 @@
-import {ActivityIndicator, Pressable, StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
-import CustomHeader from '../../../../components/CustomHeader';
-import ScreenWrapper from '../../../../components/ScreenWrapper';
-import CustomText from '../../../../components/CustomText';
-import {COLORS} from '../../../../utils/COLORS';
-import {className} from '../../../../global-styles';
-import CustomButton from '../../../../components/CustomButton';
-import GooglePlaces from '../../../../components/GooglePlaces';
-import CustomInput from '../../../../components/CustomInput';
-import {useNavigation} from '@react-navigation/native';
-import {Images} from '../../../../assets/images';
-import ImageFast from '../../../../components/ImageFast';
-import fonts from '../../../../assets/fonts';
-import {useDispatch, useSelector} from 'react-redux';
-import {get, put} from '../../../../Services/ApiRequest';
-import {ToastMessage} from '../../../../utils/ToastMessage';
-import {setUserData} from '../../../../store/reducer/usersSlice';
-import UploadImage from '../../../../components/UploadImage';
+import {
+  ActivityIndicator,
+  Pressable,
+  TouchableOpacity,
+  StyleSheet,
+  View,
+} from "react-native";
+import React, { useState } from "react";
+import moment from "moment";
 
-import {Image as ImageCompressor} from 'react-native-compressor';
+import ScreenWrapper from "../../../../components/ScreenWrapper";
+import CustomText from "../../../../components/CustomText";
+import CustomDropDown from "../../../../components/CustomDropDown";
+import { COLORS } from "../../../../utils/COLORS";
+import { className } from "../../../../global-styles";
+import CustomButton from "../../../../components/CustomButton";
+import DatePicker from "react-native-date-picker";
 
-import storage from '@react-native-firebase/storage';
+import CustomInput from "../../../../components/CustomInput";
+import { useNavigation } from "@react-navigation/native";
+import { Images } from "../../../../assets/images";
+import ImageFast from "../../../../components/ImageFast";
+import fonts from "../../../../assets/fonts";
+import { useDispatch, useSelector } from "react-redux";
+import { get, put } from "../../../../Services/ApiRequest";
+import { ToastMessage } from "../../../../utils/ToastMessage";
+import { setUserData } from "../../../../store/reducer/usersSlice";
+import UploadImage from "../../../../components/UploadImage";
+
+import { Image as ImageCompressor } from "react-native-compressor";
+
+import storage from "@react-native-firebase/storage";
+import Header from "../../../../components/Header";
 
 const EditProfile = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {userData} = useSelector(state => state.users);
+  const { userData } = useSelector((state) => state.users);
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
   const [image, setImage] = useState(userData?.profilePicture);
+  const [gender, setGender] = useState("Male");
 
   const init = {
     fName: userData?.fname,
@@ -38,27 +49,27 @@ const EditProfile = () => {
   };
 
   const [state, setState] = useState(init);
+  const [birthdate, setBirthdate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+  const formattedDate = moment(birthdate).format("DD-MM-YYYY");
 
-  const [address, setAddress] = useState(userData?.location?.address);
-
-  console.log('res======>', image);
 
   const handleUpdateUser = async () => {
     setLoading(true);
     try {
       const body = {
-        fcmtoken: '',
+        fcmtoken: "",
         fname: state?.fName,
         lname: state?.lName,
         location: {
-          lat: '12312312',
-          lng: '1231231',
+          lat: "12312312",
+          lng: "1231231",
           address: address,
         },
         profilePicture: image,
         DoorNum: state?.DoorNum,
       };
-      const response = await put('users/update-user', body);
+      const response = await put("users/update-user", body);
       if (response.data.success) {
         getProfile();
         navigation.goBack();
@@ -75,52 +86,48 @@ const EditProfile = () => {
   const array = [
     {
       id: 1,
-      placeholder: 'First Name',
+      placeholder: "Enter Full Name",
+      label: "Full Name",
       value: state.fName,
-      onChange: text => setState({...state, fName: text}),
+      onChange: (text) => setState({ ...state, fName: text }),
     },
 
     {
       id: 2,
-      placeholder: 'Last Name',
+      placeholder: "Email Address",
+      label: "Email Address",
       value: state.lName,
-      onChange: text => setState({...state, lName: text}),
+      onChange: (text) => setState({ ...state, lName: text }),
     },
     {
       id: 3,
-      placeholder: 'Phone Number',
+      placeholder: "Phone Number",
+      label: "Phone Number",
       value: state.phone,
-      onChange: text => setState({...state, phone: text}),
+      onChange: (text) => setState({ ...state, phone: text }),
     },
-    {
-      id: 6,
-    },
-    {
-      id: 7,
-      placeholder: 'Door Number',
-      value: state.DoorNum,
-      onChange: text => setState({...state, DoorNum: text}),
-    },
+    { id: 3.1 },
+    { id: 3.2 },
   ];
 
-  const uploadAndGetUrl = async file => {
+  const uploadAndGetUrl = async (file) => {
     setImageLoading(true);
     try {
       const resizeUri = await ImageCompressor.compress(
-        file.fileCopyUri || file.path,
+        file.fileCopyUri || file.path
       );
       const filename = `images/${new Date()
         .toISOString()
-        .replace(/[.:-]+/g, '_')}`;
+        .replace(/[.:-]+/g, "_")}`;
       const uploadUri =
-        Platform.OS === 'ios' ? resizeUri.replace('file://', '') : resizeUri;
+        Platform.OS === "ios" ? resizeUri.replace("file://", "") : resizeUri;
       const storageRef = storage().ref(filename);
       await storageRef.putFile(uploadUri);
       const url = await storageRef.getDownloadURL();
-      ToastMessage('Image uploaded successfully');
+      ToastMessage("Image uploaded successfully");
       return url, setImage(url);
     } catch (err) {
-      ToastMessage('Upload Again');
+      ToastMessage("Upload Again");
     } finally {
       setImageLoading(false);
     }
@@ -128,36 +135,40 @@ const EditProfile = () => {
 
   const getProfile = async () => {
     try {
-      const response = await get('users/me');
+      const response = await get("users/me");
       dispatch(setUserData(response.data?.user));
     } catch (error) {}
   };
 
   return (
-    <ScreenWrapper backgroundColor={COLORS.F8} paddingHorizontal={'0%'}>
-      <View style={className('bg-white px-5 py-3')}>
-        <CustomHeader lable={'Edit Profile'} />
-      </View>
+    <ScreenWrapper
+      backgroundColor={COLORS.white}
+      paddingHorizontal={"0%"}
+      headerUnScrollable={() => <Header title={"Edit Profile"} />}
+    >
       {imageLoading ? (
-        <ActivityIndicator size={'large'} />
+        <ActivityIndicator size={"large"} />
       ) : (
         <UploadImage
-          handleChange={async res => {
+          handleChange={async (res) => {
             const url = await uploadAndGetUrl(res);
             // setImage(url);
           }}
-          renderButton={res => (
+          renderButton={(res) => (
             <Pressable
               onPress={res}
-              style={className('align-center justify-center mt-7')}>
+              style={className("align-center justify-center mt-7")}
+            >
               <ImageFast
                 source={
-                  userData?.profilePicture ? {uri: image} : Images.sampleProfile
+                  userData?.profilePicture
+                    ? { uri: image }
+                    : Images.sampleProfile
                 }
-                style={{height: 90, width: 90, borderRadius: 50}}
+                style={{ height: 90, width: 90, borderRadius: 50 }}
               />
               <CustomText
-                label={'Change Profile Picture'}
+                label={"Change Profile Picture"}
                 fontSize={14}
                 fontFamily={fonts.semiBold}
               />
@@ -166,15 +177,64 @@ const EditProfile = () => {
         />
       )}
 
-      <View style={className('px-5 pt-4 flex-1')}>
-        {array.map(item =>
-          item.id == 6 ? (
-            <GooglePlaces
-              key={item.id}
-              value={address}
-              setValue={setAddress}
-              placeholder={item.placeholder}
-            />
+      <View style={className("px-5 pt-4 flex-1")}>
+        {array.map((item) =>
+          item.id == 3.1 ? (
+            <View>
+              <CustomText
+                label={"Date of Birth"}
+                marginBottom={5}
+                fontSize={14}
+                fontFamily={fonts.semiBold}
+              />
+              <TouchableOpacity
+                onPress={() => setOpen(true)}
+                style={{
+                  justifyContent: "center",
+                  height: 55,
+                  marginBottom: 18,
+                  paddingHorizontal: 15,
+                  borderRadius: 4,
+                  backgroundColor: COLORS.white,
+                  borderWidth: 0.2,
+                  borderColor: COLORS.gray,
+                }}
+              >
+                <CustomText
+                  label={formattedDate ? formattedDate : " Date Of Birth"}
+                  fontSize={14}
+                />
+              </TouchableOpacity>
+              <DatePicker
+                modal
+                open={open}
+                mode="date"
+                maximumDate={new Date()}
+                date={birthdate}
+                onConfirm={(date) => {
+                  setOpen(false);
+                  setBirthdate(date);
+                }}
+                onCancel={() => {
+                  setOpen(false);
+                }}
+              />
+            </View>
+          ) : item.id == 3.2 ? (
+            <>
+              <CustomText
+                label={"Gender"}
+                marginBottom={5}
+                fontSize={14}
+                fontFamily={fonts.semiBold}
+              />
+              <CustomDropDown
+                placeholder={"Select your Gender"}
+                value={gender}
+                setValue={setGender}
+                options={["Male", "Female"]}
+              />
+            </>
           ) : (
             <CustomInput
               key={item?.id}
@@ -182,11 +242,12 @@ const EditProfile = () => {
               value={item.value}
               onChangeText={item.onChange}
               editable={item?.id == 3}
+              withLabel={item?.label}
             />
-          ),
+          )
         )}
       </View>
-      <View style={className('px-5 mb-6')}>
+      <View style={className("px-5 mb-6")}>
         <CustomButton
           title="Save"
           loading={loading}

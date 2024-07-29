@@ -31,7 +31,7 @@ const Header = ({title, marginBottom, rightPress, source, desc}) => {
             height: 48,
             borderRadius: 100,
             backgroundColor: COLORS.lightGray,
-            padding: 12,
+            padding: 2,
             marginRight: 10,
           }}>
           <ImageFast
@@ -41,7 +41,7 @@ const Header = ({title, marginBottom, rightPress, source, desc}) => {
           />
         </View>
         <View>
-          <CustomText label={title} fontFamily={fonts.semiBold} />
+          <CustomText label={title} fontFamily={fonts.bold} />
           <CustomText label={desc} fontSize={12} fontFamily={fonts.medium} />
         </View>
       </View>

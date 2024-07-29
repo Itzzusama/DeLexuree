@@ -112,7 +112,7 @@ const CustomDropDown = ({
 const styles = StyleSheet.create({
   mainContainer: {
     width: '100%',
-    height: 60,
+    height: 48,
     backgroundColor: COLORS.white,
     borderWidth: 1,
     borderColor: COLORS.lightGray,

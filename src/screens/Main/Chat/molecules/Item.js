@@ -1,15 +1,15 @@
-import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import React from "react";
 
-import CustomText from '../../../../components/CustomText';
+import CustomText from "../../../../components/CustomText";
 
-import {Images} from '../../../../assets/images';
-import {COLORS} from '../../../../utils/COLORS';
-import fonts from '../../../../assets/fonts';
+import { Images } from "../../../../assets/images";
+import { COLORS } from "../../../../utils/COLORS";
+import fonts from "../../../../assets/fonts";
 
 const Item = ({
-  source = Images.mess,
-  count = '',
+  source = Images.user,
+  count = "",
   onPress,
   lastMsg,
   name,
@@ -19,29 +19,24 @@ const Item = ({
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.6}
-      style={styles.mainContainer}>
+      style={styles.mainContainer}
+    >
       <View style={styles.imageContainer}>
         <Image source={source} style={styles.image} resizeMode="contain" />
       </View>
 
-      <View style={{width: '82%'}}>
+      <View style={{ width: "83%" }}>
         <View style={styles.container}>
-          <CustomText label={userName} In fontFamily={fonts.medium} />
-          <CustomText
-            label="12.45"
-            marginTop={10}
-            fontSize={12}
-            color={COLORS.authText}
-          />
+          <CustomText label={userName} fontFamily={fonts.medium} />
+          <CustomText label="12.45" fontSize={12} color={COLORS.authText} />
         </View>
-        <CustomText label={lastMsg} fontFamily={fonts.medium} fontSize={12} />
-        <View style={styles.container}>
-          {/* <CustomText
+        <View style={{ flexDirection: "row", width: "97%", marginTop: 3 }}>
+          <CustomText
             label={lastMsg}
-            numberOfLines={1}
+            fontFamily={fonts.medium}
             fontSize={12}
-            color={COLORS.authText}
-          /> */}
+            numberOfLines={1}
+          />
           {count && (
             <View style={styles.countStyle}>
               <CustomText
@@ -62,14 +57,14 @@ export default Item;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: '100%',
-    paddingHorizontal: 20,
+    width: "100%",
+    paddingHorizontal: 12,
     paddingVertical: 15,
     borderBottomWidth: 1,
     borderBlockColor: COLORS.lightGray,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     backgroundColor: COLORS.white,
   },
   imageContainer: {
@@ -77,23 +72,24 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 100,
     backgroundColor: COLORS.lightGray,
-    padding: 12,
+    // padding: 2,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   countStyle: {
     width: 20,
     height: 20,
     borderRadius: 100,
-    backgroundColor: COLORS.red,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#5C7D72",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 22,
   },
 });

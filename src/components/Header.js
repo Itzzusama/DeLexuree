@@ -1,12 +1,12 @@
-import {useNavigation} from '@react-navigation/native';
-import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, View } from "react-native";
+import React from "react";
 
-import CustomText from './CustomText';
-import Icons from './Icons';
+import CustomText from "./CustomText";
+import Icons from "./Icons";
 
-import {COLORS} from '../utils/COLORS';
-import fonts from '../assets/fonts';
+import { COLORS } from "../utils/COLORS";
+import fonts from "../assets/fonts";
 
 const Header = ({
   title,
@@ -19,7 +19,7 @@ const Header = ({
   const navigation = useNavigation();
   return (
     <View style={styles.mainContainer}>
-      <View style={{width: '15%'}}>
+      <View style={{ width: "15%" }}>
         {hideBackArrow ? null : (
           <Icons
             family="Ionicons"
@@ -33,17 +33,17 @@ const Header = ({
                     if (navigation.canGoBack()) {
                       navigation.goBack();
                     } else {
-                      navigation.navigate('MainStack');
+                      navigation.navigate("MainStack");
                     }
                   }
             }
           />
         )}
       </View>
-      <View style={{width: '70%', alignItems: 'center'}}>
-        <CustomText label={title} fontSize={20} fontFamily={fonts.semiBold} />
+      <View style={{ width: "70%", alignItems: "center" }}>
+        <CustomText label={title} fontSize={16} fontFamily={fonts.bold} />
       </View>
-      <View style={{width: '15%', alignItems: 'flex-end'}}>
+      <View style={{ width: "15%", alignItems: "flex-end" }}>
         {onAddPress ? (
           <Icons
             family="AntDesign"
@@ -78,12 +78,12 @@ export default Header;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    marginTop: 15,
     borderBottomColor: COLORS.lightGray,
-    borderBottomWidth: 0.7,
+    // borderBottomWidth: 0.7,
   },
 });

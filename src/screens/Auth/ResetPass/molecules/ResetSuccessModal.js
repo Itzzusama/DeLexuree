@@ -1,28 +1,28 @@
-import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import { StyleSheet, View } from "react-native";
+import React from "react";
 
-import CustomButton from '../../../../components/CustomButton';
-import CustomModal from '../../../../components/CustomModal';
-import CustomText from '../../../../components/CustomText';
-import ImageFast from '../../../../components/ImageFast';
+import CustomButton from "../../../../components/CustomButton";
+import CustomModal from "../../../../components/CustomModal";
+import CustomText from "../../../../components/CustomText";
+import ImageFast from "../../../../components/ImageFast";
 
-import {Images} from '../../../../assets/images';
-import {COLORS} from '../../../../utils/COLORS';
-import fonts from '../../../../assets/fonts';
+import { Images } from "../../../../assets/images";
+import { COLORS } from "../../../../utils/COLORS";
+import fonts from "../../../../assets/fonts";
 
-const ResetSuccessModal = ({isVisible, onDisable}) => {
+const ResetSuccessModal = ({ isVisible, onDisable }) => {
   return (
-    <CustomModal isChange isVisible={isVisible} onDisable={onDisable}>
+    <CustomModal isVisible={isVisible} onDisable={onDisable}>
       <View style={styles.mainContainer}>
         <ImageFast
-          source={Images.resetPass}
+          source={Images.success}
           style={styles.image}
           resizeMode="contain"
         />
         <CustomText
           label="resSuccess"
-          fontFamily={fonts.boldExtra}
-          fontSize={18}
+          fontFamily={fonts.bold}
+          fontSize={22}
           textAlign="center"
           marginTop={20}
           marginBottom={20}
@@ -43,9 +43,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     padding: 30,
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
-    alignItems: 'center',
+    borderRadius: 20,
+    width: "94%",
+    alignSelf: "center",
+    // borderTopRightRadius: 20,
+    // borderTopLeftRadius: 20,
+    alignItems: "center",
   },
   image: {
     width: 128,

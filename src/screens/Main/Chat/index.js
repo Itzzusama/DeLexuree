@@ -1,27 +1,27 @@
-import {FlatList, RefreshControl, StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
 
-import ScreenWrapper from '../../../components/ScreenWrapper';
+import ScreenWrapper from "../../../components/ScreenWrapper";
 
-import Header from '../../../components/Header';
+import Header from "../../../components/Header";
+import SearchBar from "../../../components/SearchBar";
 
-import Item from './molecules/Item';
+import Item from "./molecules/Item";
 
-import {COLORS} from '../../../utils/COLORS';
-import {get} from '../../../Services/ApiRequest';
-import {useFocusEffect} from '@react-navigation/native';
-import NoShow from '../../../components/NoShow';
+import { COLORS } from "../../../utils/COLORS";
+import { get } from "../../../Services/ApiRequest";
+import { useFocusEffect } from "@react-navigation/native";
+import NoShow from "../../../components/NoShow";
 
-const Notifications = ({navigation}) => {
-  
-  const handleNavigation = async item => {
+const Notifications = ({ navigation }) => {
+  const handleNavigation = async (item) => {
     const dataToSend = {
       id: item?.otherUser?._id,
       img: item?.otherUser?.profilePicture,
-      name: item?.otherUser?.fname+" " + item?.otherUser?.lname ,
-      type:item?.otherUser?.type
+      name: item?.otherUser?.fname + " " + item?.otherUser?.lname,
+      type: item?.otherUser?.type,
     };
-    navigation.navigate('InboxScreen', {data: dataToSend});
+    navigation.navigate("InboxScreen", { data: dataToSend });
   };
   const [messagesArray, setMessagesArray] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -29,11 +29,11 @@ const Notifications = ({navigation}) => {
   const getConversationList = async () => {
     setRefreshing(true);
     try {
-      const response = await get('msg/conversations');
+      const response = await get("msg/conversations");
       // console.log('rhis i', response.data?.conversations);
       setMessagesArray(response.data?.conversations);
     } catch (error) {
-      console.log('hhhhhhhh==========');
+      console.log("hhhhhhhh==========");
     } finally {
       setRefreshing(false);
     }
@@ -42,21 +42,18 @@ const Notifications = ({navigation}) => {
   useFocusEffect(
     React.useCallback(() => {
       getConversationList();
-    }, []),
+    }, [])
   );
   return (
     <ScreenWrapper
       paddingBottom={70}
-      backgroundColor={COLORS.mainBg}
-      paddingHorizontal={0.1}
-      headerUnScrollable={() => <Header title="Messages" />}>
-      {/* <View style={styles.heading}>
-        <CustomText
-          label="2 Unreads"
-          fontFamily={fonts.medium}
-          color={COLORS.authText}
-        />
-      </View> */}
+      backgroundColor={COLORS.white}
+      paddingHorizontal={14}
+      headerUnScrollable={() => <Header title="Chat" />}
+    >
+      <View style={{ marginVertical: 12 }} />
+      <SearchBar placeHolder={"Search"} backgroundColor={"#F5F9F8"} />
+
       <FlatList
         refreshControl={
           <RefreshControl
@@ -64,7 +61,7 @@ const Notifications = ({navigation}) => {
             onRefresh={getConversationList}
           />
         }
-        data={messagesArray}
+        data={[1, 2, 3, 4, 5, 6]}
         ListEmptyComponent={() => (
           <NoShow
             label="You have not received any messages"
@@ -72,13 +69,14 @@ const Notifications = ({navigation}) => {
           />
         )}
         keyExtractor={(_, i) => i.toString()}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <Item
             onPress={() => handleNavigation(item)}
-            lastMsg={item?.lastMsg?.message}
-            name={item?.otherUser?.fname+" F" + item?.otherUser?.lname }
-            userName={item?.otherUser?.fname}
-            // count={item?.unseen}
+            lastMsg={
+              "Turpis lectus egestas dui proin natoque nulla egestas fames molestie."
+            }
+            userName={"Wade Warren"}
+            count={1}
           />
         )}
       />

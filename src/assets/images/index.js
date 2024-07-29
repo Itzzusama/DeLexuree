@@ -50,6 +50,16 @@ export const Images = {
   phone: require('./phone.png'),
   driving: require('./driving.png'),
   apple: require('./apple.png'),
+  success: require('./success.png'),
+  notification: require('./notification.png'),
+  logo: require('./logo.png'),
+  cardImage: require('./cardImage.png'),
+  wallet: require('./wallet.png'),
+  activity: require('./activity.png'),
+  language: require('./language.png'),
+  pastBook: require('./pastBook.png'),
+  sendButton: require('./sendButton.png'),
+
 
 
 

@@ -1,6 +1,6 @@
 export const tabIcons = {
   home: require('./home.png'),
-  orders: require('./orders.png'),
+  services: require('./services.png'),
   message: require('./message.png'),
   profile: require('./profile.png'),
 };

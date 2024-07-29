@@ -21,7 +21,6 @@ import { Images } from "../../../assets/images";
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const { userCategory } = useSelector((state) => state.authConfigs);
 
   const init = {
     email: "",
@@ -38,7 +37,7 @@ const Login = ({ navigation }) => {
       id: 1,
       placeholder: "Email",
       value: state.email,
-      label: "Email",
+      label: "Email Address",
       onChange: (text) => setState({ ...state, email: text }),
       error: errors?.emailError,
     },
@@ -152,7 +151,8 @@ const Login = ({ navigation }) => {
           <CustomText
             label="Or continue with"
             fontSize={14}
-            fontFamily={fonts.regular}
+            fontFamily={fonts.medium}
+            color={COLORS.gray}
           />
           <View style={styles.line} />
         </View>
@@ -160,24 +160,32 @@ const Login = ({ navigation }) => {
         <CustomButton
           image={Images.google}
           title={"Sign in with Google"}
-          customStyle={{ borderWidth: 1, borderColor: COLORS.gray }}
-          customText={{ color: COLORS.black }}
+          customStyle={{
+            borderWidth: 1,
+            borderColor: COLORS.lightGray,
+            backgroundColor: COLORS.white,
+          }}
+          customText={{ color: COLORS.black, fontFamily: fonts.semiBold }}
           marginTop={12}
         />
         <CustomButton
           image={Images.apple}
           title={"Sign in with Google"}
-          customStyle={{ borderWidth: 1, borderColor: COLORS.gray }}
-          customText={{ color: COLORS.black }}
+          customStyle={{
+            borderWidth: 1,
+            borderColor: COLORS.lightGray,
+            backgroundColor: COLORS.white,
+          }}
+          customText={{ color: COLORS.black, fontFamily: fonts.semiBold }}
           marginTop={12}
         />
         <CustomText
-          label="Don’t have an account?Sign Up"
+          label="Don’t have an account? Sign Up"
           fontSize={16}
           fontFamily={fonts.semiBold}
           alignSelf="center"
           marginTop={20}
-          onPress={() => navigation.navigate("Category")}
+          onPress={() => navigation.navigate("Signup")}
         />
       </AuthWrapper>
     </ScreenWrapper>
@@ -195,10 +203,25 @@ const styles = StyleSheet.create({
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: COLORS.gray,
-    marginHorizontal:2
+    backgroundColor: COLORS.lightGray,
+    marginHorizontal: 2,
   },
   orContinueWithText: {
     marginHorizontal: 10,
   },
 });
+
+// import { StyleSheet, Text, View } from 'react-native'
+// import React from 'react'
+
+// const Login = () => {
+//   return (
+//     <View>
+//       <Text>login</Text>
+//     </View>
+//   )
+// }
+
+// export default Login
+
+// const styles = StyleSheet.create({})

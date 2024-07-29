@@ -1,10 +1,10 @@
 const bold = 'Helvetica-Bold';
-const boldExtra = 'Helvetica-BoldOblique';
+const boldExtra = 'HelveticaNowText-ExtraBold';
 const extraLight = 'Manrope-ExtraLight';
 const light = 'helvetica-light-587ebe5a59211';
 const medium = 'Helvetica';
-const regular = 'Helvetica';
-const semiBold = 'Manrope-SemiBold';
+const regular = 'Helvetica Regular';
+const semiBold = 'Helvetica Black SemiBold';
 
 export default {
   regular,

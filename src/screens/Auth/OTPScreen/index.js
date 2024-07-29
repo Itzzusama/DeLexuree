@@ -1,18 +1,19 @@
-import {StyleSheet} from 'react-native';
-import React, {useState} from 'react';
+import { StyleSheet } from "react-native";
+import React, { useState } from "react";
 
-import ScreenWrapper from '../../../components/ScreenWrapper';
-import CustomButton from '../../../components/CustomButton';
-import AuthWrapper from '../../../components/AuthWrapper';
-import OTPComponent from '../../../components/OTP';
-import {post} from '../../../Services/ApiRequest';
-import {ToastMessage} from '../../../utils/ToastMessage';
-import {useDispatch, useSelector} from 'react-redux';
-import {setToken} from '../../../store/reducer/AuthConfig';
-import {setUserData} from '../../../store/reducer/usersSlice';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import ScreenWrapper from "../../../components/ScreenWrapper";
+import CustomButton from "../../../components/CustomButton";
+import AuthWrapper from "../../../components/AuthWrapper";
+import OTPComponent from "../../../components/OTP";
+import { post } from "../../../Services/ApiRequest";
+import { ToastMessage } from "../../../utils/ToastMessage";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from "../../../store/reducer/AuthConfig";
+import { setUserData } from "../../../store/reducer/usersSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Header from "../../../components/Header";
 
-const OTPScreen = ({navigation, route}) => {
+const OTPScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const isAccountCreated = route?.params?.isAccountCreated;
   const bodySignUp = route?.params?.bodySignUp;
@@ -21,9 +22,9 @@ const OTPScreen = ({navigation, route}) => {
   const extraData = route?.params?.extraData;
   const dob = route?.params?.dob;
   const DBS = route?.params?.DBS;
-  const {userCategory} = useSelector(state => state.authConfigs);
+  const { userCategory } = useSelector((state) => state.authConfigs);
 
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleVerifyOtp = async () => {
@@ -35,14 +36,14 @@ const OTPScreen = ({navigation, route}) => {
       };
       // const url =
       //   from === 'forgot' ? 'users/forget-password' : 'users/send-code';
-      const response = await post('users/verify-otp/forget-password', body);
-      console.log('this is respppppp'), response.data;
+      const response = await post("users/verify-otp/forget-password", body);
+      console.log("this is respppppp"), response.data;
       if (response.data.success) {
         navigation.reset({
           index: 0,
           routes: [
             {
-              name: 'ResetPass',
+              name: "ResetPass",
               params: {
                 token: token,
               },
@@ -67,8 +68,8 @@ const OTPScreen = ({navigation, route}) => {
         phone: bodySignUp?.phone,
         code: otp,
       };
-      const response = await post('users/verify-otp/registration', body);
-      console.log('res----', response.data);
+      const response = await post("users/verify-otp/registration", body);
+      console.log("res----", response.data);
       if (response.data.success) {
         handleRegisterUser();
         // ToastMessage(response.data?.message);
@@ -90,31 +91,31 @@ const OTPScreen = ({navigation, route}) => {
         email: bodySignUp?.email,
         phone: bodySignUp?.phone,
         password: bodySignUp?.password,
-        fcmtoken: '',
+        fcmtoken: "",
         fname: bodySignUp?.fName,
         lname: bodySignUp?.lName,
         location: {
-          lat: '12312312',
-          lng: '1231231',
+          lat: "12312312",
+          lng: "1231231",
           address: location,
         },
         title: extraData?.title,
-        doc_url: '',
+        doc_url: "",
         exp: extraData?.exp,
         dbs: DBS,
         dob: dob,
-        category: userCategory == 'Shoe Cleaning' ? 'shoeclean' : userCategory,
+        category: userCategory == "Shoe Cleaning" ? "shoeclean" : userCategory,
       };
-      const response = await post('users/signup/shop', body);
-      await AsyncStorage.setItem('token', response.data?.token);
+      const response = await post("users/signup/shop", body);
+      await AsyncStorage.setItem("token", response.data?.token);
       dispatch(setToken(response.data?.token));
       dispatch(setUserData(response.data?.user));
-      if (response.data?.user?.category == 'accomodation') {
+      if (response.data?.user?.category == "accomodation") {
         navigation.reset({
           index: 0,
           routes: [
             {
-              name: 'Accommodation',
+              name: "Accommodation",
               params: {
                 isSkip: true,
               },
@@ -124,7 +125,7 @@ const OTPScreen = ({navigation, route}) => {
       } else {
         navigation.reset({
           index: 0,
-          routes: [{name: 'Success', params: {isAccountCreated: true}}],
+          routes: [{ name: "Success", params: { isAccountCreated: true } }],
         });
       }
     } catch (error) {
@@ -136,22 +137,52 @@ const OTPScreen = ({navigation, route}) => {
   };
   return (
     <ScreenWrapper
+      headerUnScrollable={() => <Header />}
       footerUnScrollable={() => (
         <CustomButton
-          title={isAccountCreated ? 'Done' : 'Continue'}
+          title={isAccountCreated ? "Done" : "Continue"}
           marginTop={40}
           width="90%"
           marginBottom={30}
           loading={loading}
+          disabled={otp.length < 4}
           // onPress={
           //   isAccountCreated
           //     ? () => navigation.navigate('Success', {isAccountCreated})
           //     : () => navigation.navigate('ResetPass')
           // }
-          onPress={isAccountCreated ? handleVerifyOtp : handleCheckOtp}
+          // onPress={isAccountCreated ? handleVerifyOtp : handleCheckOtp}
+          onPress={
+            isAccountCreated
+              ? () =>
+                  navigation.reset({
+                    index: 0,
+                    routes: [
+                      {
+                        name: "ResetPass",
+                        params: {
+                          token: token,
+                        },
+                      },
+                    ],
+                  })
+              : () =>
+                  navigation.reset({
+                    index: 0,
+                    routes: [
+                      {
+                        name: "Availability",
+                      },
+                    ],
+                  })
+          }
         />
-      )}>
-      <AuthWrapper heading="OTP" desc="OTPDesc">
+      )}
+    >
+      <AuthWrapper
+        heading="Enter Verification Code"
+        desc="We have sent you an OTP, check your email and put the code down below."
+      >
         <OTPComponent value={otp} setValue={setOtp} />
       </AuthWrapper>
     </ScreenWrapper>

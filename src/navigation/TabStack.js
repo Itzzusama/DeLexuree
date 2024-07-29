@@ -51,7 +51,7 @@ const TabStack = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <Image
-              source={tabIcons.orders}
+              source={tabIcons.services}
               style={[
                 styles.icon,
                 {tintColor: focused ? COLORS.primaryColor : COLORS.tabIcon},
@@ -59,7 +59,7 @@ const TabStack = () => {
             />
           ),
         }}
-        name={i18n.t('Orders')}
+        name={i18n.t('Services')}
         component={Order}
       />
       <Tab.Screen
@@ -74,7 +74,7 @@ const TabStack = () => {
             />
           ),
         }}
-        name={i18n.t('Chat')}
+        name={i18n.t('Message')}
         component={Chat}
       />
       <Tab.Screen
@@ -89,7 +89,7 @@ const TabStack = () => {
             />
           ),
         }}
-        name={i18n.t('Profile')}
+        name={i18n.t('Account')}
         component={Profile}
       />
     </Tab.Navigator>

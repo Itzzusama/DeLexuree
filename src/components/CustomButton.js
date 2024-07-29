@@ -39,7 +39,7 @@ const CustomButton = ({
             ? COLORS.gray
             : backgroundColor
             ? backgroundColor
-            : COLORS.buttonColor,
+            : COLORS.primaryColor,
           marginTop,
           marginBottom,
           width,
@@ -72,9 +72,9 @@ const CustomButton = ({
             textStyle={customText}
             label={title}
             color={color ? color : COLORS.white}
-            fontFamily={fonts.semiBold}
+            fontFamily={fonts.bold}
             fontSize={fontSize || 18}
-            lineHeight={22}
+            // lineHeight={22}
           />
         </View>
       )}

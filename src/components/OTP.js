@@ -10,7 +10,7 @@ import {
 import {COLORS} from '../utils/COLORS';
 import fonts from '../assets/fonts';
 
-const CELL_COUNT = 5;
+const CELL_COUNT = 4;
 
 const OTPComponent = ({value, setValue}) => {
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
@@ -54,13 +54,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   cellRoot: {
-    height: 65,
+    height: 48,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
     borderColor: COLORS.lightGray,
     borderWidth: 1,
-    width: 58,
+    width: 69,
   },
   cellText: {
     color: COLORS.primaryColor,
@@ -71,5 +71,6 @@ const styles = StyleSheet.create({
   focusCell: {
     borderColor: COLORS.primaryColor,
     borderWidth: 1,
+    backgroundColor:'#EEF2F0'
   },
 });

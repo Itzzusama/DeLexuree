@@ -11,11 +11,11 @@ import Login from "../screens/Auth/Login";
 import Success from "../screens/Main/Success";
 import ForgetPass from "../screens/Auth/ForgetPass";
 import ResetPass from "../screens/Auth/ResetPass";
-import PreviousWork from "../screens/Auth/PreviousWork";
-import Category from "../screens/Auth/Category";
-import AddAccomodation from "../screens/Main/AddAccomodation";
+import Category from "../screens/Auth/Availability";
 import Accommodation from "../screens/Main/AddAccomodation";
 import NewAccommodation from "../screens/Main/AddAccomodation/NewAccommodation";
+import Information from "../screens/Auth/Information";
+import Availability from "../screens/Auth/Availability";
 
 
 const Stack = createNativeStackNavigator();
@@ -28,7 +28,7 @@ const AuthStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      // initialRouteName="Accommodation"
+      initialRouteName="Availability"
     >
       {isOnBoarding ? (
         <>
@@ -49,7 +49,8 @@ const AuthStack = () => {
       <Stack.Screen name="Success" component={Success} />
       <Stack.Screen name="ForgetPass" component={ForgetPass} />
       <Stack.Screen name="ResetPass" component={ResetPass} />
-      <Stack.Screen name="PreviousWork" component={PreviousWork} />
+      <Stack.Screen name="Availability" component={Availability} />
+      <Stack.Screen name="Information" component={Information} />
       <Stack.Screen name="Accommodation" component={Accommodation} />
       <Stack.Screen name="NewAccommodation" component={NewAccommodation} />
 
