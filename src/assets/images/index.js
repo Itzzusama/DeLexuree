@@ -49,6 +49,7 @@ export const Images = {
   phone: require('./phone.png'),
   phone: require('./phone.png'),
   driving: require('./driving.png'),
+  apple: require('./apple.png'),
 
 
 

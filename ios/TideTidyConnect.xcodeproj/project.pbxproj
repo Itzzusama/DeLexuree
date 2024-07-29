@@ -41,6 +41,14 @@
 		B7FBBD8ED280472F94F5EB31 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B0BC3F54FEC483ABBD1EC2B /* Manrope-Light.ttf */; };
 		DEC18EB0C03B465783EBCEDE /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B321D1BA9C94E0499A636CB /* Manrope-SemiBold.ttf */; };
 		F5440079DE0F405C94B238EB /* Manrope-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 901665CC09004489A7767ABC /* Manrope-ExtraBold.ttf */; };
+		89F23A51E51F4DC8844A3541 /* helvetica-compressed-5871d14b6903a.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F04AAF0169C45E69EA8EAD8 /* helvetica-compressed-5871d14b6903a.otf */; };
+		2C909B5583E847C4A0430872 /* helvetica-rounded-bold-5871d05ead8de.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF59DBE61D924655A4355DDE /* helvetica-rounded-bold-5871d05ead8de.otf */; };
+		AE2A4B0FCDE746E589771702 /* Helvetica-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 968DC0391BA347EFA6A73256 /* Helvetica-Bold.ttf */; };
+		AC8A051FE4704A1F9BE84B0B /* Helvetica-BoldOblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD2F89D380B943ED98BB4DC7 /* Helvetica-BoldOblique.ttf */; };
+		BA9D0695135C40D899CC1C45 /* Helvetica-Oblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B53F1F04B47243FEBDB0BFBC /* Helvetica-Oblique.ttf */; };
+		7FDFED66B1384BD6BCC773BE /* Helvetica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA256E8F3F874B539E79A9FD /* Helvetica.ttf */; };
+		90591B1BDD294BD78808E9FD /* helvetica-light-587ebe5a59211.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C261A0111284E2A8AB8782A /* helvetica-light-587ebe5a59211.ttf */; };
+		9BF7E75F70154831901C6E9C /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 72690002F6DD457680F6FE91 /* index.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +106,14 @@
 		9F46D74C23F641889773F1EF /* Manrope-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Manrope-Medium.ttf"; path = "../src/assets/fonts/Manrope-Medium.ttf"; sourceTree = "<group>"; };
 		D6740AC2DE084B31B1217248 /* Manrope-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Manrope-Regular.ttf"; path = "../src/assets/fonts/Manrope-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		6F04AAF0169C45E69EA8EAD8 /* helvetica-compressed-5871d14b6903a.otf */ = {isa = PBXFileReference; name = "helvetica-compressed-5871d14b6903a.otf"; path = "../src/assets/fonts/helvetica-compressed-5871d14b6903a.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FF59DBE61D924655A4355DDE /* helvetica-rounded-bold-5871d05ead8de.otf */ = {isa = PBXFileReference; name = "helvetica-rounded-bold-5871d05ead8de.otf"; path = "../src/assets/fonts/helvetica-rounded-bold-5871d05ead8de.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		968DC0391BA347EFA6A73256 /* Helvetica-Bold.ttf */ = {isa = PBXFileReference; name = "Helvetica-Bold.ttf"; path = "../src/assets/fonts/Helvetica-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CD2F89D380B943ED98BB4DC7 /* Helvetica-BoldOblique.ttf */ = {isa = PBXFileReference; name = "Helvetica-BoldOblique.ttf"; path = "../src/assets/fonts/Helvetica-BoldOblique.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B53F1F04B47243FEBDB0BFBC /* Helvetica-Oblique.ttf */ = {isa = PBXFileReference; name = "Helvetica-Oblique.ttf"; path = "../src/assets/fonts/Helvetica-Oblique.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FA256E8F3F874B539E79A9FD /* Helvetica.ttf */ = {isa = PBXFileReference; name = "Helvetica.ttf"; path = "../src/assets/fonts/Helvetica.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5C261A0111284E2A8AB8782A /* helvetica-light-587ebe5a59211.ttf */ = {isa = PBXFileReference; name = "helvetica-light-587ebe5a59211.ttf"; path = "../src/assets/fonts/helvetica-light-587ebe5a59211.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		72690002F6DD457680F6FE91 /* index.js */ = {isa = PBXFileReference; name = "index.js"; path = "../src/assets/fonts/index.js"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +187,14 @@
 				9F46D74C23F641889773F1EF /* Manrope-Medium.ttf */,
 				D6740AC2DE084B31B1217248 /* Manrope-Regular.ttf */,
 				6B321D1BA9C94E0499A636CB /* Manrope-SemiBold.ttf */,
+				6F04AAF0169C45E69EA8EAD8 /* helvetica-compressed-5871d14b6903a.otf */,
+				FF59DBE61D924655A4355DDE /* helvetica-rounded-bold-5871d05ead8de.otf */,
+				968DC0391BA347EFA6A73256 /* Helvetica-Bold.ttf */,
+				CD2F89D380B943ED98BB4DC7 /* Helvetica-BoldOblique.ttf */,
+				B53F1F04B47243FEBDB0BFBC /* Helvetica-Oblique.ttf */,
+				FA256E8F3F874B539E79A9FD /* Helvetica.ttf */,
+				5C261A0111284E2A8AB8782A /* helvetica-light-587ebe5a59211.ttf */,
+				72690002F6DD457680F6FE91 /* index.js */,
 			);
 			name = Resources;
 			path = "";
@@ -371,6 +395,14 @@
 				5495EC39252243BEB9BDEA13 /* Manrope-Regular.ttf in Resources */,
 				DEC18EB0C03B465783EBCEDE /* Manrope-SemiBold.ttf in Resources */,
 				65159936D20640E7B6491740 /* BootSplash.storyboard in Resources */,
+				89F23A51E51F4DC8844A3541 /* helvetica-compressed-5871d14b6903a.otf in Resources */,
+				2C909B5583E847C4A0430872 /* helvetica-rounded-bold-5871d05ead8de.otf in Resources */,
+				AE2A4B0FCDE746E589771702 /* Helvetica-Bold.ttf in Resources */,
+				AC8A051FE4704A1F9BE84B0B /* Helvetica-BoldOblique.ttf in Resources */,
+				BA9D0695135C40D899CC1C45 /* Helvetica-Oblique.ttf in Resources */,
+				7FDFED66B1384BD6BCC773BE /* Helvetica.ttf in Resources */,
+				90591B1BDD294BD78808E9FD /* helvetica-light-587ebe5a59211.ttf in Resources */,
+				9BF7E75F70154831901C6E9C /* index.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

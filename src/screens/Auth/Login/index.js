@@ -1,67 +1,71 @@
-import {StyleSheet} from 'react-native';
-import React, {useEffect, useMemo, useState} from 'react';
+import { StyleSheet, View } from "react-native";
+import React, { useEffect, useMemo, useState } from "react";
 
-import ScreenWrapper from '../../../components/ScreenWrapper';
-import CustomButton from '../../../components/CustomButton';
-import AuthWrapper from '../../../components/AuthWrapper';
-import CustomInput from '../../../components/CustomInput';
-import CustomText from '../../../components/CustomText';
+import ScreenWrapper from "../../../components/ScreenWrapper";
+import CustomButton from "../../../components/CustomButton";
+import AuthWrapper from "../../../components/AuthWrapper";
+import CustomInput from "../../../components/CustomInput";
+import CustomText from "../../../components/CustomText";
 
-import fonts from '../../../assets/fonts';
-import {passwordRegex, regEmail} from '../../../utils/constants';
-import {ToastMessage} from '../../../utils/ToastMessage';
-import {post} from '../../../Services/ApiRequest';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch, useSelector} from 'react-redux';
-import {setUserData} from '../../../store/reducer/usersSlice';
-import {setToken} from '../../../store/reducer/AuthConfig';
+import fonts from "../../../assets/fonts";
+import { passwordRegex, regEmail } from "../../../utils/constants";
+import { ToastMessage } from "../../../utils/ToastMessage";
+import { post } from "../../../Services/ApiRequest";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData } from "../../../store/reducer/usersSlice";
+import { setToken } from "../../../store/reducer/AuthConfig";
+import { COLORS } from "../../../utils/COLORS";
+import { Images } from "../../../assets/images";
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const {userCategory} = useSelector(state => state.authConfigs);
+  const { userCategory } = useSelector((state) => state.authConfigs);
 
   const init = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   };
   const inits = {
-    emailError: '',
-    passwordError: '',
+    emailError: "",
+    passwordError: "",
   };
   const [errors, setErrors] = useState(inits);
   const [state, setState] = useState(init);
   const array = [
     {
       id: 1,
-      placeholder: 'Email',
+      placeholder: "Email",
       value: state.email,
-      onChange: text => setState({...state, email: text}),
+      label: "Email",
+      onChange: (text) => setState({ ...state, email: text }),
       error: errors?.emailError,
     },
 
     {
       id: 2,
-      placeholder: 'Password',
+      placeholder: "Password",
       value: state.password,
-      onChange: text => setState({...state, password: text}),
+      label: "Password",
+      onChange: (text) => setState({ ...state, password: text }),
       error: errors?.passwordError,
     },
   ];
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const fcmToken = await AsyncStorage.getItem('fcmToken');
+      const fcmToken = await AsyncStorage.getItem("fcmToken");
       const body = {
         email: state.email,
         password: state.password,
         fcmtoken: fcmToken,
       };
-      const response = await post('auth/', body);
+      const response = await post("auth/", body);
 
-      console.log('res-------', response.data);
+      console.log("res-------", response.data);
       if (response.data?.success) {
-        await AsyncStorage.setItem('token', response.data?.token);
+        await AsyncStorage.setItem("token", response.data?.token);
         dispatch(setToken(response.data?.token));
         dispatch(setUserData(response.data?.user));
         // if (response.data?.category == 'accomodation') {
@@ -78,7 +82,7 @@ const Login = ({navigation}) => {
           index: 0,
           routes: [
             {
-              name: 'MainStack',
+              name: "MainStack",
             },
           ],
         });
@@ -95,14 +99,14 @@ const Login = ({navigation}) => {
   const errorCheck = useMemo(() => {
     return () => {
       let newErrors = {};
-      if (!state.email) newErrors.emailError = 'Please enter Email address';
+      if (!state.email) newErrors.emailError = "Please enter Email address";
       else if (!regEmail.test(state.email))
-        newErrors.emailError = 'Please enter valid email';
+        newErrors.emailError = "Please enter valid email";
       else if (!state.password)
-        newErrors.passwordError = 'Please enter Password';
+        newErrors.passwordError = "Please enter Password";
       else if (!passwordRegex.test(state.password))
         newErrors.passwordError =
-          'Password must contain 1 number, 1 special character, Uppercase and 8 digits';
+          "Password must contain 1 number, 1 special character, Uppercase and 8 digits";
       setErrors(newErrors);
     };
   }, [state]);
@@ -113,40 +117,67 @@ const Login = ({navigation}) => {
   return (
     <ScreenWrapper scrollEnabled>
       <AuthWrapper heading="Login" desc="signUpDesc">
-        {array.map(item => (
+        {array.map((item) => (
           <CustomInput
             key={item?.id}
             placeholder={item.placeholder}
             value={item.value}
             onChangeText={item.onChange}
             error={item.error}
+            withLabel={item.label}
             secureTextEntry={item.id === 2}
           />
         ))}
 
         <CustomText
-          label="Forgot Password"
+          label="Forgot Password?"
           fontSize={16}
           fontFamily={fonts.semiBold}
+          color={COLORS.darkGreen}
           alignSelf="flex-end"
-          onPress={() => navigation.navigate('ForgetPass')}
+          onPress={() => navigation.navigate("ForgetPass")}
         />
         <CustomButton
-          title="Login"
+          title="Sign In"
           marginTop={40}
           onPress={handleLogin}
           loading={loading}
           disabled={
-            loading || !Object.values(errors).every(error => error === '')
+            loading || !Object.values(errors).every((error) => error === "")
           }
         />
+
+        <View style={styles.orContinueWithContainer}>
+          <View style={styles.line} />
+          <CustomText
+            label="Or continue with"
+            fontSize={14}
+            fontFamily={fonts.regular}
+          />
+          <View style={styles.line} />
+        </View>
+
+        <CustomButton
+          image={Images.google}
+          title={"Sign in with Google"}
+          customStyle={{ borderWidth: 1, borderColor: COLORS.gray }}
+          customText={{ color: COLORS.black }}
+          marginTop={12}
+        />
+        <CustomButton
+          image={Images.apple}
+          title={"Sign in with Google"}
+          customStyle={{ borderWidth: 1, borderColor: COLORS.gray }}
+          customText={{ color: COLORS.black }}
+          marginTop={12}
+        />
         <CustomText
-          label="I don’t have an account"
+          label="Don’t have an account?Sign Up"
           fontSize={16}
           fontFamily={fonts.semiBold}
           alignSelf="center"
           marginTop={20}
-          onPress={() => navigation.navigate('Category')}
+          onPress={() => navigation.navigate("Category")}
         />
       </AuthWrapper>
     </ScreenWrapper>
@@ -155,4 +186,19 @@ const Login = ({navigation}) => {
 
 export default Login;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  orContinueWithContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: COLORS.gray,
+    marginHorizontal:2
+  },
+  orContinueWithText: {
+    marginHorizontal: 10,
+  },
+});

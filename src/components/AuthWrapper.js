@@ -23,11 +23,11 @@ const AuthWrapper = ({
       style={{flex: 1}}
       keyboardShouldPersistTaps="handled"
       showsVerticalScrollIndicator={false}>
-      <ImageFast
+      {/* <ImageFast
         style={styles.logo}
         resizeMode="contain"
         source={Images.logoIcon}
-      />
+      /> */}
       {showStatus && (
         <View style={className('flex mt-7')}>
           <View
@@ -64,14 +64,14 @@ const AuthWrapper = ({
       <CustomText
         label={heading}
         fontFamily={fonts.boldExtra}
-        fontSize={28}
+        fontSize={24}
         marginTop={showStatus ? 10 : 20}
         marginBottom={5}
       />
       <CustomText
         label={desc}
-        fontSize={16}
-        color={COLORS.authText}
+        fontSize={14}
+        // color={COLORS.authText}
         marginBottom={30}
       />
 

@@ -57,7 +57,7 @@ const CustomInput = ({
         <CustomText
           label={withLabel}
           marginBottom={5}
-          fontSize={18}
+          fontSize={14}
           fontFamily={fonts.semiBold}
         />
       )}
@@ -72,7 +72,7 @@ const CustomInput = ({
               : isFocused
               ? COLORS.primaryColor
               : COLORS.lightGray,
-            height: height || 55,
+            height: height || 48,
             width: width || '100%',
             borderRadius: borderRadius || 8,
           },

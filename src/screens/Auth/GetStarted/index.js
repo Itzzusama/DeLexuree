@@ -1,13 +1,6 @@
-import {
-  StyleSheet,
-  Dimensions,
-  View,
-  ImageBackground,
-  StatusBar,
-} from "react-native";
+import { StyleSheet, View, ImageBackground, StatusBar } from "react-native";
 import React from "react";
 
-import ScreenWrapper from "../../../components/ScreenWrapper";
 import CustomText from "../../../components/CustomText";
 import CustomButton from "../../../components/CustomButton";
 
@@ -17,7 +10,13 @@ import { COLORS } from "../../../utils/COLORS";
 const GetStarted = ({ navigation }) => {
   return (
     <ImageBackground source={Images.getStarted} style={styles.imgContainer}>
-      <StatusBar translucent backgroundColor="transparent" />
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle={"light-content"}
+      />
+
+      <View style={styles.overlay} />
 
       <View
         style={{ paddingHorizontal: 12, justifyContent: "flex-end", flex: 1 }}
@@ -50,9 +49,15 @@ const GetStarted = ({ navigation }) => {
   );
 };
 export default GetStarted;
+
 const styles = StyleSheet.create({
   imgContainer: {
     flex: 1,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "black",
+    opacity: 0.6,
   },
   img: {
     width: "100%",
