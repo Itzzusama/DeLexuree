@@ -30,5 +30,6 @@ export const COLORS = {
   smoke: '#DADADA',
   DD: '#DDDDE1',
   mainBg: '#f8f8f8',
+  gold: '#FFCD1A',
   notification: '#59C1F2',
 };

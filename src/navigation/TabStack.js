@@ -59,7 +59,7 @@ const TabStack = () => {
             />
           ),
         }}
-        name={i18n.t('Services')}
+        name={i18n.t('Orders')}
         component={Order}
       />
       <Tab.Screen

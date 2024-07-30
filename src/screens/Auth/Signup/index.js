@@ -3,20 +3,19 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import ScreenWrapper from "../../../components/ScreenWrapper";
 import CustomButton from "../../../components/CustomButton";
-import GooglePlaces from "../../../components/GooglePlaces";
 import AuthWrapper from "../../../components/AuthWrapper";
 import CustomInput from "../../../components/CustomInput";
 import CustomText from "../../../components/CustomText";
 
-import fonts from "../../../assets/fonts";
+import CountryPhoneInput from "../../../components/CountryPhoneInput";
 import { passwordRegex, regEmail } from "../../../utils/constants";
 import { ToastMessage } from "../../../utils/ToastMessage";
 import { post } from "../../../Services/ApiRequest";
-import CountryPhoneInput from "../../../components/CountryPhoneInput";
-import { View } from "react-native";
 import DatePicker from "react-native-date-picker";
-import moment from "moment";
 import { COLORS } from "../../../utils/COLORS";
+import fonts from "../../../assets/fonts";
+import { View } from "react-native";
+import moment from "moment";
 
 const Signup = ({ navigation }) => {
   const init = {

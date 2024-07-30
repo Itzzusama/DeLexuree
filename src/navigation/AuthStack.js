@@ -28,7 +28,6 @@ const AuthStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Availability"
     >
       {isOnBoarding ? (
         <>

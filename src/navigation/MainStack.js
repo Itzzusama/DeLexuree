@@ -22,6 +22,7 @@ import Reviews from "../screens/Main/ProfileScreens/Reviews";
 import UserProfile from "../screens/Main/UserProfile";
 import Wallet from "../screens/Main/ProfileScreens/Wallet";
 import PastBooking from "../screens/Main/ProfileScreens/PastBooking";
+import Availability from "../screens/Auth/Availability";
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
@@ -53,6 +54,8 @@ const MainStack = () => {
       <Stack.Screen name="Reviews" component={Reviews} />
       <Stack.Screen name="Wallet" component={Wallet} />
       <Stack.Screen name="PastBooking" component={PastBooking} />
+      <Stack.Screen name="Availability" component={Availability} />
+
     </Stack.Navigator>
   );
 };

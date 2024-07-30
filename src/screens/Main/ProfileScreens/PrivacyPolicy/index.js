@@ -7,12 +7,14 @@ import CustomHeader from "../../../../components/CustomHeader";
 import { COLORS } from "../../../../utils/COLORS";
 import { className } from "../../../../global-styles";
 import TextContentCard from "../../../../components/TextContentCard";
+import Header from "../../../../components/Header";
 const PrivacyPolicy = () => {
   return (
-    <ScreenWrapper backgroundColor={COLORS.F0} paddingHorizontal={"0%"}>
-      <View style={className("bg-white px-5 py-3")}>
-        <CustomHeader lable="Privacy Policy" />
-      </View>
+    <ScreenWrapper
+      backgroundColor={COLORS.white}
+      paddingHorizontal={"0%"}
+      headerUnScrollable={() => <Header title={"Privacy Policy"} />}
+    >
       <View style={className("bg-white mt-1.5")}>
         <TextContentCard
           title={"Lorem ipsum dolor sit amet"}

@@ -53,7 +53,7 @@ const Profile = () => {
     {
       id: 2,
       name: "Availability",
-      screen: "WorkExperience",
+      screen: "Availability",
       image: Images.activity,
     },
     {
@@ -67,26 +67,26 @@ const Profile = () => {
     {
       id: 1,
       name: "Help Center",
-      image: Images.language,
+      image: Images.help,
       screen: "HelpCenter",
     },
     {
       id: 2,
       name: "Privacy & Policy",
       screen: "PrivacyPolicy",
-      image: Images.activity,
+      image: Images.lock,
     },
     {
       id: 3,
       name: "About App",
       screen: "Education",
-      image: Images.pastBook,
+      image: Images.about,
     },
     {
       id: 4,
       name: "Term & Condition",
       screen: "TermsCondition",
-      image: Images.pastBook,
+      image: Images.terms,
     },
   ];
 
@@ -137,7 +137,11 @@ const Profile = () => {
       />
 
       {general.map((item, index) => (
-        <Item name={item.name} source={item.image} />
+        <Item
+          name={item.name}
+          source={item.image}
+          onPress={() => navigation.navigate(item.screen)}
+        />
       ))}
       <CustomText
         label={"About"}
@@ -147,7 +151,11 @@ const Profile = () => {
       />
 
       {About.map((item, index) => (
-        <Item name={item.name} source={item.image} />
+        <Item
+          name={item.name}
+          source={item.image}
+          onPress={() => navigation.navigate(item.screen)}
+        />
       ))}
 
       <LogoutModal
