@@ -26,6 +26,7 @@ const GetStarted = ({ navigation }) => {
           image={Images.apple}
           customStyle={styles.socialButton}
           customText={styles.socialText}
+          onPress={()=>navigation.navigate("Signup")}
         />
         <CustomButton
           title={"Continue with Google"}

@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     width: "100%",
     paddingHorizontal: 12,
-    paddingVertical: 15,
+    paddingVertical: 16,
     borderBottomWidth: 1,
     borderBlockColor: COLORS.lightGray,
     flexDirection: "row",

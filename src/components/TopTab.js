@@ -34,20 +34,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 12,
-    borderWidth: 0.4,
-    borderRadius: 12,
+    borderWidth: 0.1,
+    borderRadius: 99,
     borderColor: COLORS.gray,
     paddingHorizontal: 6,
-    marginVertical:16
+    marginVertical: 16,
+    backgroundColor: "#F8F8F8",
   },
   item: {
     flex: 1,
     alignItems: "center",
-    paddingVertical: 4,
+    paddingVertical: 5,
   },
   activeTab: {
     backgroundColor: COLORS.primaryColor,
-    borderRadius: 4,
+    borderRadius: 99,
   },
   indicator: {
     width: "90%",

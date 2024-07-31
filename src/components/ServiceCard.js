@@ -13,9 +13,10 @@ const ServiceCard = ({
   date,
   onOpenMaps,
   past,
+  onCardPress,
 }) => {
   return (
-    <View style={styles.cardContainer}>
+    <TouchableOpacity onPress={onCardPress} activeOpacity={0.6} style={styles.cardContainer}>
       <Image source={imageSource} style={styles.image} />
       <View style={styles.textContainer}>
         <Text style={styles.title} numberOfLines={1}>
@@ -45,7 +46,7 @@ const ServiceCard = ({
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

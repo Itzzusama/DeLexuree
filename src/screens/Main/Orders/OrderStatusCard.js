@@ -11,7 +11,7 @@ const OrderStatusCard = ({ name, selected, onSelect, isFirst }) => {
   return (
     <TouchableOpacity
       style={[
-        className(" align-center justify-center p-2 rounded-6 w-27 py-2"),
+        className(" align-center justify-center p-2 rounded-6 w-25 py-2"),
         {
           backgroundColor: selected ? COLORS.primaryColor : "transparent",
         },

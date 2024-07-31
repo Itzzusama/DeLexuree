@@ -49,6 +49,7 @@ const Notifications = ({ navigation }) => {
       paddingBottom={70}
       backgroundColor={COLORS.white}
       paddingHorizontal={14}
+      scrollEnabled
       headerUnScrollable={() => <Header title="Chat" />}
     >
       <View style={{ marginVertical: 12 }} />

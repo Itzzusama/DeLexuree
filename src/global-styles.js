@@ -585,6 +585,7 @@ const flex = () => {
     "justify-end": { justifyContent: "flex-end" },
     "align-end": { alignItems: "flex-end" },
     "align-self-end": { alignSelf: "flex-end" },
+    "align-self-center": { alignSelf: "center" },
     "shadow-3": {
       shadowColor: "rgba(0,0,0,0.3)",
       shadowOffset: {

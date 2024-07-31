@@ -81,7 +81,6 @@ const Home = ({ navigation }) => {
       backgroundColor={COLORS.white}
       headerUnScrollable={() => <Header />}
     >
-      <SearchBar placeHolder={"Search"} backgroundColor={"#F5F9F8"} />
       <TopTab
         tabNames={["All", "Pending", "Completed", "Cancelled"]}
         tab={tab}
@@ -106,6 +105,8 @@ const Home = ({ navigation }) => {
             description={"Includes dusting, vacuuming, etc."}
             date={"12/06/2024"}
             imageSource={Images.cardImage}
+            onOpenMaps={()=>navigation.navigate('Maps')}
+            onCardPress={()=>navigation.navigate("OrderDetail")} 
           />
         )}
       />

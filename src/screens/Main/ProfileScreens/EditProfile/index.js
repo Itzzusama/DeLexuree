@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
 
 import ScreenWrapper from "../../../../components/ScreenWrapper";
 import CustomText from "../../../../components/CustomText";
@@ -21,7 +22,6 @@ import { useNavigation } from "@react-navigation/native";
 import { Images } from "../../../../assets/images";
 import ImageFast from "../../../../components/ImageFast";
 import fonts from "../../../../assets/fonts";
-import { useDispatch, useSelector } from "react-redux";
 import { get, put } from "../../../../Services/ApiRequest";
 import { ToastMessage } from "../../../../utils/ToastMessage";
 import { setUserData } from "../../../../store/reducer/usersSlice";
@@ -52,7 +52,6 @@ const EditProfile = () => {
   const [birthdate, setBirthdate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const formattedDate = moment(birthdate).format("DD-MM-YYYY");
-
 
   const handleUpdateUser = async () => {
     setLoading(true);
@@ -106,6 +105,20 @@ const EditProfile = () => {
       value: state.phone,
       onChange: (text) => setState({ ...state, phone: text }),
     },
+    {
+      id: 4,
+      placeholder: "Enter account title",
+      label: "Account Title",
+      value: state.subject,
+      onChange: (text) => setState({ ...state, subject: text }),
+    },
+    {
+      id: 5,
+      placeholder: "Enter account number",
+      label: "Account Number",
+      value: state.email,
+      onChange: (text) => setState({ ...state, email: text }),
+    },
     { id: 3.1 },
     { id: 3.2 },
   ];
@@ -143,6 +156,7 @@ const EditProfile = () => {
   return (
     <ScreenWrapper
       backgroundColor={COLORS.white}
+      scrollEnabled
       paddingHorizontal={"0%"}
       headerUnScrollable={() => <Header title={"Edit Profile"} />}
     >

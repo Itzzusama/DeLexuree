@@ -31,7 +31,7 @@ const ImageFast = ({source, style, resizeMode, isView}) => {
             color={COLORS.white}
             size={30}
             onPress={() => setIsViewModal(false)}
-            style={{alignSelf: 'flex-end', marginBottom: 20, marginRight: 10}}
+            style={{alignSelf: 'flex-end',  marginRight: 10, marginTop: 28,}}
           />
           <FastImage
             onLoadStart={() => setIsImageLoading(true)}
@@ -40,7 +40,7 @@ const ImageFast = ({source, style, resizeMode, isView}) => {
             resizeMode="contain"
             style={{
               width: width,
-              height: height - 70,
+              height: height - 80,
             }}
           />
         </CustomModal>

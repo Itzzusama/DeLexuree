@@ -85,7 +85,7 @@ const OnBoarding = () => {
           fontSize={24}
           marginBottom={6}
           textAlign="center"
-          lineHeight={30}
+          lineHeight={34}
           fontFamily={fonts.bold}
         />
         <CustomText
@@ -99,10 +99,11 @@ const OnBoarding = () => {
           fontSize={14}
           marginBottom={10}
           textAlign="center"
-          lineHeight={28}
+          lineHeight={22}
           fontFamily={fonts.medium}
         />
-
+      </View>
+      <View style={{ padding: 20 }}>
         <Animated.View style={styles.dotContainer}>
           {array?.map((_, i) => (
             <Animated.View
@@ -117,11 +118,8 @@ const OnBoarding = () => {
             />
           ))}
         </Animated.View>
-      </View>
-      <View style={{ padding: 20 }}>
         <CustomButton
           marginBottom={10}
-          
           title={currentIndex == 2 ? "Get Started" : "Next"}
           onPress={
             currentIndex == 2
@@ -171,6 +169,7 @@ const styles = StyleSheet.create({
   dotContainer: {
     flexDirection: "row",
     alignItems: "center",
+    alignSelf: "center",
     marginBottom: 30,
   },
 });
