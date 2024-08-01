@@ -29,7 +29,7 @@ const ForgetPass = ({ navigation }) => {
     try {
       setLoading(true);
       const body = {
-        phone: phone,
+        email: email,
       };
       const response = await post("users/forget-password", body);
       console.log("res-------------", response.data);
@@ -61,14 +61,14 @@ const ForgetPass = ({ navigation }) => {
           width="90%"
           marginBottom={30}
           loading={loading}
-          // onPress={handleSendOTP}
-          onPress={() =>
-            navigation.navigate("OTPScreen", {
-              isAccountCreated: true,
-              // token: response.data?.token || "",
-              token: "",
-            })
-          }
+          onPress={handleSendOTP}
+          // onPress={() =>
+          //   navigation.navigate("OTPScreen", {
+          //     isAccountCreated: true,
+          //     token: response.data?.token || "",
+          //     token: "",
+          //   })
+          // }
           disabled={!!emailError || loading}
         />
       )}

@@ -17,12 +17,9 @@ const OTPScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const isAccountCreated = route?.params?.isAccountCreated;
   const bodySignUp = route?.params?.bodySignUp;
-  const location = route?.params?.location;
+  const category = route?.params?.category;
   const token = route?.params?.token;
-  const extraData = route?.params?.extraData;
   const dob = route?.params?.dob;
-  const DBS = route?.params?.DBS;
-  const { userCategory } = useSelector((state) => state.authConfigs);
 
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
@@ -65,11 +62,11 @@ const OTPScreen = ({ navigation, route }) => {
     setLoading(true);
     try {
       const body = {
-        phone: bodySignUp?.phone,
+        email: bodySignUp?.email,
         code: otp,
       };
       const response = await post("users/verify-otp/registration", body);
-      console.log("res----", response.data);
+
       if (response.data.success) {
         handleRegisterUser();
         // ToastMessage(response.data?.message);
@@ -92,21 +89,14 @@ const OTPScreen = ({ navigation, route }) => {
         phone: bodySignUp?.phone,
         password: bodySignUp?.password,
         fcmtoken: "",
-        fname: bodySignUp?.fName,
-        lname: bodySignUp?.lName,
-        location: {
-          lat: "12312312",
-          lng: "1231231",
-          address: location,
-        },
-        title: extraData?.title,
-        doc_url: "",
-        exp: extraData?.exp,
-        dbs: DBS,
+        name: bodySignUp?.fName,
+        acc_numb: bodySignUp?.acc_numb,
+        acc_title: bodySignUp?.acc_title,
         dob: dob,
-        category: userCategory == "Shoe Cleaning" ? "shoeclean" : userCategory,
+        category: category,
       };
-      const response = await post("users/signup/shop", body);
+      const response = await post("users/signup/employee", body);
+      console.log("res`, respons", response.data);
       await AsyncStorage.setItem("token", response.data?.token);
       dispatch(setToken(response.data?.token));
       dispatch(setUserData(response.data?.user));
@@ -115,10 +105,7 @@ const OTPScreen = ({ navigation, route }) => {
           index: 0,
           routes: [
             {
-              name: "Accommodation",
-              params: {
-                isSkip: true,
-              },
+              name: "Information",
             },
           ],
         });
@@ -145,37 +132,37 @@ const OTPScreen = ({ navigation, route }) => {
           width="90%"
           marginBottom={30}
           loading={loading}
-          disabled={otp.length < 4}
+          disabled={loading || otp.length < 4}
           // onPress={
           //   isAccountCreated
           //     ? () => navigation.navigate('Success', {isAccountCreated})
           //     : () => navigation.navigate('ResetPass')
           // }
-          // onPress={isAccountCreated ? handleVerifyOtp : handleCheckOtp}
-          onPress={
-            isAccountCreated
-              ? () =>
-                  navigation.reset({
-                    index: 0,
-                    routes: [
-                      {
-                        name: "ResetPass",
-                        params: {
-                          token: token,
-                        },
-                      },
-                    ],
-                  })
-              : () =>
-                  navigation.reset({
-                    index: 0,
-                    routes: [
-                      {
-                        name: "Availability",
-                      },
-                    ],
-                  })
-          }
+          onPress={isAccountCreated ? handleVerifyOtp : handleCheckOtp}
+          // onPress={
+          //   isAccountCreated
+          //     ? () =>
+          //         navigation.reset({
+          //           index: 0,
+          //           routes: [
+          //             {
+          //               name: "ResetPass",
+          //               params: {
+          //                 token: token,
+          //               },
+          //             },
+          //           ],
+          //         })
+          //     : () =>
+          //         navigation.reset({
+          //           index: 0,
+          //           routes: [
+          //             {
+          //               name: "Availability",
+          //             },
+          //           ],
+          //         })
+          // }
         />
       )}
     >

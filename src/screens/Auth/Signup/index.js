@@ -16,6 +16,7 @@ import { COLORS } from "../../../utils/COLORS";
 import fonts from "../../../assets/fonts";
 import { View } from "react-native";
 import moment from "moment";
+import CustomDropDown from "../../../components/CustomDropDown";
 
 const Signup = ({ navigation }) => {
   const init = {
@@ -23,7 +24,8 @@ const Signup = ({ navigation }) => {
     email: "",
     phone: "",
     password: "",
-    DoorNum: "",
+    acc_title: "",
+    acc_numb: "",
   };
   const [state, setState] = useState(init);
   const inits = {
@@ -31,18 +33,18 @@ const Signup = ({ navigation }) => {
     emailError: "",
     phoneError: "",
     passwordError: "",
-    addressError: "",
-    DoorNumError: "",
+    categoryError: "",
+    acc_titleError: "",
+    acc_numbError: "",
   };
 
   const [errors, setErrors] = useState(inits);
   const [loading, setLoading] = useState(false);
-  const [address, setAddress] = useState("");
+  const [category, setCategory] = useState("");
   const [birthdate, setBirthdate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const formattedDate = moment(birthdate).format("DD-MM-YYYY");
 
-  // console.log('birthdate', birthdate);
   const array = [
     {
       id: 1,
@@ -79,6 +81,23 @@ const Signup = ({ navigation }) => {
       onChange: (text) => setState({ ...state, password: text }),
       error: errors.passwordError,
     },
+    {
+      id: 7,
+      placeholder: "Account Title",
+      label: "Account Title",
+      value: state.acc_title,
+      onChange: (text) => setState({ ...state, acc_title: text }),
+      error: errors.acc_titleError,
+    },
+    {
+      id: 8,
+      placeholder: "Account Number",
+      label: "Account Number",
+      value: state.acc_numb,
+      onChange: (text) => setState({ ...state, acc_numb: text }),
+      error: errors.acc_numbError,
+    },
+    { id: 6 },
   ];
 
   const checkEmail = async () => {
@@ -92,11 +111,7 @@ const Signup = ({ navigation }) => {
       if (!response.data?.success) {
         ToastMessage("Email Already Exists");
       } else {
-        navigation.navigate("PreviousWork", {
-          user: state,
-          location: address,
-          dob: birthdate,
-        });
+        handleSendOtp();
       }
     } catch (error) {
       console.log(error.response.data);
@@ -104,7 +119,32 @@ const Signup = ({ navigation }) => {
     } finally {
       setLoading(false);
     }
-  }; //navigation.navigate('OTPScreen', {isAccountCreated: true})
+  };
+
+  const handleSendOtp = async () => {
+    try {
+      setLoading(true);
+      const body = {
+        email: state?.email,
+      };
+      const response = await post("users/send-code", body);
+      console.log("response", response.data);
+      ToastMessage(response.data?.message);
+      if (response.data) {
+        navigation.navigate("OTPScreen", {
+          isAccountCreated: false,
+          bodySignUp: state,
+          category: category,
+          dob: birthdate,
+        });
+      }
+    } catch (error) {
+      ToastMessage(error.response?.data?.error);
+      console.log(error.response.data.error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const errorCheck = useMemo(() => {
     return () => {
@@ -123,45 +163,21 @@ const Signup = ({ navigation }) => {
       else if (!passwordRegex.test(state.password))
         newErrors.passwordError =
           "Password must contain 1 number, 1 special character, Uppercase and 8 digits";
+      else if (!state.acc_title)
+        newErrors.acc_titleError = "Please enter Account Title";
+      else if (!state.acc_numb)
+        newErrors.acc_numbError = "Please enter Account Number";
+      else if (!category) newErrors.categoryError = "Please select a category";
 
       setErrors(newErrors);
     };
-  }, [state, address]);
+  }, [state, category]);
 
   useEffect(() => {
     errorCheck();
   }, [errorCheck]);
   return (
-    <ScreenWrapper
-      scrollEnabled
-      footerUnScrollable={() => (
-        <>
-          <CustomButton
-            title="Create Account"
-            marginTop={50}
-            // onPress={checkEmail}
-            onPress={() =>
-              navigation.navigate("Information", {
-                user: state,
-                dob: birthdate,
-              })
-            }
-            disabled={!Object.values(errors).every((error) => error === "")}
-            loading={loading}
-            width="90%"
-          />
-          <CustomText
-            label="I already have an account"
-            fontSize={16}
-            fontFamily={fonts.semiBold}
-            alignSelf="center"
-            marginTop={20}
-            marginBottom={30}
-            onPress={() => navigation.navigate("Login")}
-          />
-        </>
-      )}
-    >
+    <ScreenWrapper scrollEnabled footerUnScrollable={() => <></>}>
       <AuthWrapper heading="Create Account" desc="signUpDesc" showStatus={true}>
         {array.map((item) =>
           item.id === 4 ? (
@@ -220,6 +236,14 @@ const Signup = ({ navigation }) => {
                 }}
               />
             </View>
+          ) : item?.id == 6 ? (
+            <CustomDropDown
+              options={["floor", "laundry", "bathroom", "shoe"]}
+              value={category}
+              setValue={setCategory}
+              placeholder={"Select a category"}
+              error={errors.categoryError}
+            />
           ) : (
             <CustomInput
               key={item?.id}
@@ -229,10 +253,36 @@ const Signup = ({ navigation }) => {
               error={item.error}
               secureTextEntry={item?.id == 5}
               withLabel={item.label}
-              keyboardType={item?.id == 4 ? "number-pad" : "default"}
+              keyboardType={
+                item?.id == 4 || item.id == 8 ? "number-pad" : "default"
+              }
             />
           )
         )}
+        <CustomButton
+          title="Create Account"
+          marginTop={50}
+          onPress={checkEmail}
+          // onPress={() =>
+          //   navigation.navigate("Information", {
+          //     user: state,
+          //     dob: birthdate,
+          //   })
+          // }
+          disabled={
+            loading || !Object.values(errors).every((error) => error === "")
+          }
+          loading={loading}
+        />
+        <CustomText
+          label="I already have an account"
+          fontSize={16}
+          fontFamily={fonts.semiBold}
+          alignSelf="center"
+          marginTop={20}
+          marginBottom={30}
+          onPress={() => navigation.navigate("Login")}
+        />
       </AuthWrapper>
     </ScreenWrapper>
   );

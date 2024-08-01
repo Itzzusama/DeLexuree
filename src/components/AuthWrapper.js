@@ -52,14 +52,14 @@ const AuthWrapper = ({
               },
             ]}
           />
-          {/* <View
+          <View
             style={[
               className("flex-1 rounded-1 h-1 bg-DD "),
               {
                 backgroundColor: index == 2 ? COLORS.primaryColor : COLORS.DD,
               },
             ]}
-          /> */}
+          />
         </View>
       )}
 

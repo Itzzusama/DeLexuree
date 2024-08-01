@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from "react";
 import {
   TouchableOpacity,
   ScrollView,
@@ -7,13 +7,13 @@ import {
   View,
   Image,
   Text,
-} from 'react-native';
+} from "react-native";
 
-import CustomText from './CustomText';
-import Icons from './Icons';
+import CustomText from "./CustomText";
+import Icons from "./Icons";
 
-import {COLORS} from '../utils/COLORS';
-import fonts from '../assets/fonts';
+import { COLORS } from "../utils/COLORS";
+import fonts from "../assets/fonts";
 
 const CustomDropDown = ({
   options,
@@ -24,6 +24,7 @@ const CustomDropDown = ({
   withLabel,
   isRequired,
   maxHeight,
+  error,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const opacity = useRef(new Animated.Value(0)).current;
@@ -46,7 +47,7 @@ const CustomDropDown = ({
     ]).start();
   };
 
-  const handleSelect = option => {
+  const handleSelect = (option) => {
     setValue(option);
     toggleDropdown();
   };
@@ -56,18 +57,19 @@ const CustomDropDown = ({
       {withLabel ? (
         <Text style={styles.withLabelStyle}>
           {withLabel}
-          {isRequired && <Text style={{color: COLORS.red}}> *</Text>}
+          {isRequired && <Text style={{ color: COLORS.red }}> *</Text>}
         </Text>
       ) : null}
-      <View style={{width: '100%'}}>
+      <View style={{ width: "100%" }}>
         <TouchableOpacity
-          style={[styles.mainContainer, {marginBottom: isOpen ? 5 : 20}]}
-          onPress={toggleDropdown}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          style={[styles.mainContainer, { marginBottom: isOpen ? 5 : 20 }]}
+          onPress={toggleDropdown}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
             {icon && <Image source={icon} style={styles.leftIcon} />}
             <CustomText
               label={value || placeholder}
-              color={value ? COLORS.black : COLORS.grey}
+              color={value ? COLORS.black : COLORS.gray}
               marginLeft={10}
             />
           </View>
@@ -75,7 +77,7 @@ const CustomDropDown = ({
             family="Entypo"
             size={24}
             color={COLORS.black}
-            name={isOpen ? 'chevron-up' : 'chevron-down'}
+            name={isOpen ? "chevron-up" : "chevron-down"}
           />
         </TouchableOpacity>
 
@@ -83,17 +85,24 @@ const CustomDropDown = ({
           <Animated.View
             style={[
               styles.dropdown,
-              {opacity, transform: [{translateY}], maxHeight: maxHeight || 165},
-            ]}>
+              {
+                opacity,
+                transform: [{ translateY }],
+                maxHeight: maxHeight || 165,
+              },
+            ]}
+          >
             <ScrollView
               nestedScrollEnabled
-              showsVerticalScrollIndicator={false}>
-              {options?.map(option => (
+              showsVerticalScrollIndicator={false}
+            >
+              {options?.map((option) => (
                 <TouchableOpacity
                   activeOpacity={1}
                   style={styles.listItemContainer}
                   key={option}
-                  onPress={() => handleSelect(option)}>
+                  onPress={() => handleSelect(option)}
+                >
                   <CustomText
                     fontSize={12}
                     fontFamily={fonts.medium}
@@ -105,22 +114,25 @@ const CustomDropDown = ({
           </Animated.View>
         )}
       </View>
+      {error && (
+        <CustomText label={error} color={COLORS.red} marginBottom={20} />
+      )}
     </>
   );
 };
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: '100%',
+    width: "100%",
     height: 48,
     backgroundColor: COLORS.white,
     borderWidth: 1,
     borderColor: COLORS.lightGray,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     borderRadius: 6,
     paddingHorizontal: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   dropdown: {
     left: 0,
@@ -141,7 +153,7 @@ const styles = StyleSheet.create({
   leftIcon: {
     width: 17,
     height: 17,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   withLabelStyle: {
     fontSize: 14,

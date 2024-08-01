@@ -6,6 +6,7 @@ import storage from "@react-native-firebase/storage";
 
 import { ToastMessage } from "./ToastMessage";
 import { get } from "../Services/ApiRequest";
+import axios from "axios";
 
 export const regEmail =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -17,25 +18,31 @@ const GOOGLE_API_KEY = "";
 const imageUrl = "";
 export const uploadAndGetUrl = async (file) => {
   try {
-    const resizeUri = await ImageCompressor.compress(
-      file.fileCopyUri || file.path
+    const token = await AsyncStorage.getItem("token");
+    const formData = new FormData();
+    formData.append("image", {
+      uri: file.path || file.fileCopyUri || "",
+      type: "image/jpeg",
+      name: "photo.jpg",
+    });
+    const res = await axios.post(
+      `${endPoints.BASE_URL}image/upload`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "x-auth-token": token,
+        },
+      }
     );
-
-    const filename = `images/${new Date()
-      .toISOString()
-      .replace(/[.:-]+/g, "_")}`;
-    const uploadUri =
-      Platform.OS === "ios" ? resizeUri.replace("file://", "") : resizeUri;
-    const storageRef = storage().ref(filename);
-    await storageRef.putFile(uploadUri);
-    const url = await storageRef.getDownloadURL();
-    ToastMessage("Image uploaded successfully");
-    return url;
+    return res?.data?.image;
   } catch (err) {
     console.log("=======er", err);
     ToastMessage("Upload Again");
   }
 };
+
+
 export const getToken = async () => {
   const status = await PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS

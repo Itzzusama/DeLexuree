@@ -96,9 +96,11 @@ const ResetPass = ({ navigation, route }) => {
           title="Reset Password"
           marginBottom={30}
           width="90%"
-          onPress={() => setResetModal(true)}
-          // onPress={handleSetNewPassword}
-          disabled={!Object.values(errors).every((error) => error === "")}
+          // onPress={() => setResetModal(true)}
+          onPress={handleSetNewPassword}
+          disabled={
+            loading || !Object.values(errors).every((error) => error === "")
+          }
           loading={loading}
         />
       )}

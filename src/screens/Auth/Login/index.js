@@ -67,16 +67,6 @@ const Login = ({ navigation }) => {
         await AsyncStorage.setItem("token", response.data?.token);
         dispatch(setToken(response.data?.token));
         dispatch(setUserData(response.data?.user));
-        // if (response.data?.category == 'accomodation') {
-        //   navigation.reset({
-        //     index: 0,
-        //     routes: [
-        //       {
-        //         name: 'Accommodation',
-        //       },
-        //     ],
-        //   });
-        // } else {
         navigation.reset({
           index: 0,
           routes: [
