@@ -112,11 +112,11 @@ const Information = ({ navigation, route }) => {
       let newErrors = {};
 
       if (!state.q1) newErrors.q1Error = "Please enter Information";
-      if (!state.q2) newErrors.q2Error = "Please enter Information";
-      if (!state.q3) newErrors.q3Error = "Please enter Information";
-      if (!state.q4) newErrors.q4Error = "Please enter Information";
-      if (!state.q5) newErrors.q5Error = "Please enter Information";
-      if (!state.q6) newErrors.q6Error = "Please enter Information";
+      else if (!state.q2) newErrors.q2Error = "Please enter Information";
+      else if (!state.q3) newErrors.q3Error = "Please enter Information";
+      else if (!state.q4) newErrors.q4Error = "Please enter Information";
+      else if (!state.q5) newErrors.q5Error = "Please enter Information";
+      else if (!state.q6) newErrors.q6Error = "Please enter Information";
 
       setErrors(newErrors);
     };

@@ -1,20 +1,21 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import ScreenWrapper from '../../../components/ScreenWrapper';
-import ImageFast from '../../../components/ImageFast';
-import {Images} from '../../../assets/images';
-import {COLORS} from '../../../utils/COLORS';
-import CustomText from '../../../components/CustomText';
-import fonts from '../../../assets/fonts';
-import CustomButton from '../../../components/CustomButton';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import ScreenWrapper from "../../../components/ScreenWrapper";
+import ImageFast from "../../../components/ImageFast";
+import { Images } from "../../../assets/images";
+import { COLORS } from "../../../utils/COLORS";
+import CustomText from "../../../components/CustomText";
+import fonts from "../../../assets/fonts";
+import CustomButton from "../../../components/CustomButton";
 
-const Success = ({navigation, route}) => {
+const Success = ({ navigation, route }) => {
   const isAccountCreated = route?.params?.isAccountCreated;
   return (
     <ScreenWrapper
-      backgroundColor={COLORS.primaryColor}
-      statusBarColor={COLORS.primaryColor}
-      barStyle="light-style">
+      backgroundColor={COLORS.white}
+      statusBarColor={COLORS.white}
+      barStyle="dark-content"
+    >
       <View style={styles.mainContainer}>
         <ImageFast
           source={isAccountCreated ? Images.accountCreated : Images.otpSent}
@@ -22,20 +23,18 @@ const Success = ({navigation, route}) => {
           resizeMode="contain"
         />
         <CustomText
-          label={isAccountCreated ? 'signUpSuccess' : 'Open your email'}
-          color={COLORS.white}
+          label={isAccountCreated ? "signUpSuccess" : "Open your email"}
           fontFamily={fonts.boldExtra}
           fontSize={28}
           textAlign="center"
         />
         <CustomText
-          label={isAccountCreated ? 'signUpSuccessDecs' : 'sendOtp'}
-          color={COLORS.gray1}
+          label={isAccountCreated ? "signUpSuccessDecs" : "sendOtp"}
           fontSize={16}
           textAlign="center"
           marginTop={30}
         />
-        <View style={{flex: 1}} />
+        <View style={{ flex: 1 }} />
         {isAccountCreated ? null : (
           <CustomText
             label="Open Email App"
@@ -49,11 +48,11 @@ const Success = ({navigation, route}) => {
         )}
 
         <CustomButton
-          title={isAccountCreated ? 'Get Started' : 'Continue'}
+          title={isAccountCreated ? "Get Started" : "Continue"}
           backgroundColor={COLORS.primaryColor1}
           marginBottom={40}
           onPress={() =>
-            navigation.navigate(isAccountCreated ? 'Login' : 'OTPScreen')
+            navigation.navigate(isAccountCreated ? "Information" : "OTPScreen")
           }
         />
       </View>
@@ -66,7 +65,7 @@ export default Success;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   image: {
     width: 124,
