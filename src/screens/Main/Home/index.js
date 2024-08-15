@@ -11,69 +11,42 @@ import { get, post, put } from "../../../Services/ApiRequest";
 import { ToastMessage } from "../../../utils/ToastMessage";
 import { useFocusEffect } from "@react-navigation/native";
 import NoShow from "../../../components/NoShow";
-import { setUserData } from "../../../store/reducer/usersSlice";
 import SearchBar from "../../../components/SearchBar";
 import ServiceCard from "../../../components/ServiceCard";
 import { Images } from "../../../assets/images";
 import TopTab from "../../../components/TopTab";
+import { formatDate } from "../../../utils/dateUtils";
 
 const Home = ({ navigation }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState("Pending");
   const [orders, setOrders] = useState([]);
 
   const { userData } = useSelector((state) => state.users);
+
   const getOrders = async () => {
+    const status =
+      tab === "Pending" ? "all" : tab === "Accepted" ? "accepted" : "completed";
     try {
       setLoading(true);
       const body = {
-        status: "all",
-        category: userData?.category,
+        status: status,
+        //category: userData?.category,
         sub_cat: "",
       };
       const response = await post("order/employee/filter/", body);
-      console.log("response: ", response.data);
       setOrders(response.data?.orders);
-      ToastMessage(response?.data?.message);
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response?.data);
       ToastMessage(error?.response?.data?.message);
     } finally {
       setLoading(false);
     }
   };
-
-  const updateOrderStatus = async (key, item) => {
-    try {
-      const response = await put(
-        "order/employee/update/" + key + "/" + item?._id
-      );
-      if (response.data?.success) {
-        ToastMessage(response.data?.message);
-        getOrders();
-      }
-      console.log("res=====>", response.data);
-    } catch (error) {
-      console.log("errr---------", error);
-    }
-  };
-
-  const getProfile = async () => {
-    try {
-      const response = await get("users/me");
-      dispatch(setUserData(response.data?.user));
-    } catch (error) {}
-  };
-  useFocusEffect(
-    React.useCallback(() => {
-      getOrders();
-    }, [])
-  );
   useEffect(() => {
-    getProfile();
-  }, []);
-
+    getOrders(); //
+  }, [tab]);
   return (
     <ScreenWrapper
       paddingHorizontal={16}
@@ -82,33 +55,46 @@ const Home = ({ navigation }) => {
       headerUnScrollable={() => <Header />}
     >
       <TopTab
-        tabNames={["All", "Pending", "Completed", "Cancelled"]}
+        tabNames={["Pending", "Accepted", "Completed"]}
         tab={tab}
         setTab={setTab}
+        getOrders={getOrders}
       />
       <FlatList
-        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
-        ListEmptyComponent={
-          <NoShow
-            label={"You don’t have any active jobs"}
-            label2={"Always keep yourself available to get new jobs"}
-          />
-        }
+        data={orders}
         keyExtractor={(_, index) => index.toString()}
         refreshControl={
           <RefreshControl refreshing={loading} onRefresh={getOrders} />
         }
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <ServiceCard
-            title={"House Cleaning Service"}
-            description={"Includes dusting, vacuuming, etc."}
-            date={"12/06/2024"}
-            imageSource={Images.cardImage}
-            onOpenMaps={()=>navigation.navigate('Maps')}
-            onCardPress={()=>navigation.navigate("OrderDetail")} 
-          />
-        )}
+        renderItem={({ item }) => {
+          let isPaid =
+            item?.transaction && typeof item.transaction === "object";
+          return (
+            <ServiceCard
+              title={item?.service?.title}
+              description={item?.service?.description}
+              date={formatDate(item?.date)}
+              imageSource={item?.service?.images[0]}
+              status={item?.status}
+              isPaid={isPaid}
+              onOpenMaps={() => navigation.navigate("Maps", { detail: item })}
+              onCardPress={() =>
+                navigation.navigate("OrderDetail", {
+                  detail: item,
+                })
+              }
+            />
+          );
+        }}
+        ListEmptyComponent={
+          !loading && (
+            <NoShow
+              label={"You don’t have any active orders"}
+              label2={"Always keep yourself available to get new orders"}
+            />
+          )
+        }
       />
     </ScreenWrapper>
   );

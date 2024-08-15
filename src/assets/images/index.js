@@ -61,4 +61,11 @@ export const Images = {
   help: require("./help.png"),
   terms: require("./terms.png"),
   about: require("./about.png"),
+  pin: require("./pin.png"),
+  noti: require("./noti.png"),
 };
+
+//svgs
+export { default as GoogleIcon } from "./Google.svg";
+export { default as AppleIcon } from "./Vector.svg";
+export { default as Email } from "./mail.svg";

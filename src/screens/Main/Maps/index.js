@@ -1,5 +1,9 @@
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { useIsFocused } from "@react-navigation/native";
+import {
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useRef } from "react";
 
@@ -9,21 +13,36 @@ import { mapStyle } from "../../../utils/constants";
 import { Images } from "../../../assets/images";
 import { COLORS } from "../../../utils/COLORS";
 import ScreenWrapper from "../../../components/ScreenWrapper";
+import NoShow from "../../../components/NoShow";
+import CustomerCard from "../OrderDetail/molecules/CustomerCard";
+import { formatDate, formatTime } from "../../../utils/dateUtils";
 
 const Maps = () => {
+  const route = useRoute();
+  const navigation = useNavigation();
+  const { detail } = route.params;
   const mapRef = useRef();
   const focus = useIsFocused();
   useEffect(() => {
     mapRef.current?.animateToRegion(
       {
-        latitude: 31.5204,
-        longitude: 74.3587,
+        latitude: detail?.location?.lat,
+        longitude: detail?.location?.lng,
         latitudeDelta: 0.545,
         longitudeDelta: 0.545,
       },
       1000
     );
   }, [focus]);
+  const onChatPress = async () => {
+    const dataToSend = {
+      id: detail?.user?._id,
+      img: detail?.user?.profilePicture,
+      name: detail?.user?.name,
+      type: detail?.user?.type,
+    };
+    navigation.navigate("InboxScreen", { data: dataToSend });
+  };
   return (
     <ScreenWrapper
       translucent
@@ -32,50 +51,59 @@ const Maps = () => {
       barStyle="light-content"
     >
       <MapView
-        provider={PROVIDER_GOOGLE}
-        customMapStyle={mapStyle}
-        mapType="satellite" // You can use "standard", "satellite", "hybrid", or "terrain"
+        //provider={PROVIDER_GOOGLE}
+        mapType="standard" // You can use "standard", "satellite", "hybrid", or "terrain"
         showsBuildings={true}
         camera={{
           pitch: 45, // This sets the 3D pitch
           heading: 0,
           altitude: 1000,
           center: {
-            latitude: 31.5204,
-            longitude: 74.3587,
+            latitude: detail?.location?.lat,
+            longitude: detail?.location?.lng,
           },
           zoom: 16.5,
         }}
         ref={mapRef}
         style={{ width: "100%", flex: 1 }}
         initialRegion={{
-          latitude: 31.5204,
-          longitude: 74.3587,
+          latitude: detail?.location?.lat,
+          longitude: detail?.location?.lng,
           latitudeDelta: 0.545,
           longitudeDelta: 0.545,
         }}
       >
         <Marker
           coordinate={{
-            latitude: 31.5204,
-            longitude: 74.3587,
+            latitude: detail?.location?.lat,
+            longitude: detail?.location?.lng,
           }}
         >
           <View style={{ alignItems: "center" }}>
             <ImageFast
-              source={Images.user}
+              source={Images.pin}
               resizeMode="cover"
               style={{
-                width: 35,
-                height: 35,
-                borderRadius: 100,
-                borderWidth: 2,
-                borderColor: COLORS.gray2,
+                width: 37,
+                height: 37,
               }}
             />
           </View>
         </Marker>
       </MapView>
+      <View style={styles.bottomList}>
+        <CustomerCard
+          color={COLORS.white}
+          backgroundColor={COLORS.white}
+          imageUrl={detail?.user?.profilePicture}
+          name={detail?.user?.name}
+          date={formatDate(detail?.date)}
+          time={formatTime(detail?.time)}
+          address={detail?.location?.address}
+          description={detail?.user?.email}
+          onChatPress={onChatPress}
+        />
+      </View>
     </ScreenWrapper>
   );
 };
@@ -87,5 +115,12 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  bottomList: {
+    position: "absolute",
+    bottom: 30,
+    marginHorizontal: 20,
+    right: 0,
+    left: 0,
   },
 });

@@ -12,13 +12,14 @@ import { COLORS } from "../../../utils/COLORS";
 import { get } from "../../../Services/ApiRequest";
 import { useFocusEffect } from "@react-navigation/native";
 import NoShow from "../../../components/NoShow";
+import { formatTime } from "../../../utils/dateUtils";
 
 const Notifications = ({ navigation }) => {
   const handleNavigation = async (item) => {
     const dataToSend = {
       id: item?.otherUser?._id,
       img: item?.otherUser?.profilePicture,
-      name: item?.otherUser?.fname + " " + item?.otherUser?.lname,
+      name: item?.otherUser?.name,
       type: item?.otherUser?.type,
     };
     navigation.navigate("InboxScreen", { data: dataToSend });
@@ -62,7 +63,7 @@ const Notifications = ({ navigation }) => {
             onRefresh={getConversationList}
           />
         }
-        data={[1, 2, 3, 4, 5, 6]}
+        data={messagesArray}
         ListEmptyComponent={() => (
           <NoShow
             label="You have not received any messages"
@@ -73,11 +74,12 @@ const Notifications = ({ navigation }) => {
         renderItem={({ item }) => (
           <Item
             onPress={() => handleNavigation(item)}
-            lastMsg={
-              "Turpis lectus egestas dui proin natoque nulla egestas fames molestie."
-            }
-            userName={"Wade Warren"}
-            count={1}
+            lastMsg={item?.lastMsg?.message}
+            userName={item?.otherUser?.name}
+            count={item?.unseen}
+            time={formatTime(item?.lastMsg?.createdAt)}
+            lastSeen={item?.lastMsg?.seen}
+            img={item?.otherUser?.profilePicture}
           />
         )}
       />

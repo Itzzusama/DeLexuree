@@ -39,17 +39,19 @@ const EditProfile = () => {
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
   const [image, setImage] = useState(userData?.profilePicture);
-  const [gender, setGender] = useState("Male");
-
+  const [gender, setGender] = useState(userData?.gender);
   const init = {
-    fName: userData?.fname,
-    lName: userData?.lname,
+    fName: userData?.name,
+    email: userData?.email,
     phone: userData?.phone,
-    DoorNum: userData?.DoorNum,
+    acc_title: userData?.acc_title,
+    acc_number: userData?.acc_numb,
   };
 
   const [state, setState] = useState(init);
-  const [birthdate, setBirthdate] = useState(new Date());
+  const [birthdate, setBirthdate] = useState(
+    userData?.dob ? new Date(userData?.dob) : new Date()
+  );
   const [open, setOpen] = useState(false);
   const formattedDate = moment(birthdate).format("DD-MM-YYYY");
 
@@ -57,16 +59,14 @@ const EditProfile = () => {
     setLoading(true);
     try {
       const body = {
-        fcmtoken: "",
-        fname: state?.fName,
-        lname: state?.lName,
-        location: {
-          lat: "12312312",
-          lng: "1231231",
-          address: address,
-        },
+        dob: birthdate,
+        email: init.email,
+        name: init.fName,
+        phone: init.phone,
+        acc_title: init.acc_title,
+        acc_numb: init.acc_number,
+        gender: gender,
         profilePicture: image,
-        DoorNum: state?.DoorNum,
       };
       const response = await put("users/update-user", body);
       if (response.data.success) {
@@ -95,8 +95,8 @@ const EditProfile = () => {
       id: 2,
       placeholder: "Email Address",
       label: "Email Address",
-      value: state.lName,
-      onChange: (text) => setState({ ...state, lName: text }),
+      value: state.email,
+      onChange: (text) => setState({ ...state, email: text }),
     },
     {
       id: 3,
@@ -109,15 +109,15 @@ const EditProfile = () => {
       id: 4,
       placeholder: "Enter account title",
       label: "Account Title",
-      value: state.subject,
-      onChange: (text) => setState({ ...state, subject: text }),
+      value: state.acc_title,
+      onChange: (text) => setState({ ...state, acc_title: text }),
     },
     {
       id: 5,
       placeholder: "Enter account number",
       label: "Account Number",
-      value: state.email,
-      onChange: (text) => setState({ ...state, email: text }),
+      value: state.acc_number,
+      onChange: (text) => setState({ ...state, acc_number: text }),
     },
     { id: 3.1 },
     { id: 3.2 },
@@ -174,11 +174,7 @@ const EditProfile = () => {
               style={className("align-center justify-center mt-7")}
             >
               <ImageFast
-                source={
-                  userData?.profilePicture
-                    ? { uri: image }
-                    : Images.sampleProfile
-                }
+                source={image ? { uri: image } : Images.sampleProfile}
                 style={{ height: 90, width: 90, borderRadius: 50 }}
               />
               <CustomText
@@ -246,7 +242,7 @@ const EditProfile = () => {
                 placeholder={"Select your Gender"}
                 value={gender}
                 setValue={setGender}
-                options={["Male", "Female"]}
+                options={["male", "female"]}
               />
             </>
           ) : (

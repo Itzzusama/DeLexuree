@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* TideTidyConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TideTidyConnectTests.m */; };
+		00E356F31AD99517003FC87E /* DeluxureeCleanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DeluxureeCleanTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -17,8 +17,8 @@
 		6BDD9A4EC93947C4B2BF3CAB /* Manrope-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F46D74C23F641889773F1EF /* Manrope-Medium.ttf */; };
 		6EBEB34371564534BBA6C76B /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46BE222668734C7D8FDFA4D0 /* Manrope-Bold.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		8527FC8386DB03EB57D540CF /* Pods_TideTidyConnect_TideTidyConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711657F78ED1653C58071F9 /* Pods_TideTidyConnect_TideTidyConnectTests.framework */; };
-		8B8007810A6732F33BADDFCE /* Pods_TideTidyConnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2047DABD1166522A69089D6C /* Pods_TideTidyConnect.framework */; };
+		8527FC8386DB03EB57D540CF /* Pods_DeluxureeClean_DeluxureeCleanTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711657F78ED1653C58071F9 /* Pods_DeluxureeClean_DeluxureeCleanTests.framework */; };
+		8B8007810A6732F33BADDFCE /* Pods_DeluxureeClean.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2047DABD1166522A69089D6C /* Pods_DeluxureeClean.framework */; };
 		97A376372AEF6F3A007BD60A /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97A376242AEF6F3A007BD60A /* Fontisto.ttf */; };
 		97A376382AEF6F3A007BD60A /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97A376252AEF6F3A007BD60A /* Octicons.ttf */; };
 		97A376392AEF6F3A007BD60A /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97A376262AEF6F3A007BD60A /* Feather.ttf */; };
@@ -57,32 +57,32 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = TideTidyConnect;
+			remoteInfo = DeluxureeClean;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* TideTidyConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TideTidyConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* DeluxureeCleanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeluxureeCleanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* TideTidyConnectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TideTidyConnectTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* TideTidyConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TideTidyConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TideTidyConnect/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = TideTidyConnect/AppDelegate.mm; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TideTidyConnect/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TideTidyConnect/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TideTidyConnect/main.m; sourceTree = "<group>"; };
-		2047DABD1166522A69089D6C /* Pods_TideTidyConnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TideTidyConnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4392A12AC88292D35C810B /* Pods-TideTidyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TideTidyConnect.debug.xcconfig"; path = "Target Support Files/Pods-TideTidyConnect/Pods-TideTidyConnect.debug.xcconfig"; sourceTree = "<group>"; };
-		43DCCAD9CB10471BA736A4AB /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = TideTidyConnect/BootSplash.storyboard; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* DeluxureeCleanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeluxureeCleanTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* DeluxureeClean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeluxureeClean.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = DeluxureeClean/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = DeluxureeClean/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DeluxureeClean/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DeluxureeClean/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DeluxureeClean/main.m; sourceTree = "<group>"; };
+		2047DABD1166522A69089D6C /* Pods_DeluxureeClean.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeluxureeClean.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B4392A12AC88292D35C810B /* Pods-DeluxureeClean.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeluxureeClean.debug.xcconfig"; path = "Target Support Files/Pods-DeluxureeClean/Pods-DeluxureeClean.debug.xcconfig"; sourceTree = "<group>"; };
+		43DCCAD9CB10471BA736A4AB /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = DeluxureeClean/BootSplash.storyboard; sourceTree = "<group>"; };
 		46BE222668734C7D8FDFA4D0 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Manrope-Bold.ttf"; path = "../src/assets/fonts/Manrope-Bold.ttf"; sourceTree = "<group>"; };
-		4711657F78ED1653C58071F9 /* Pods_TideTidyConnect_TideTidyConnectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TideTidyConnect_TideTidyConnectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4711657F78ED1653C58071F9 /* Pods_DeluxureeClean_DeluxureeCleanTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeluxureeClean_DeluxureeCleanTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B4886B166AE4D05A44AD1B8 /* Manrope-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Manrope-ExtraLight.ttf"; path = "../src/assets/fonts/Manrope-ExtraLight.ttf"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-TideTidyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TideTidyConnect.release.xcconfig"; path = "Target Support Files/Pods-TideTidyConnect/Pods-TideTidyConnect.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-TideTidyConnect-TideTidyConnectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TideTidyConnect-TideTidyConnectTests.debug.xcconfig"; path = "Target Support Files/Pods-TideTidyConnect-TideTidyConnectTests/Pods-TideTidyConnect-TideTidyConnectTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-DeluxureeClean.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeluxureeClean.release.xcconfig"; path = "Target Support Files/Pods-DeluxureeClean/Pods-DeluxureeClean.release.xcconfig"; sourceTree = "<group>"; };
+		5B7EB9410499542E8C5724F5 /* Pods-DeluxureeClean-DeluxureeCleanTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeluxureeClean-DeluxureeCleanTests.debug.xcconfig"; path = "Target Support Files/Pods-DeluxureeClean-DeluxureeCleanTests/Pods-DeluxureeClean-DeluxureeCleanTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6B321D1BA9C94E0499A636CB /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Manrope-SemiBold.ttf"; path = "../src/assets/fonts/Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
 		7B0BC3F54FEC483ABBD1EC2B /* Manrope-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Manrope-Light.ttf"; path = "../src/assets/fonts/Manrope-Light.ttf"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = TideTidyConnect/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-TideTidyConnect-TideTidyConnectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TideTidyConnect-TideTidyConnectTests.release.xcconfig"; path = "Target Support Files/Pods-TideTidyConnect-TideTidyConnectTests/Pods-TideTidyConnect-TideTidyConnectTests.release.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DeluxureeClean/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89C6BE57DB24E9ADA2F236DE /* Pods-DeluxureeClean-DeluxureeCleanTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeluxureeClean-DeluxureeCleanTests.release.xcconfig"; path = "Target Support Files/Pods-DeluxureeClean-DeluxureeCleanTests/Pods-DeluxureeClean-DeluxureeCleanTests.release.xcconfig"; sourceTree = "<group>"; };
 		901665CC09004489A7767ABC /* Manrope-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Manrope-ExtraBold.ttf"; path = "../src/assets/fonts/Manrope-ExtraBold.ttf"; sourceTree = "<group>"; };
 		97A376242AEF6F3A007BD60A /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
 		97A376252AEF6F3A007BD60A /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8527FC8386DB03EB57D540CF /* Pods_TideTidyConnect_TideTidyConnectTests.framework in Frameworks */,
+				8527FC8386DB03EB57D540CF /* Pods_DeluxureeClean_DeluxureeCleanTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,20 +129,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B8007810A6732F33BADDFCE /* Pods_TideTidyConnect.framework in Frameworks */,
+				8B8007810A6732F33BADDFCE /* Pods_DeluxureeClean.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* TideTidyConnectTests */ = {
+		00E356EF1AD99517003FC87E /* DeluxureeCleanTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* TideTidyConnectTests.m */,
+				00E356F21AD99517003FC87E /* DeluxureeCleanTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = TideTidyConnectTests;
+			path = DeluxureeCleanTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -153,7 +153,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* TideTidyConnect */ = {
+		13B07FAE1A68108700A75B9A /* DeluxureeClean */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -164,15 +164,15 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				43DCCAD9CB10471BA736A4AB /* BootSplash.storyboard */,
 			);
-			name = TideTidyConnect;
+			name = DeluxureeClean;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				2047DABD1166522A69089D6C /* Pods_TideTidyConnect.framework */,
-				4711657F78ED1653C58071F9 /* Pods_TideTidyConnect_TideTidyConnectTests.framework */,
+				2047DABD1166522A69089D6C /* Pods_DeluxureeClean.framework */,
+				4711657F78ED1653C58071F9 /* Pods_DeluxureeClean_DeluxureeCleanTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -211,9 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				97A376232AEF6F3A007BD60A /* Fonts */,
-				13B07FAE1A68108700A75B9A /* TideTidyConnect */,
+				13B07FAE1A68108700A75B9A /* DeluxureeClean */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* TideTidyConnectTests */,
+				00E356EF1AD99517003FC87E /* DeluxureeCleanTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -227,8 +227,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* TideTidyConnect.app */,
-				00E356EE1AD99517003FC87E /* TideTidyConnectTests.xctest */,
+				13B07F961A680F5B00A75B9A /* DeluxureeClean.app */,
+				00E356EE1AD99517003FC87E /* DeluxureeCleanTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -263,10 +263,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-TideTidyConnect.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-TideTidyConnect.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-TideTidyConnect-TideTidyConnectTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-TideTidyConnect-TideTidyConnectTests.release.xcconfig */,
+				3B4392A12AC88292D35C810B /* Pods-DeluxureeClean.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-DeluxureeClean.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-DeluxureeClean-DeluxureeCleanTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-DeluxureeClean-DeluxureeCleanTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -274,9 +274,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* TideTidyConnectTests */ = {
+		00E356ED1AD99517003FC87E /* DeluxureeCleanTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "TideTidyConnectTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "DeluxureeCleanTests" */;
 			buildPhases = (
 				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -290,14 +290,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = TideTidyConnectTests;
-			productName = TideTidyConnectTests;
-			productReference = 00E356EE1AD99517003FC87E /* TideTidyConnectTests.xctest */;
+			name = DeluxureeCleanTests;
+			productName = DeluxureeCleanTests;
+			productReference = 00E356EE1AD99517003FC87E /* DeluxureeCleanTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* TideTidyConnect */ = {
+		13B07F861A680F5B00A75B9A /* DeluxureeClean */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "TideTidyConnect" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DeluxureeClean" */;
 			buildPhases = (
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -313,9 +313,9 @@
 			);
 			dependencies = (
 			);
-			name = TideTidyConnect;
-			productName = TideTidyConnect;
-			productReference = 13B07F961A680F5B00A75B9A /* TideTidyConnect.app */;
+			name = DeluxureeClean;
+			productName = DeluxureeClean;
+			productReference = 13B07F961A680F5B00A75B9A /* DeluxureeClean.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -335,7 +335,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "TideTidyConnect" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "DeluxureeClean" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -348,8 +348,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* TideTidyConnect */,
-				00E356ED1AD99517003FC87E /* TideTidyConnectTests */,
+				13B07F861A680F5B00A75B9A /* DeluxureeClean */,
+				00E356ED1AD99517003FC87E /* DeluxureeCleanTests */,
 			);
 		};
 /* End PBXProject section */
@@ -431,15 +431,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect/Pods-TideTidyConnect-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean/Pods-DeluxureeClean-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect/Pods-TideTidyConnect-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean/Pods-DeluxureeClean-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect/Pods-TideTidyConnect-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean/Pods-DeluxureeClean-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		64EA63B43E9AC9E7B0F88DA7 /* [CP-User] [RNFB] Core Configuration */ = {
@@ -470,7 +470,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TideTidyConnect-TideTidyConnectTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DeluxureeClean-DeluxureeCleanTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -492,7 +492,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TideTidyConnect-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DeluxureeClean-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -505,15 +505,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect-TideTidyConnectTests/Pods-TideTidyConnect-TideTidyConnectTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean-DeluxureeCleanTests/Pods-DeluxureeClean-DeluxureeCleanTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect-TideTidyConnectTests/Pods-TideTidyConnect-TideTidyConnectTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean-DeluxureeCleanTests/Pods-DeluxureeClean-DeluxureeCleanTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect-TideTidyConnectTests/Pods-TideTidyConnect-TideTidyConnectTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean-DeluxureeCleanTests/Pods-DeluxureeClean-DeluxureeCleanTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
@@ -522,15 +522,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect/Pods-TideTidyConnect-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean/Pods-DeluxureeClean-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect/Pods-TideTidyConnect-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean/Pods-DeluxureeClean-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect/Pods-TideTidyConnect-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean/Pods-DeluxureeClean-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
@@ -539,15 +539,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect-TideTidyConnectTests/Pods-TideTidyConnect-TideTidyConnectTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean-DeluxureeCleanTests/Pods-DeluxureeClean-DeluxureeCleanTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect-TideTidyConnectTests/Pods-TideTidyConnect-TideTidyConnectTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean-DeluxureeCleanTests/Pods-DeluxureeClean-DeluxureeCleanTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TideTidyConnect-TideTidyConnectTests/Pods-TideTidyConnect-TideTidyConnectTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeluxureeClean-DeluxureeCleanTests/Pods-DeluxureeClean-DeluxureeCleanTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -576,7 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* TideTidyConnectTests.m in Sources */,
+				00E356F31AD99517003FC87E /* DeluxureeCleanTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,7 +594,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* TideTidyConnect */;
+			target = 13B07F861A680F5B00A75B9A /* DeluxureeClean */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -602,14 +602,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-TideTidyConnect-TideTidyConnectTests.debug.xcconfig */;
+			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-DeluxureeClean-DeluxureeCleanTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = TideTidyConnectTests/Info.plist;
+				INFOPLIST_FILE = DeluxureeCleanTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -623,17 +623,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TideTidyConnect.app/TideTidyConnect";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeluxureeClean.app/DeluxureeClean";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-TideTidyConnect-TideTidyConnectTests.release.xcconfig */;
+			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-DeluxureeClean-DeluxureeCleanTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = TideTidyConnectTests/Info.plist;
+				INFOPLIST_FILE = DeluxureeCleanTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -647,19 +647,19 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TideTidyConnect.app/TideTidyConnect";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeluxureeClean.app/DeluxureeClean";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-TideTidyConnect.debug.xcconfig */;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-DeluxureeClean.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = TideTidyConnect/Info.plist;
+				INFOPLIST_FILE = DeluxureeClean/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -671,7 +671,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = TideTidyConnect;
+				PRODUCT_NAME = DeluxureeClean;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -680,12 +680,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-TideTidyConnect.release.xcconfig */;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-DeluxureeClean.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = TideTidyConnect/Info.plist;
+				INFOPLIST_FILE = DeluxureeClean/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -697,7 +697,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = TideTidyConnect;
+				PRODUCT_NAME = DeluxureeClean;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -876,7 +876,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "TideTidyConnectTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "DeluxureeCleanTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -885,7 +885,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "TideTidyConnect" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DeluxureeClean" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -894,7 +894,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "TideTidyConnect" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "DeluxureeClean" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

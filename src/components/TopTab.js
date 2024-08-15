@@ -6,20 +6,22 @@ import CustomText from "./CustomText";
 import { COLORS } from "../utils/COLORS";
 import fonts from "../assets/fonts";
 
-const TopTab = ({ tab, setTab, tabNames }) => {
+const TopTab = ({ tab, setTab, tabNames, getOrders }) => {
   return (
     <View style={styles.mainContainer}>
       {tabNames.map((tabName, index) => (
         <TouchableOpacity
           key={index}
-          onPress={() => setTab(index)}
-          style={[styles.item, tab === index && styles.activeTab]}
+          onPress={() => {
+            setTab(tabName);
+          }}
+          style={[styles.item, tab === tabName && styles.activeTab]}
         >
           <CustomText
             textTransform="capitalize"
-            fontFamily={tab == index ? fonts.bold : fonts.medium}
+            fontFamily={tab == tabName ? fonts.bold : fonts.medium}
             label={tabName}
-            color={tab == index ? COLORS.white : COLORS.gray}
+            color={tab == tabName ? COLORS.white : COLORS.gray}
           />
         </TouchableOpacity>
       ))}

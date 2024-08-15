@@ -28,6 +28,8 @@ const CustomButton = ({
   indicatorcolor,
   image,
   imageStyle,
+  ImageIcon,
+  icon,
 }) => {
   return (
     <TouchableOpacity
@@ -36,7 +38,7 @@ const CustomButton = ({
       style={[
         {
           backgroundColor: disabled
-            ? COLORS.gray
+            ? COLORS.disabled
             : backgroundColor
             ? backgroundColor
             : COLORS.primaryColor,
@@ -62,12 +64,7 @@ const CustomButton = ({
       )}
       {!loading && (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          {image && (
-            <Image
-              source={image}
-              style={[{ marginRight: 10, height: 20, width: 20 }, imageStyle]}
-            />
-          )}
+          {ImageIcon && ImageIcon}
           <CustomText
             textStyle={customText}
             label={title}

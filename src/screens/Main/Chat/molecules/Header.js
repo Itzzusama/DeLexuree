@@ -1,22 +1,23 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
 
-import CustomText from '../../../../components/CustomText';
-import ImageFast from '../../../../components/ImageFast';
-import Icons from '../../../../components/Icons';
+import CustomText from "../../../../components/CustomText";
+import ImageFast from "../../../../components/ImageFast";
+import Icons from "../../../../components/Icons";
 
-import {COLORS} from '../../../../utils/COLORS';
-import fonts from '../../../../assets/fonts';
+import { COLORS } from "../../../../utils/COLORS";
+import fonts from "../../../../assets/fonts";
 
-const Header = ({title, marginBottom, rightPress, source, desc}) => {
+const Header = ({ title, marginBottom, rightPress, source, desc }) => {
   const navigation = useNavigation();
   return (
-    <View style={[styles.mainContainer, {marginBottom}]}>
+    <View style={[styles.mainContainer, { marginBottom }]}>
       <TouchableOpacity
         activeOpacity={0.6}
         onPress={() => navigation.goBack()}
-        style={styles.firstContainer}>
+        style={styles.firstContainer}
+      >
         <Icons
           family="AntDesign"
           name="arrowleft"
@@ -33,7 +34,8 @@ const Header = ({title, marginBottom, rightPress, source, desc}) => {
             backgroundColor: COLORS.lightGray,
             padding: 2,
             marginRight: 10,
-          }}>
+          }}
+        >
           <ImageFast
             resizeMode="cover"
             source={source}
@@ -63,30 +65,31 @@ export default Header;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 24,
     paddingVertical: 20,
-    width: '100%',
+    width: "100%",
     borderBottomWidth: 1,
     borderBottomColor: COLORS.lightGray,
     backgroundColor: COLORS.white,
   },
   firstContainer: {
-    width: '12%',
+    width: "12%",
   },
   secondContainer: {
-    width: '70%',
-    flexDirection: 'row',
-    alignItems: 'center',
+    width: "70%",
+    flexDirection: "row",
+    alignItems: "center",
   },
   userImage: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
+    borderRadius: 50,
   },
   thirdContainer: {
-    alignItems: 'flex-end',
-    width: '18%',
+    alignItems: "flex-end",
+    width: "18%",
     paddingRight: 10,
   },
 });

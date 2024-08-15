@@ -7,31 +7,18 @@ import { put } from "../../../Services/ApiRequest";
 import Header from "../../../components/Header";
 import DetailCard from "./molecules/DetailCard";
 import CustomerCard from "./molecules/CustomerCard";
-const OrderDetail = ({ route, navigation }) => {
-  const details = route.params?.details;
-
-  const updateOrderStatus = async (key) => {
-    console.log("key--", key);
-    try {
-      const response = await put(
-        "order/employee/update/" + key + "/" + details?._id
-      );
-      if (response.data?.success) {
-        ToastMessage(response.data?.message);
-        navigation.goBack();
-      }
-      console.log("res=====>", response.data);
-    } catch (error) {
-      console.log("errr---------", error);
-    }
-  };
-
-  const handleNavigation = async (item) => {
+import { useRoute } from "@react-navigation/native";
+import { COLORS } from "../../../utils/COLORS";
+import { formatDate, formatTime } from "../../../utils/dateUtils";
+const OrderDetail = ({ navigation }) => {
+  const route = useRoute();
+  const { detail } = route.params;
+  const onChatPress = async (item) => {
     const dataToSend = {
-      id: item?.user?._id,
-      img: item?.user?.profilePicture,
-      name: item?.user?.fname + " " + item?.user?.lname,
-      type: item?.user?.type,
+      id: detail?.user?._id,
+      img: detail?.user?.profilePicture,
+      name: detail?.user?.name,
+      type: detail?.user?.type,
     };
     navigation.navigate("InboxScreen", { data: dataToSend });
   };
@@ -43,30 +30,28 @@ const OrderDetail = ({ route, navigation }) => {
       headerUnScrollable={() => <Header title={"Details"} />}
     >
       <DetailCard
-        orderName={"Home Cleaning Service"}
-        review={"4.4 "}
-        totalRating={"(532)"}
+        orderName={detail?.service?.title}
+        review={detail?.service?.rating?.toFixed(1)}
+        totalRating={` (${detail?.service?.totalRating})`}
         imageUrl={
+          detail?.service?.images[0] ||
           "https://scrubnbubbles.com/wp-content/uploads/2020/07/how-to-keep-your-house-clean.jpg"
         }
+        date={formatDate(detail?.date)}
+        status={detail?.status}
+        price={detail?.service?.price}
+        note={detail?.note}
+        id={detail?._id}
       />
-      <CustomerCard />
-
-      {/* {details?.status == "pending" ? (
-        <View style={className("mx-5 mt-10")}>
-          <CustomButton
-            title={"Accept"}
-            onPress={() => updateOrderStatus("accepted")}
-            textStyle={{ fontSize: 16, fontFamily: fonts.regular }}
-          />
-          <CustomButton
-            title={"Reject"}
-            textStyle={{ fontSize: 16, fontFamily: fonts.regular }}
-            customStyle={className("bg-9F mt-2")}
-            onPress={() => updateOrderStatus("rejected")}
-          />
-        </View>
-      ) : null} */}
+      <CustomerCard
+        imageUrl={detail?.user?.profilePicture}
+        name={detail?.user?.name}
+        date={formatDate(detail?.date)}
+        time={formatTime(detail?.time)}
+        address={detail?.location?.address}
+        description={detail?.user?.email}
+        onChatPress={onChatPress}
+      />
     </ScreenWrapper>
   );
 };

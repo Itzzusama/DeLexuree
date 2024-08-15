@@ -75,10 +75,10 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.tidetidyemployee.app"
+    namespace "com.deeluxreeserviceprovider.app"
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
-        applicationId "com.tidetidyemployee.app"
+        applicationId "com.deeluxreeserviceprovider.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

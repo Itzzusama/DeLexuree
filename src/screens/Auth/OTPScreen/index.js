@@ -66,10 +66,10 @@ const OTPScreen = ({ navigation, route }) => {
         code: otp,
       };
       const response = await post("users/verify-otp/registration", body);
-
+      console.log(response.data);
       if (response.data.success) {
         handleRegisterUser();
-        // ToastMessage(response.data?.message);
+        ToastMessage(response.data?.message);
       } else {
         ToastMessage(response.data?.message);
       }
@@ -82,45 +82,26 @@ const OTPScreen = ({ navigation, route }) => {
   };
 
   const handleRegisterUser = async () => {
-    setLoading(true);
-    try {
-      const body = {
-        email: bodySignUp?.email,
-        phone: bodySignUp?.phone,
-        password: bodySignUp?.password,
-        fcmtoken: "",
-        name: bodySignUp?.fName,
-        acc_numb: bodySignUp?.acc_numb,
-        acc_title: bodySignUp?.acc_title,
-        dob: dob,
-        category: category,
-      };
-      const response = await post("users/signup/employee", body);
-      console.log("res`, respons", response.data);
-      await AsyncStorage.setItem("token", response.data?.token);
-      dispatch(setToken(response.data?.token));
-      dispatch(setUserData(response.data?.user));
-      if (response.data?.user?.category == "accomodation") {
-        navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: "Information",
-            },
-          ],
-        });
-      } else {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "Success", params: { isAccountCreated: true } }],
-        });
-      }
-    } catch (error) {
-      ToastMessage(error.response?.data?.error);
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    const fcmToken = await AsyncStorage.getItem("fcmToken");
+    const body = {
+      email: bodySignUp?.email,
+      phone: bodySignUp?.phone,
+      password: bodySignUp?.password,
+      fcmtoken: fcmToken,
+      name: bodySignUp?.fName,
+      dob: dob,
+      category: category,
+    };
+
+    navigation.reset({
+      index: 0,
+      routes: [
+        {
+          name: "BankDetail",
+          params: { body },
+        },
+      ],
+    });
   };
   return (
     <ScreenWrapper

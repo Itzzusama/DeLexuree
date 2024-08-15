@@ -1,39 +1,39 @@
-import {FlatList, RefreshControl, StyleSheet, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
 
-import ScreenWrapper from '../../../components/ScreenWrapper';
-import NoDataFound from '../../../components/NoDataFound';
-import CustomText from '../../../components/CustomText';
-import Header from '../../../components/Header';
+import ScreenWrapper from "../../../components/ScreenWrapper";
+import NoDataFound from "../../../components/NoDataFound";
+import CustomText from "../../../components/CustomText";
+import Header from "../../../components/Header";
 
-import Item from './molecules/Item';
+import Item from "./molecules/Item";
 
-import {Images} from '../../../assets/images';
-import {COLORS} from '../../../utils/COLORS';
-import fonts from '../../../assets/fonts';
-import {get} from '../../../Services/ApiRequest';
-import {ToastMessage} from '../../../utils/ToastMessage';
-import moment from 'moment';
+import { Images } from "../../../assets/images";
+import { COLORS } from "../../../utils/COLORS";
+import fonts from "../../../assets/fonts";
+import { get } from "../../../Services/ApiRequest";
+import { ToastMessage } from "../../../utils/ToastMessage";
+import moment from "moment";
 
 const Notifications = () => {
   const array = [
     {
-      date: 'New',
+      date: "New",
     },
     {
-      color: 'red',
+      color: "red",
     },
     {
-      color: 'blue',
+      color: "blue",
     },
     {
-      color: 'red',
+      color: "red",
     },
     {
-      date: 'Yesterday',
+      date: "Yesterday",
     },
     {
-      color: 'blue',
+      color: "blue",
     },
   ];
   const [notification, setNotification] = useState([]);
@@ -42,8 +42,8 @@ const Notifications = () => {
   const getNotifications = async () => {
     setRefreshing(true);
     try {
-      const res = await get('notification/all');
-      console.log('res------not', res.data);
+      const res = await get("notification/all");
+      console.log("res------not", res.data);
 
       if (res.data?.success) {
         setNotification(res.data.notifications);
@@ -51,9 +51,9 @@ const Notifications = () => {
         setNotification([]);
       }
       // setNotification
-      console.log('res------not', res.data);
+      console.log("res------not", res.data);
     } catch (error) {
-      console.log('err=====', error);
+      console.log("err=====", error);
       ToastMessage(error.response.data?.message);
     } finally {
       setRefreshing(false);
@@ -62,21 +62,22 @@ const Notifications = () => {
   useEffect(() => {
     getNotifications();
   }, []);
-
+  const fetchMoreNotifications = async () => {
+    if (notification?.length > 0) {
+      const lastNoti = notification[notification?.length - 1]?._id;
+      try {
+        const res = await get(`notification/all/${lastNoti}`);
+        if (res.data.success) {
+          const newNoti = res.data.notifications;
+          setNotification([...notification, ...newNoti]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
   return (
-    <ScreenWrapper
-      headerUnScrollable={() => (
-        <Header
-          title="Notification"
-          // rightPress={() => {
-          //   if (notification?.length) {
-          //     setNotification([]);
-          //   } else {
-          //     setNotification(array);
-          //   }
-          // }}
-        />
-      )}>
+    <ScreenWrapper headerUnScrollable={() => <Header title="Notification" />}>
       <FlatList
         data={notification}
         showsVerticalScrollIndicator={false}
@@ -93,8 +94,10 @@ const Notifications = () => {
             onRefresh={getNotifications}
           />
         }
+        onEndReachedThreshold={0.2}
+        onEndReached={() => fetchMoreNotifications()}
         keyExtractor={(_, i) => i.toString()}
-        renderItem={({item}) =>
+        renderItem={({ item }) =>
           item.date ? (
             <View style={styles.heading}>
               <CustomText
@@ -109,7 +112,7 @@ const Notifications = () => {
               description={item?.description}
               time={moment(item?.createdAt).fromNow()}
               source={
-                item.color == 'red'
+                item.color == "red"
                   ? Images.notification1
                   : Images.notification2
               }

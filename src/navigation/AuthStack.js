@@ -13,6 +13,7 @@ import ForgetPass from "../screens/Auth/ForgetPass";
 import ResetPass from "../screens/Auth/ResetPass";
 import Category from "../screens/Auth/Availability";
 
+import BankDetail from "../screens/Auth/BankDetail";
 import Information from "../screens/Auth/Information";
 import Availability from "../screens/Auth/Availability";
 
@@ -46,6 +47,7 @@ const AuthStack = () => {
       <Stack.Screen name="Success" component={Success} />
       <Stack.Screen name="ForgetPass" component={ForgetPass} />
       <Stack.Screen name="ResetPass" component={ResetPass} />
+      <Stack.Screen name="BankDetail" component={BankDetail} />
       <Stack.Screen name="Availability" component={Availability} />
       <Stack.Screen name="Information" component={Information} />
     </Stack.Navigator>

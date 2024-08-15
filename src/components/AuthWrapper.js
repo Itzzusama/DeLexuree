@@ -31,32 +31,53 @@ const AuthWrapper = ({
         source={Images.logoIcon}
       /> */}
       {showStatus && (
-        <View style={className("flex mt-7")}>
+        <View
+          style={[
+            className("flex mt-7  align-center"),
+            { width: "100%", justifyContent: "space-between" },
+          ]}
+        >
           <View
             style={[
-              className("flex-1 rounded-1 h-1 bg-DD "),
+              className("rounded-1 h-1 bg-DD "),
               {
                 backgroundColor:
-                  index == 0 || index == 1 || index == 2
+                  index == 0 || index == 1 || index == 2 || index == 3
                     ? COLORS.primaryColor
                     : COLORS.DD,
+                width: "23%",
               },
             ]}
           />
           <View
             style={[
-              className("flex-1 rounded-1 h-1 bg-DD mx-2"),
+              className(" rounded-1 h-1 bg-DD mx-2"),
               {
                 backgroundColor:
-                  index == 1 || index == 2 ? COLORS.primaryColor : COLORS.DD,
+                  index == 1 || index == 2 || index == 3
+                    ? COLORS.primaryColor
+                    : COLORS.DD,
+                width: "23%",
               },
             ]}
           />
           <View
             style={[
-              className("flex-1 rounded-1 h-1 bg-DD "),
+              className(" rounded-1 h-1 bg-DD "),
               {
-                backgroundColor: index == 2 ? COLORS.primaryColor : COLORS.DD,
+                backgroundColor:
+                  index == 2 || index == 3 ? COLORS.primaryColor : COLORS.DD,
+                width: "23%",
+              },
+            ]}
+          />
+          <View
+            style={[
+              className("rounded-1 h-1 bg-DD "),
+              {
+                backgroundColor: index == 3 ? COLORS.primaryColor : COLORS.DD,
+                width: "23%",
+                marginLeft: 5,
               },
             ]}
           />

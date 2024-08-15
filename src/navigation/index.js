@@ -1,27 +1,26 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useSelector} from 'react-redux';
-import React, {useEffect, useState} from 'react';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 
 //screens
-import AuthStack from './AuthStack';
-import MainStack from './MainStack';
-import {useNavigation} from '@react-navigation/native';
+import AuthStack from "./AuthStack";
+import MainStack from "./MainStack";
+import { useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
 const RootNavigation = () => {
   const navigation = useNavigation();
 
-  const {token} = useSelector(state => state.authConfigs);
+  const { token } = useSelector((state) => state.authConfigs);
 
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        animation: 'slide_from_right',
+        animation: "slide_from_right",
       }}
-      initialRouteName='MainStack'
-      >
+    >
       {token ? (
         <>
           <Stack.Screen name="MainStack" component={MainStack} />

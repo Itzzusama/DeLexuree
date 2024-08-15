@@ -12,6 +12,11 @@ const CustomerCard = ({
   name = "Alicent Hightower",
   description = "Standard Package (Home Cleaning)",
   onChatPress,
+  color,
+  backgroundColor,
+  date = "Monday, May 12",
+  time = "11:00",
+  address = "5th avenue, apartment 456, New York, USA",
 }) => {
   return (
     <View
@@ -19,11 +24,12 @@ const CustomerCard = ({
         padding: 12,
         borderWidth: 0.5,
         borderRadius: 8,
-        borderColor: COLORS.gray,
+        borderColor: color || COLORS.gray,
         marginTop: 18,
+        backgroundColor: backgroundColor,
       }}
     >
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         <Image source={{ uri: imageUrl }} style={styles.image} />
         <View style={styles.textContainer}>
           <CustomText
@@ -40,8 +46,8 @@ const CustomerCard = ({
         </View>
         <TouchableOpacity onPress={onChatPress} style={styles.chatButton}>
           <Icons
-            name="message-square"
-            family={"Feather"}
+            name="chatbox-ellipses-outline"
+            family={"Ionicons"}
             size={24}
             color={COLORS.primary}
           />
@@ -52,8 +58,8 @@ const CustomerCard = ({
         customStyle={styles.timeContainer}
         leftImage={Images.calender}
         rightImage={Images.clock}
-        leftText={"Monday, May 12"}
-        rightText={"11:00 - 12:00 Am"}
+        leftText={date}
+        rightText={time}
       />
       <CustomText
         label={"Address"}
@@ -61,22 +67,7 @@ const CustomerCard = ({
         fontFamily={fonts.bold}
         fontSize={12}
       />
-      <CustomText
-        label={"5th avenue, apartment 456, New York, USA"}
-        fontSize={12}
-      />
-      <CustomText
-        label={"Details"}
-        marginTop={18}
-        fontFamily={fonts.bold}
-        fontSize={12}
-      />
-      <CustomText
-        label={
-          "Clean home is a happy home, and we take pride in delivering exceptional cleaning services tailored to your specific needs."
-        }
-        fontSize={12}
-      />
+      <CustomText label={address} fontSize={12} />
     </View>
   );
 };

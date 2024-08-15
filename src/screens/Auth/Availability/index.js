@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -14,9 +14,21 @@ import fonts from "../../../assets/fonts";
 import AuthWrapper from "../../../components/AuthWrapper";
 import CustomButton from "../../../components/CustomButton";
 import CustomText from "../../../components/CustomText";
+import { ToastMessage } from "../../../utils/ToastMessage";
+import { post, put } from "../../../Services/ApiRequest";
+import { useRoute } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setToken } from "../../../store/reducer/AuthConfig";
+import { setUserData } from "../../../store/reducer/usersSlice";
 
 const Availability = ({ navigation }) => {
-  const [availability, setAvailability] = useState({
+  const route = useRoute();
+  const dispatch = useDispatch();
+  const { showSkip, body } = route.params || {};
+  const { userData } = useSelector((state) => state.users);
+  const [loading, setLoading] = useState(false);
+  const initialAvailability = {
     Monday: { active: false, from: new Date(), to: new Date() },
     Tuesday: { active: false, from: new Date(), to: new Date() },
     Wednesday: { active: false, from: new Date(), to: new Date() },
@@ -24,7 +36,8 @@ const Availability = ({ navigation }) => {
     Friday: { active: false, from: new Date(), to: new Date() },
     Saturday: { active: false, from: new Date(), to: new Date() },
     Sunday: { active: false, from: new Date(), to: new Date() },
-  });
+  };
+  const [availability, setAvailability] = useState(initialAvailability);
 
   const [openFromPicker, setOpenFromPicker] = useState(false);
   const [openToPicker, setOpenToPicker] = useState(false);
@@ -115,6 +128,101 @@ const Availability = ({ navigation }) => {
     "Sunday",
   ];
 
+  const saveAvailability = async () => {
+    setLoading(true);
+    const selectedAvailability = Object.keys(availability).map((day) => {
+      return {
+        start_time: availability[day].active
+          ? availability[day].from.toISOString()
+          : null,
+        end_time: availability[day].active
+          ? availability[day].to.toISOString()
+          : null,
+        day: day.slice(0, 3), // Get the first three letters of the day (e.g., "Mon")
+        status: availability[day].active,
+      };
+    });
+
+    if (selectedAvailability?.length === 0) {
+      ToastMessage("Please select at least one day with a time range.");
+      setLoading(false);
+      return;
+    } else {
+      if (showSkip) {
+        console.log("creating acc");
+        try {
+          const apiBody = {
+            ...body,
+            availablity: selectedAvailability,
+          };
+          console.log(apiBody);
+          const response = await post("users/signup/employee", apiBody);
+
+          if (response.data.success) {
+            console.log(response.data);
+            await AsyncStorage.setItem("token", response.data?.token);
+            dispatch(setToken(response.data?.token));
+            dispatch(setUserData(response.data?.user));
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "MainStack" }],
+            });
+          }
+        } catch (err) {
+          console.log(err);
+          //ToastMessage(err?.response?.data?.error);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        const ApiData = {
+          availablity: selectedAvailability,
+        };
+        try {
+          const res = await put("users/update-user", ApiData);
+          if (res.data.success) {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "MainStack" }],
+            });
+          }
+        } catch (err) {
+          console.log("--", err);
+        } finally {
+          setLoading(false);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (userData?.availablity) {
+      const updatedAvailability = { ...initialAvailability };
+
+      userData.availablity.forEach((day) => {
+        // Map the day abbreviation to full day name
+        const fullDayName = daysOfWeek.find((d) =>
+          d.startsWith(day.day.charAt(0).toUpperCase() + day.day.slice(1))
+        );
+
+        if (fullDayName) {
+          const currentDate = new Date().toISOString().split("T")[0]; // Get the current date in "YYYY-MM-DD" format
+          updatedAvailability[fullDayName] = {
+            active: day.status,
+            from: day.start_time
+              ? new Date(day.start_time)
+              : new Date(`${currentDate}T09:00:00`),
+            to: day.end_time
+              ? new Date(day.end_time)
+              : new Date(`${currentDate}T17:00:00`),
+          };
+        }
+      });
+
+      setAvailability(updatedAvailability);
+    }
+  }, [userData]);
+
   return (
     <ScreenWrapper
       scrollEnabled
@@ -124,35 +232,10 @@ const Availability = ({ navigation }) => {
           <CustomButton
             width="90%"
             marginBottom={12}
-            title={"Skip for now"}
-            backgroundColor={"transparent"}
-            color={COLORS.primaryColor}
-            customStyle={{ borderWidth: 1, borderColor: COLORS.primaryColor }}
-            onPress={() =>
-              navigation.reset({
-                index: 0,
-                routes: [
-                  {
-                    name: "MainStack",
-                  },
-                ],
-              })
-            }
-          />
-          <CustomButton
-            width="90%"
-            marginBottom={12}
-            title={"Save"}
-            onPress={() =>
-              navigation.reset({
-                index: 0,
-                routes: [
-                  {
-                    name: "MainStack",
-                  },
-                ],
-              })
-            }
+            title={showSkip ? "Create Account" : "Save"}
+            onPress={saveAvailability}
+            loading={loading}
+            disabled={loading}
           />
         </>
       )}
@@ -160,6 +243,8 @@ const Availability = ({ navigation }) => {
       <AuthWrapper
         heading="Set Availability"
         desc="Let us know your available times."
+        showStatus={showSkip ? true : false}
+        index={3}
       >
         <FlatList
           data={daysOfWeek}

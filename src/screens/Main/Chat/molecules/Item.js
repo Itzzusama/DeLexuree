@@ -14,6 +14,9 @@ const Item = ({
   lastMsg,
   name,
   userName,
+  time,
+  lastSeen,
+  img,
 }) => {
   return (
     <TouchableOpacity
@@ -22,13 +25,17 @@ const Item = ({
       style={styles.mainContainer}
     >
       <View style={styles.imageContainer}>
-        <Image source={source} style={styles.image} resizeMode="contain" />
+        <Image
+          source={img ? { uri: img } : source}
+          style={styles.image}
+          resizeMode="contain"
+        />
       </View>
 
       <View style={{ width: "83%" }}>
         <View style={styles.container}>
           <CustomText label={userName} fontFamily={fonts.medium} />
-          <CustomText label="12.45" fontSize={12} color={COLORS.authText} />
+          <CustomText label={time} fontSize={12} color={COLORS.authText} />
         </View>
         <View style={{ flexDirection: "row", width: "97%", marginTop: 3 }}>
           <CustomText
@@ -37,7 +44,7 @@ const Item = ({
             fontSize={12}
             numberOfLines={1}
           />
-          {count && (
+          {lastMsg && count != 0 && (
             <View style={styles.countStyle}>
               <CustomText
                 label={count}
@@ -77,6 +84,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
+    borderRadius: 50,
   },
   container: {
     flexDirection: "row",
@@ -91,5 +99,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginLeft: 22,
+    position: "absolute",
+    right: -4,
   },
 });

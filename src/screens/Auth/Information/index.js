@@ -16,7 +16,7 @@ import CustomText from "../../../components/CustomText";
 
 import fonts from "../../../assets/fonts";
 
-import { post } from "../../../Services/ApiRequest";
+import { post, put } from "../../../Services/ApiRequest";
 import { ToastMessage } from "../../../utils/ToastMessage";
 import { COLORS } from "../../../utils/COLORS";
 import Gallery from "../../../components/Gallery";
@@ -24,8 +24,6 @@ import { useSelector } from "react-redux";
 import { className } from "../../../global-styles";
 import InformationItem from "./molecules/InformationItem";
 const Information = ({ navigation, route }) => {
-  const user = route?.params?.user;
-  const dob = route?.params?.dob;
   const { userCategory } = useSelector((state) => state.authConfigs);
 
   const init = {
@@ -125,31 +123,19 @@ const Information = ({ navigation, route }) => {
   useEffect(() => {
     errorCheck();
   }, [errorCheck]);
-
-  const handleSendOtp = async () => {
-    try {
-      setLoading(true);
-      const body = {
-        phone: user?.phone,
-      };
-      const response = await post("users/send-code", body);
-      ToastMessage(response.data?.message);
-      console.log("otp------------", response.data);
-      if (response.data) {
-        navigation.navigate("OTPScreen", {
-          isAccountCreated: false,
-          bodySignUp: user,
-          extraData: state,
-          DBS: hasDBSCertificate,
-          dob: dob,
-        });
-      }
-    } catch (error) {
-      ToastMessage(error.response?.data?.error);
-      console.log(error.response.data.error);
-    } finally {
-      setLoading(false);
-    }
+  const handlePress = async () => {
+    const body = {
+      ...route.params.body,
+      ques_forms: {
+        years_exp: state.q1,
+        specialities: state.q2,
+        services: state.q3,
+        determie_pricing: state.q4,
+        how_far: state.q5,
+        warrenties: state.q6,
+      },
+    };
+    navigation.navigate("Availability", { showSkip: true, body: body });
   };
   return (
     <ScreenWrapper
@@ -157,28 +143,13 @@ const Information = ({ navigation, route }) => {
       footerUnScrollable={() => (
         <>
           <CustomButton
-            title="Create Account"
+            title="Continue"
             width="90%"
             // onPress={handleSendOtp}
-            onPress={() =>
-              navigation.navigate("OTPScreen", {
-                isAccountCreated: false,
-                bodySignUp: user,
-                extraData: state,
-                dob: dob,
-              })
-            }
+            onPress={handlePress}
             disabled={!Object.values(errors).every((error) => error === "")}
             loading={loading}
-          />
-          <CustomText
-            label="I already have an account"
-            fontSize={16}
-            fontFamily={fonts.semiBold}
-            alignSelf="center"
-            marginTop={20}
-            marginBottom={30}
-            onPress={() => navigation.navigate("Login")}
+            customStyle={{ marginBottom: 30 }}
           />
         </>
       )}
@@ -188,7 +159,7 @@ const Information = ({ navigation, route }) => {
         desc="Tell us a bit about yourself to get started on your journey!"
         marginBottom={10}
         showStatus={true}
-        index={1}
+        index={2}
       >
         {array.map((item) => (
           <InformationItem

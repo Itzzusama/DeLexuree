@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
 import ScreenWrapper from "../../../../components/ScreenWrapper";
 import Header from "../../../../components/Header";
@@ -6,35 +6,56 @@ import CustomText from "../../../../components/CustomText";
 import fonts from "../../../../assets/fonts";
 import { COLORS } from "../../../../utils/COLORS";
 import TransactionCard from "./molecules/TransactionCard";
+import { useFocusEffect } from "@react-navigation/native";
+import { get } from "../../../../Services/ApiRequest";
+import NoShow from "../../../../components/NoShow";
 
 const Wallet = ({ navigation }) => {
-  const transaction = [
-    {
-      id: 1,
-      detail: "Book Purchased Successfully",
-      price: 100,
-    },
-    {
-      id: 2,
-      detail: "Car Purchased",
-      price: -20,
-    },
-    {
-      id: 3,
-      detail: "Account Credited",
-      price: 30,
-    },
-    {
-      id: 4,
-      detail: "Account Debited",
-      price: -39,
-    },
-    {
-      id: 5,
-      detail: "Account Credited",
-      price: 46,
-    },
-  ];
+  const [loading, setLoading] = useState(true);
+  const [transaction, setTransaction] = useState([]);
+
+  const fetchTransactions = async () => {
+    try {
+      setLoading(true);
+      const res = await get("users/transactions");
+      setTransaction(res.data.transactions);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchMoreTransactions = async () => {
+    if (transaction?.length > 0) {
+      const lastTran = transaction[transaction?.length - 1]._id;
+      console.log(lastTran);
+      try {
+        setLoading(true);
+        const res = await get(`users/transactions/${lastTran}`);
+        if (res.data.success) {
+          const newTransactions = res.data.transactions;
+          setTransaction([...transaction, ...newTransactions]);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchTransactions();
+      return () => {};
+    }, [])
+  );
+
+  // Calculate total earnings
+  const totalEarnings = useMemo(() => {
+    return transaction.reduce((total, item) => total + item.balance, 0);
+  }, [transaction]);
 
   return (
     <ScreenWrapper
@@ -43,9 +64,9 @@ const Wallet = ({ navigation }) => {
       headerUnScrollable={() => <Header title={"Wallet"} />}
     >
       <View style={styles.walletCard}>
-        <CustomText label={"Your Earning"} color={COLORS.white} />
+        <CustomText label={"Your Earnings"} color={COLORS.white} />
         <CustomText
-          label={"$1340.56"}
+          label={`$${totalEarnings?.toFixed(2)}`}
           fontSize={34}
           fontFamily={fonts.bold}
           color={COLORS.white}
@@ -57,13 +78,32 @@ const Wallet = ({ navigation }) => {
         fontFamily={fonts.bold}
         fontSize={16}
       />
-      {transaction.map((item) => (
-        <TransactionCard
-          key={item.id}
-          detail={item.detail}
-          amount={item.price}
-        />
-      ))}
+      <FlatList
+        data={transaction}
+        keyExtractor={(_, index) => index.toString()}
+        onEndReachedThreshold={0.2}
+        onEndReached={() => fetchMoreTransactions()}
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={fetchTransactions} />
+        }
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => {
+          return (
+            <TransactionCard
+              orderId={item?.order_id}
+              detail={item?.description}
+              amount={item?.balance}
+            />
+          );
+        }}
+        ListEmptyComponent={
+          <NoShow
+            marginTop={60}
+            label={"You don’t have any active transactions"}
+            label2={"Always keep yourself available to get new transactions"}
+          />
+        }
+      />
     </ScreenWrapper>
   );
 };

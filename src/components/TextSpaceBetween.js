@@ -31,6 +31,7 @@ const TextSpaceBetween = ({
           alignSelf={"flex-end"}
           fontFamily={light ? fonts.semiBold : fonts.bold}
           color={rightColor}
+          textTransform={"capitalize"}
         />
       </View>
     </View>

@@ -10,7 +10,7 @@ const UserDetail = ({ name, email, avatar }) => {
   return (
     <View style={styles.container}>
       <ImageFast isView source={avatar} style={styles.avatar} />
-      <View style={{marginLeft:12}}>
+      <View style={{ marginLeft: 12 }}>
         <CustomText
           label={name}
           fontSize={18}
@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     marginTop: 26,
   },
   avatar: {
-    height: 58,
-    width: 58,
-    borderRadius: 99,
+    height: 48,
+    width: 48,
+    borderRadius: 48,
   },
   name: {
     marginTop: 10,

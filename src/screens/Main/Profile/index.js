@@ -12,17 +12,20 @@ import LogoutModal from "./LogoutModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../../store/reducer/AuthConfig";
-import { get } from "../../../Services/ApiRequest";
+import { del, get } from "../../../Services/ApiRequest";
 import { setUserData } from "../../../store/reducer/usersSlice";
 
 import Item from "./Item";
 import { tabIcons } from "../../../assets/images/tabIcons";
 import CustomButton from "../../../components/CustomButton";
 import DeleteAccModal from "./DeleteAccModal";
+import Header from "../../../components/Header";
+import { notiLogout } from "../../../store/reducer/unseenNotiSlice";
 
 const Profile = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const { userData } = useSelector((state) => state.users);
   const [isLogoutModal, setLogoutModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const personal = [
@@ -39,18 +42,20 @@ const Profile = () => {
       image: Images.wallet,
     },
   ];
+  const security = [
+    {
+      id: 1,
+      name: "Change Password",
+      image: Images.lock,
+      screen: "ChangePassword",
+    },
+  ];
   const general = [
     {
       id: 2,
       name: "Availability",
       screen: "Availability",
       image: Images.activity,
-    },
-    {
-      id: 3,
-      name: "Instructional Material",
-      screen: "Education",
-      image: Images.pastBook,
     },
   ];
   const About = [
@@ -67,26 +72,13 @@ const Profile = () => {
       image: Images.lock,
     },
 
-    {
-      id: 4,
-      name: "Term & Condition",
-      screen: "TermsCondition",
-      image: Images.terms,
-    },
+    // {
+    //   id: 4,
+    //   name: "Term & Condition",
+    //   screen: "TermsCondition",
+    //   image: Images.terms,
+    // },
   ];
-
-  const getProfile = async () => {
-    try {
-      const response = await get("users/me");
-      dispatch(setUserData(response.data?.user));
-    } catch (error) {}
-  };
-
-  useFocusEffect(
-    useCallback(() => {
-      getProfile();
-    }, [])
-  );
 
   return (
     <ScreenWrapper
@@ -94,11 +86,16 @@ const Profile = () => {
       paddingBottom={70}
       backgroundColor={COLORS.white}
       scrollEnabled
+      headerUnScrollable={() => <Header title="Settings" />}
     >
       <UserDetail
-        avatar={Images.user}
-        name={"Aaron Ramsdale"}
-        email={"aaronramsdale@gmail.com"}
+        avatar={
+          userData?.profilePicture
+            ? { uri: userData?.profilePicture }
+            : Images.user
+        }
+        name={userData?.name}
+        email={userData?.email}
       />
 
       <CustomText
@@ -109,6 +106,20 @@ const Profile = () => {
       />
 
       {personal.map((item, index) => (
+        <Item
+          name={item.name}
+          source={item.image}
+          onPress={() => navigation.navigate(item.screen)}
+        />
+      ))}
+      <CustomText
+        label={"Security"}
+        fontSize={12}
+        fontFamily={fonts.medium}
+        marginTop={32}
+      />
+
+      {security.map((item, index) => (
         <Item
           name={item.name}
           source={item.image}
@@ -163,6 +174,7 @@ const Profile = () => {
         onDisable={async () => {
           setLogoutModal(false);
           dispatch(setToken(""));
+          dispatch(setUserData({}));
           try {
             await AsyncStorage.removeItem("token");
           } catch (error) {
@@ -193,8 +205,14 @@ const Profile = () => {
         onDisable={async () => {
           setDeleteModal(false);
           dispatch(setToken(""));
+          dispatch(setUserData({}));
           try {
+            const res = await del("users/");
+            if (res.data.success) {
+              ToastMessage("The account has been successfully deleted!");
+            }
             await AsyncStorage.removeItem("token");
+            dispatch(notiLogout());
           } catch (error) {
             console.log("Error removing token from AsyncStorage:", error);
           }

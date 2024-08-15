@@ -16,11 +16,37 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../../store/reducer/usersSlice";
 import { setToken } from "../../../store/reducer/AuthConfig";
 import { COLORS } from "../../../utils/COLORS";
-import { Images } from "../../../assets/images";
+import { AppleIcon, GoogleIcon, Images } from "../../../assets/images";
+import { signInWithApple, signInWithGoogle } from "../../../utils/authUtils";
 
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState({
+    google: false,
+    apple: false,
+  });
+  const socialLogin = [
+    {
+      id: "google",
+      name: "Sign in with Google",
+      icon: <GoogleIcon />,
+    },
+  ];
+  const AppleCard = [
+    {
+      id: "apple",
+      name: "Sign in with Apple",
+      icon: <AppleIcon />,
+    },
+  ];
+  const handleSocialLogin = async (id) => {
+    if (id === "google") {
+      await signInWithGoogle(navigation, dispatch, setLoading);
+    } else {
+      await signInWithApple(navigation, dispatch, setLoading);
+    }
+  };
+  const [isloading, setisLoading] = useState(false);
 
   const init = {
     email: "",
@@ -53,7 +79,7 @@ const Login = ({ navigation }) => {
   ];
   const handleLogin = async () => {
     try {
-      setLoading(true);
+      setisLoading(true);
       const fcmToken = await AsyncStorage.getItem("fcmToken");
       const body = {
         email: state.email,
@@ -61,8 +87,6 @@ const Login = ({ navigation }) => {
         fcmtoken: fcmToken,
       };
       const response = await post("auth/", body);
-
-      console.log("res-------", response.data);
       if (response.data?.success) {
         await AsyncStorage.setItem("token", response.data?.token);
         dispatch(setToken(response.data?.token));
@@ -81,7 +105,7 @@ const Login = ({ navigation }) => {
       console.log(error.response.data);
       ToastMessage(error?.response?.data?.message);
     } finally {
-      setLoading(false);
+      setisLoading(false);
     }
   };
 
@@ -130,9 +154,9 @@ const Login = ({ navigation }) => {
           title="Sign In"
           marginTop={40}
           onPress={handleLogin}
-          loading={loading}
+          loading={isloading}
           disabled={
-            loading || !Object.values(errors).every((error) => error === "")
+            isloading || !Object.values(errors).every((error) => error === "")
           }
         />
 
@@ -147,28 +171,24 @@ const Login = ({ navigation }) => {
           <View style={styles.line} />
         </View>
 
-        <CustomButton
-          image={Images.google}
-          title={"Sign in with Google"}
-          customStyle={{
-            borderWidth: 1,
-            borderColor: COLORS.lightGray,
-            backgroundColor: COLORS.white,
-          }}
-          customText={{ color: COLORS.black, fontFamily: fonts.semiBold }}
-          marginTop={12}
-        />
-        <CustomButton
-          image={Images.apple}
-          title={"Sign in with Google"}
-          customStyle={{
-            borderWidth: 1,
-            borderColor: COLORS.lightGray,
-            backgroundColor: COLORS.white,
-          }}
-          customText={{ color: COLORS.black, fontFamily: fonts.semiBold }}
-          marginTop={12}
-        />
+        {[...socialLogin, ...(Platform.OS == "ios" ? AppleCard : [])].map(
+          (item) => (
+            <CustomButton
+              ImageIcon={item.icon}
+              title={item?.name}
+              customStyle={{
+                borderWidth: 1,
+                borderColor: COLORS.lightGray,
+                backgroundColor: COLORS.white,
+              }}
+              customText={{ color: COLORS.black, fontFamily: fonts.semiBold }}
+              marginTop={12}
+              onPress={() => handleSocialLogin(item.id)}
+              disabled={loading[item.id]}
+              loading={loading[item.id]}
+            />
+          )
+        )}
         <CustomText
           label="Don’t have an account? Sign Up"
           fontSize={16}

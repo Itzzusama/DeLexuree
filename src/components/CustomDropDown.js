@@ -25,6 +25,7 @@ const CustomDropDown = ({
   isRequired,
   maxHeight,
   error,
+  multiSelect = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const opacity = useRef(new Animated.Value(0)).current;
@@ -48,8 +49,20 @@ const CustomDropDown = ({
   };
 
   const handleSelect = (option) => {
-    setValue(option);
-    toggleDropdown();
+    if (multiSelect) {
+      if (value.includes(option)) {
+        setValue(value.filter((item) => item !== option));
+      } else {
+        setValue([...value, option]);
+      }
+    } else {
+      setValue(option);
+      toggleDropdown();
+    }
+  };
+
+  const isSelected = (option) => {
+    return multiSelect ? value.includes(option) : value === option;
   };
 
   return (
@@ -68,8 +81,15 @@ const CustomDropDown = ({
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             {icon && <Image source={icon} style={styles.leftIcon} />}
             <CustomText
-              label={value || placeholder}
-              color={value ? COLORS.black : COLORS.gray}
+              textTransform={"capitalize"}
+              label={
+                multiSelect
+                  ? value.length > 0
+                    ? value?.join(", ")
+                    : placeholder
+                  : value || placeholder
+              }
+              color={value?.length > 0 ? COLORS.black : COLORS.gray}
               marginLeft={10}
             />
           </View>
@@ -88,7 +108,7 @@ const CustomDropDown = ({
               {
                 opacity,
                 transform: [{ translateY }],
-                maxHeight: maxHeight || 165,
+                maxHeight: maxHeight || 175,
               },
             ]}
           >
@@ -107,7 +127,17 @@ const CustomDropDown = ({
                     fontSize={12}
                     fontFamily={fonts.medium}
                     label={option}
+                    textTransform={"capitalize"}
                   />
+                  {isSelected(option) && (
+                    <Icons
+                      family="FontAwesome"
+                      size={16}
+                      color={COLORS.green}
+                      name="check"
+                      style={styles.checkIcon}
+                    />
+                  )}
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -146,6 +176,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   listItemContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     borderBlockColor: COLORS.lightGray,
     borderBottomWidth: 1,
     padding: 12,
@@ -160,6 +193,9 @@ const styles = StyleSheet.create({
     fontFamily: fonts.medium,
     color: COLORS.black,
     marginBottom: 5,
+  },
+  checkIcon: {
+    marginLeft: 10,
   },
 });
 
