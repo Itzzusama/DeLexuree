@@ -5,6 +5,7 @@ const initialState = {
   isOnBoarding: false,
   userCategory: '',
   userData: {},
+  modal:false
 };
 export const authConfigsSlice = createSlice({
   name: 'authConfigs',
@@ -25,8 +26,11 @@ export const authConfigsSlice = createSlice({
     setUserData(state, action) {
       state.userData = action.payload;
     },
+    setModal(state, action) {
+      state.modal = action.payload;
+    },
   },
 });
 
-export const {setToken, setOnBoarding, logout, setUserCategory, setUserData} =
+export const {setToken, setOnBoarding, logout, setUserCategory, setUserData,setModal} =
   authConfigsSlice.actions;

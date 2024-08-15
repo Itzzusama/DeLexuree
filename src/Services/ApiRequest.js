@@ -2,6 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 import { endPoints } from "./ENV";
+import { store } from "../store";
+import { setModal, setToken } from "../store/reducer/AuthConfig";
+import { notiLogout } from "../store/reducer/unseenNotiSlice";
 
 const baseURL = endPoints.BASE_URL;
 
@@ -21,6 +24,16 @@ const createApi = () => {
     }
     return config;
   });
+  instance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response && error.response.status === 440) {
+        handleLogout();
+      } else {
+        return Promise.reject(error);
+      }
+    }
+  );
   const get = (url) => {
     return instance.get(url);
   };
@@ -36,3 +49,11 @@ const createApi = () => {
   return { get, post, put, del };
 };
 export const { get, post, put, del } = createApi();
+
+const handleLogout = async () => {
+  await AsyncStorage.removeItem("token");
+  await AsyncStorage.removeItem("fcmToken");
+  store.dispatch(setToken(""));
+  store.dispatch(setModal(true));
+  store.dispatch(notiLogout());
+};
