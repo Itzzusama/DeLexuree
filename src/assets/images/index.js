@@ -63,6 +63,7 @@ export const Images = {
   about: require("./about.png"),
   pin: require("./pin.png"),
   noti: require("./noti.png"),
+  clip: require("./clipboard.png"),
 };
 
 //svgs

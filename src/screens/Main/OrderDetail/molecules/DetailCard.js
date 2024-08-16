@@ -115,21 +115,21 @@ const DetailCard = ({
       <View style={styles.line} />
 
       <TextSpaceBetween light leftText={"Price"} rightText={`$${price}`} />
-      <TextSpaceBetween
+      {/* <TextSpaceBetween
         light
         leftText={"Apps fee"}
         rightText={"$3"}
         marginTop={6}
-      />
+      /> */}
       <TextSpaceBetween
         leftText={"Total price"}
-        rightText={`$${3 + price}`}
+        rightText={`$${price}`}
         marginTop={6}
       />
       <View style={className("flex align-center justify-between")}>
         {(status == "pending" || status == "accepted") && (
           <CustomButton
-            title={status == "pending" ? "Accept" : "Complete Request"}
+            title={status == "pending" ? "Accept" : "Request for completion"}
             marginTop={14}
             backgroundColor={"transparent"}
             customStyle={{

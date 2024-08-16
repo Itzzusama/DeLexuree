@@ -43,15 +43,12 @@ const Notifications = () => {
     setRefreshing(true);
     try {
       const res = await get("notification/all");
-      console.log("res------not", res.data);
 
       if (res.data?.success) {
         setNotification(res.data.notifications);
       } else {
         setNotification([]);
       }
-      // setNotification
-      console.log("res------not", res.data);
     } catch (error) {
       console.log("err=====", error);
       ToastMessage(error.response.data?.message);
@@ -111,11 +108,7 @@ const Notifications = () => {
               title={item?.title}
               description={item?.description}
               time={moment(item?.createdAt).fromNow()}
-              source={
-                item.color == "red"
-                  ? Images.notification1
-                  : Images.notification2
-              }
+              source={Images.clip}
             />
           )
         }

@@ -83,7 +83,7 @@ const InboxScreen = ({ route }) => {
       socket.emit("send-message", {
         recipientId: data?.id,
         messageText: inputText,
-        name: users?.name,
+        name: userData?.name,
       });
       setInputText("");
     } else {
@@ -108,6 +108,7 @@ const InboxScreen = ({ route }) => {
     });
 
     newSocket.on("send-message", (msg) => {
+      console.log(msg);
       setMessages((prevMessages) => [msg, ...prevMessages]);
     });
 

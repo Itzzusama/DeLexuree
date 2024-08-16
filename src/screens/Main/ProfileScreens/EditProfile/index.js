@@ -251,7 +251,7 @@ const EditProfile = () => {
               placeholder={item.placeholder}
               value={item.value}
               onChangeText={item.onChange}
-              editable={item?.id == 3}
+              editable={item?.id == 3 || item?.id == 2}
               withLabel={item?.label}
             />
           )
