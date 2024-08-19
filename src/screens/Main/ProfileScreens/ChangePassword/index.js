@@ -63,13 +63,15 @@ const ChangePassword = () => {
   const array = [
     {
       id: 1,
-      placeholder: "Enter Password",
+      label: "Old Password",
+      placeholder: "Enter old Password",
       value: state.password,
       onChange: (text) => setState({ ...state, password: text }),
       error: errors?.passwordError,
     },
     {
       id: 2,
+      label: "New Password",
       placeholder: "Enter New Password",
       value: state.newPassword,
       onChange: (text) => setState({ ...state, newPassword: text }),
@@ -77,6 +79,7 @@ const ChangePassword = () => {
     },
     {
       id: 3,
+      label: "Confirm Password",
       placeholder: "Enter Confirm Password",
       value: state.conPassword,
       onChange: (text) => setState({ ...state, conPassword: text }),
@@ -91,11 +94,12 @@ const ChangePassword = () => {
       else if (!passwordRegex.test(state.password))
         newErrors.passwordError =
           "Password must contain 1 number, 1 special character, Uppercase and 8 digits";
-      if (!state.newPassword) newErrors.newPasswordError = "Enter New Password";
+      else if (!state.newPassword)
+        newErrors.newPasswordError = "Enter New Password";
       else if (!passwordRegex.test(state.newPassword))
         newErrors.newPasswordError =
           "Password must contain 1 number, 1 special character, Uppercase and 8 digits";
-      if (!state.conPassword)
+      else if (!state.conPassword)
         newErrors.confirmPasswordError = "Enter Confirm Password";
       else if (!passwordRegex.test(state.conPassword))
         newErrors.confirmPasswordError =
@@ -119,6 +123,7 @@ const ChangePassword = () => {
       <View style={className("mx-5 flex-1 mt-7")}>
         {array.map((item) => (
           <CustomInput
+            withLabel={item?.label}
             key={item.id}
             placeholder={item.placeholder}
             value={item.value}
