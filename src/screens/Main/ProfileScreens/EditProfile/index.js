@@ -31,11 +31,15 @@ import { Image as ImageCompressor } from "react-native-compressor";
 
 import storage from "@react-native-firebase/storage";
 import Header from "../../../../components/Header";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { endPoints } from "../../../../Services/ENV";
+import axios from "axios";
 
 const EditProfile = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.users);
+
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
   const [image, setImage] = useState(userData?.profilePicture);
@@ -46,6 +50,7 @@ const EditProfile = () => {
     phone: userData?.phone,
     acc_title: userData?.acc_title,
     acc_number: userData?.acc_numb,
+    bank_name: userData?.bank_name,
   };
 
   const [state, setState] = useState(init);
@@ -57,16 +62,37 @@ const EditProfile = () => {
 
   const handleUpdateUser = async () => {
     setLoading(true);
+    if (!state.fName) {
+      ToastMessage("Please enter your name");
+      setLoading(false);
+      return;
+    }
+    if (!state.acc_title) {
+      ToastMessage("Please enter account title");
+      setLoading(false);
+      return;
+    }
+    if (!state.acc_number) {
+      ToastMessage("Please enter account number");
+      setLoading(false);
+      return;
+    }
+    if (!state.bank_name) {
+      ToastMessage("Please enter bank name");
+      setLoading(false);
+      return;
+    }
     try {
       const body = {
         dob: birthdate,
-        email: init.email,
-        name: init.fName,
-        phone: init.phone,
-        acc_title: init.acc_title,
-        acc_numb: init.acc_number,
+        email: state.email,
+        name: state.fName,
+        phone: state.phone,
+        acc_title: state.acc_title,
+        acc_numb: state.acc_number,
         gender: gender,
         profilePicture: image,
+        bank_name: state.bank_name,
       };
       const response = await put("users/update-user", body);
       if (response.data.success) {
@@ -119,26 +145,41 @@ const EditProfile = () => {
       value: state.acc_number,
       onChange: (text) => setState({ ...state, acc_number: text }),
     },
+    {
+      id: 6,
+      placeholder: "Enter bank name",
+      label: "Bank Name",
+      value: state.bank_name,
+      onChange: (text) => setState({ ...state, bank_name: text }),
+    },
     { id: 3.1 },
     { id: 3.2 },
   ];
 
   const uploadAndGetUrl = async (file) => {
+    console.log("this is", file);
     setImageLoading(true);
+    const token = await AsyncStorage.getItem("token");
+    console.log(token);
     try {
-      const resizeUri = await ImageCompressor.compress(
-        file.fileCopyUri || file.path
+      const formData = new FormData();
+      formData.append("image", {
+        uri: file?.path || file?.fileCopyUri || "",
+        type: "image/jpeg",
+        name: "photo.jpg",
+      });
+      const res = await axios.post(
+        `${endPoints.BASE_URL}/image/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "x-auth-token": token,
+          },
+        }
       );
-      const filename = `images/${new Date()
-        .toISOString()
-        .replace(/[.:-]+/g, "_")}`;
-      const uploadUri =
-        Platform.OS === "ios" ? resizeUri.replace("file://", "") : resizeUri;
-      const storageRef = storage().ref(filename);
-      await storageRef.putFile(uploadUri);
-      const url = await storageRef.getDownloadURL();
-      ToastMessage("Image uploaded successfully");
-      return url, setImage(url);
+      setImage(res?.data?.image);
+      return res?.data?.image;
     } catch (err) {
       ToastMessage("Upload Again");
     } finally {
@@ -161,7 +202,7 @@ const EditProfile = () => {
       headerUnScrollable={() => <Header title={"Edit Profile"} />}
     >
       {imageLoading ? (
-        <ActivityIndicator size={"large"} />
+        <ActivityIndicator size={"small"} />
       ) : (
         <UploadImage
           handleChange={async (res) => {
@@ -169,20 +210,22 @@ const EditProfile = () => {
             // setImage(url);
           }}
           renderButton={(res) => (
-            <Pressable
-              onPress={res}
-              style={className("align-center justify-center mt-7")}
-            >
-              <ImageFast
-                source={image ? { uri: image } : Images.sampleProfile}
-                style={{ height: 90, width: 90, borderRadius: 50 }}
-              />
-              <CustomText
-                label={"Change Profile Picture"}
-                fontSize={14}
-                fontFamily={fonts.semiBold}
-              />
-            </Pressable>
+            <View style={className("align-center justify-center")}>
+              <Pressable
+                onPress={res}
+                style={className("align-center justify-center mt-7 ")}
+              >
+                <ImageFast
+                  source={image ? { uri: image } : Images.sampleProfile}
+                  style={{ height: 90, width: 90, borderRadius: 50 }}
+                />
+                <CustomText
+                  label={"Change Profile Picture"}
+                  fontSize={14}
+                  fontFamily={fonts.semiBold}
+                />
+              </Pressable>
+            </View>
           )}
         />
       )}
@@ -260,7 +303,7 @@ const EditProfile = () => {
       <View style={className("px-5 mb-6")}>
         <CustomButton
           title="Save"
-          loading={loading}
+          loading={loading || imageLoading}
           onPress={handleUpdateUser}
         />
       </View>

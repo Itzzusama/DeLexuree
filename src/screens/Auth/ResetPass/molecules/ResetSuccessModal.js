@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: 128,
-    height: 128,
+    width: 100,
+    height: 100,
+    tintColor: COLORS.primaryColor,
   },
 });
