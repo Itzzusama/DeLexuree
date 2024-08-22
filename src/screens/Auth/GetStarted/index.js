@@ -4,6 +4,8 @@ import {
   ImageBackground,
   StatusBar,
   Platform,
+  TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState } from "react";
 
@@ -16,6 +18,7 @@ import { signInWithApple, signInWithGoogle } from "../../../utils/authUtils";
 import { GoogleIcon, AppleIcon, Email } from "../../../assets/images";
 import { useDispatch } from "react-redux";
 import { className } from "../../../global-styles";
+import fonts from "../../../assets/fonts";
 
 const GetStarted = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -67,16 +70,30 @@ const GetStarted = ({ navigation }) => {
       >
         {[...socialLogin, ...(Platform.OS == "ios" ? AppleCard : [])].map(
           (item) => (
-            <CustomButton
-              title={item?.name}
-              ImageIcon={item?.icon}
-              customStyle={styles.socialButton}
-              customText={styles.socialText}
+            <TouchableOpacity
+              key={item.id}
+              style={className(
+                "flex flex-row align-center justify-center bg-white p-4 mb-3 rounded-2"
+              )}
+              activeOpacity={0.8}
               onPress={() => handleSocialLogin(item.id)}
               disabled={loading[item.id]}
-              loading={loading[item.id]}
-              customStyle={className("mb-3 bg-white")}
-            />
+            >
+              {loading[item.id] ? (
+                <ActivityIndicator size="small" color={COLORS.primaryColor} />
+              ) : (
+                <>
+                  {item?.icon}
+                  <CustomText
+                    label={item?.name}
+                    textStyle={className("ml-2")}
+                    fontSize={16}
+                    color={COLORS.blk2}
+                    fontFamily={fonts.medium}
+                  />
+                </>
+              )}
+            </TouchableOpacity>
           )
         )}
       </View>

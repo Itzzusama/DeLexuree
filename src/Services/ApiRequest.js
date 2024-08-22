@@ -5,7 +5,7 @@ import { endPoints } from "./ENV";
 import { store } from "../store";
 import { setModal, setToken } from "../store/reducer/AuthConfig";
 import { notiLogout } from "../store/reducer/unseenNotiSlice";
-
+import { userLogout } from "../store/reducer/usersSlice";
 const baseURL = endPoints.BASE_URL;
 
 const createApi = () => {
@@ -56,4 +56,5 @@ const handleLogout = async () => {
   store.dispatch(setToken(""));
   store.dispatch(setModal(true));
   store.dispatch(notiLogout());
+  store.dispatch(userLogout());
 };

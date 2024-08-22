@@ -8,6 +8,8 @@ import { appleAuth } from "@invertase/react-native-apple-authentication";
 import jwt_decode from "jwt-decode";
 import { ToastMessage } from "./ToastMessage";
 import { post } from "../Services/ApiRequest";
+import { setToken } from "../store/reducer/AuthConfig";
+import { setUserData } from "../store/reducer/usersSlice";
 
 GoogleSignin.configure({
   webClientId:
@@ -32,7 +34,8 @@ export const signInWithGoogle = async (navigation, dispatch, setLoading) => {
     };
     try {
       const response = await post("auth/social-login", reqData);
-      if (response.data?.success) {
+      console.log(response.data);
+      if (response.data?.token && response?.data?.user?.type == "employee") {
         await AsyncStorage.setItem("token", response.data?.token);
         dispatch(setToken(response.data?.token));
         dispatch(setUserData(response.data?.user));
@@ -45,12 +48,13 @@ export const signInWithGoogle = async (navigation, dispatch, setLoading) => {
           ],
         });
       } else {
+        console.log("Please select");
         ToastMessage("Invalid credentials");
         await GoogleSignin.signOut();
       }
     } catch (err) {
       await GoogleSignin.signOut();
-      ToastMessage("User has not registered with this account");
+      ToastMessage(err.response?.data?.message || "Something went wrong");
     }
   } catch (error) {
     await GoogleSignin.signOut();
@@ -86,7 +90,7 @@ export const signInWithApple = async (navigation, dispatch, setLoading) => {
     };
     try {
       const response = await post("auth/social-login", reqData);
-      if (response.data?.success) {
+      if (response.data?.token && response?.data?.user?.type == "employee") {
         await AsyncStorage.setItem("token", response.data?.token);
         dispatch(setToken(response.data?.token));
         dispatch(setUserData(response.data?.user));
@@ -99,11 +103,11 @@ export const signInWithApple = async (navigation, dispatch, setLoading) => {
           ],
         });
       } else {
-        ToastMessage("An error occurred during Apple sign in");
+        ToastMessage("Invalid credentials");
       }
     } catch (err) {
       console.log(err);
-      ToastMessage("User has not registered with this account");
+      ToastMessage(err?.response?.data?.message || "Something went wrong");
     }
   } catch (error) {
     ToastMessage("An error occurred during Apple sign in");

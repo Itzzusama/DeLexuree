@@ -1,4 +1,9 @@
-import { StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
 
 import ScreenWrapper from "../../../components/ScreenWrapper";
@@ -18,6 +23,7 @@ import { setToken } from "../../../store/reducer/AuthConfig";
 import { COLORS } from "../../../utils/COLORS";
 import { AppleIcon, GoogleIcon, Images } from "../../../assets/images";
 import { signInWithApple, signInWithGoogle } from "../../../utils/authUtils";
+import { className } from "../../../global-styles";
 
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -173,20 +179,30 @@ const Login = ({ navigation }) => {
 
         {[...socialLogin, ...(Platform.OS == "ios" ? AppleCard : [])].map(
           (item) => (
-            <CustomButton
-              ImageIcon={item.icon}
-              title={item?.name}
-              customStyle={{
-                borderWidth: 1,
-                borderColor: COLORS.lightGray,
-                backgroundColor: COLORS.white,
-              }}
-              customText={{ color: COLORS.black, fontFamily: fonts.semiBold }}
-              marginTop={12}
+            <TouchableOpacity
+              key={item.id}
+              style={className(
+                "flex flex-row align-center justify-center bg-white p-4 mb-3 rounded-2 border-gray2 bor-1"
+              )}
+              activeOpacity={0.8}
               onPress={() => handleSocialLogin(item.id)}
               disabled={loading[item.id]}
-              loading={loading[item.id]}
-            />
+            >
+              {loading[item.id] ? (
+                <ActivityIndicator size="small" color={COLORS.primaryColor} />
+              ) : (
+                <>
+                  {item?.icon}
+                  <CustomText
+                    label={item?.name}
+                    textStyle={className("ml-2")}
+                    fontSize={16}
+                    color={COLORS.blk2}
+                    fontFamily={fonts.medium}
+                  />
+                </>
+              )}
+            </TouchableOpacity>
           )
         )}
         <CustomText

@@ -7,6 +7,8 @@ import {
   View,
   Image,
   Text,
+  LayoutAnimation,
+  UIManager,
 } from "react-native";
 
 import CustomText from "./CustomText";
@@ -14,7 +16,8 @@ import Icons from "./Icons";
 
 import { COLORS } from "../utils/COLORS";
 import fonts from "../assets/fonts";
-
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 const CustomDropDown = ({
   options,
   value,
@@ -32,23 +35,12 @@ const CustomDropDown = ({
   const translateY = useRef(new Animated.Value(-1000)).current;
 
   const toggleDropdown = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setIsOpen(!isOpen);
-
-    Animated.parallel([
-      Animated.timing(opacity, {
-        toValue: isOpen ? 0 : 1,
-        duration: 300,
-        useNativeDriver: false,
-      }),
-      Animated.timing(translateY, {
-        toValue: isOpen ? -1000 : 0,
-        duration: 300,
-        useNativeDriver: false,
-      }),
-    ]).start();
   };
 
   const handleSelect = (option) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     if (multiSelect) {
       if (value.includes(option)) {
         setValue(value.filter((item) => item !== option));
@@ -73,7 +65,7 @@ const CustomDropDown = ({
           {isRequired && <Text style={{ color: COLORS.red }}> *</Text>}
         </Text>
       ) : null}
-      <View style={{ width: "100%" }}>
+      <View style={[styles.dropdownMainContainer, { height: !isOpen && 49 }]}>
         <TouchableOpacity
           style={[styles.mainContainer, { marginBottom: isOpen ? 5 : 20 }]}
           onPress={toggleDropdown}
@@ -95,53 +87,39 @@ const CustomDropDown = ({
           </View>
           <Icons
             family="Entypo"
-            size={24}
+            size={20}
             color={COLORS.black}
             name={isOpen ? "chevron-up" : "chevron-down"}
           />
         </TouchableOpacity>
 
         {isOpen && (
-          <Animated.View
-            style={[
-              styles.dropdown,
-              {
-                opacity,
-                transform: [{ translateY }],
-                maxHeight: maxHeight || 175,
-              },
-            ]}
-          >
-            <ScrollView
-              nestedScrollEnabled
-              showsVerticalScrollIndicator={false}
-            >
-              {options?.map((option) => (
-                <TouchableOpacity
-                  activeOpacity={1}
-                  style={styles.listItemContainer}
-                  key={option}
-                  onPress={() => handleSelect(option)}
-                >
-                  <CustomText
-                    fontSize={12}
-                    fontFamily={fonts.medium}
-                    label={option}
-                    textTransform={"capitalize"}
+          <ScrollView nestedScrollEnabled>
+            {options?.map((option) => (
+              <TouchableOpacity
+                activeOpacity={1}
+                style={styles.listItemContainer}
+                key={option}
+                onPress={() => handleSelect(option)}
+              >
+                <CustomText
+                  fontSize={12}
+                  fontFamily={fonts.medium}
+                  label={option}
+                  textTransform={"capitalize"}
+                />
+                {isSelected(option) && (
+                  <Icons
+                    family="FontAwesome"
+                    size={16}
+                    color={COLORS.green}
+                    name="check"
+                    style={styles.checkIcon}
                   />
-                  {isSelected(option) && (
-                    <Icons
-                      family="FontAwesome"
-                      size={16}
-                      color={COLORS.green}
-                      name="check"
-                      style={styles.checkIcon}
-                    />
-                  )}
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </Animated.View>
+                )}
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
         )}
       </View>
       {error && (
@@ -152,17 +130,26 @@ const CustomDropDown = ({
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    width: "100%",
-    height: 48,
+  dropdownMainContainer: {
+    borderRadius: 10,
     backgroundColor: COLORS.white,
+    width: "100%",
+    // maxHeight: 200,
+    overflow: "hidden",
     borderWidth: 1,
     borderColor: COLORS.lightGray,
-    justifyContent: "space-between",
-    borderRadius: 6,
-    paddingHorizontal: 8,
+  },
+  mainContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    width: "100%",
+    height: 40,
+    backgroundColor: COLORS.white,
+  },
+  scrollContainer: {
+    maxHeight: 150,
   },
   dropdown: {
     left: 0,
@@ -176,12 +163,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   listItemContainer: {
+    borderTopWidth: 1,
+    borderTopColor: COLORS.lightGray,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-    borderBlockColor: COLORS.lightGray,
-    borderBottomWidth: 1,
-    padding: 12,
+    justifyContent: "space-between",
   },
   leftIcon: {
     width: 17,

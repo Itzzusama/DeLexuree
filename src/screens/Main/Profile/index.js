@@ -13,7 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../../store/reducer/AuthConfig";
 import { del, get } from "../../../Services/ApiRequest";
-import { setUserData } from "../../../store/reducer/usersSlice";
+import { setUserData, userLogout } from "../../../store/reducer/usersSlice";
 
 import Item from "./Item";
 import { tabIcons } from "../../../assets/images/tabIcons";
@@ -21,6 +21,7 @@ import CustomButton from "../../../components/CustomButton";
 import DeleteAccModal from "./DeleteAccModal";
 import Header from "../../../components/Header";
 import { notiLogout } from "../../../store/reducer/unseenNotiSlice";
+import { ToastMessage } from "../../../utils/ToastMessage";
 
 const Profile = () => {
   const navigation = useNavigation();
@@ -174,7 +175,7 @@ const Profile = () => {
         onDisable={async () => {
           setLogoutModal(false);
           dispatch(setToken(""));
-          dispatch(setUserData({}));
+          dispatch(userLogout());
           try {
             await AsyncStorage.removeItem("token");
           } catch (error) {
@@ -204,14 +205,14 @@ const Profile = () => {
         isVisible={deleteModal}
         onDisable={async () => {
           setDeleteModal(false);
-          dispatch(setToken(""));
-          dispatch(setUserData({}));
           try {
             const res = await del("users/");
             if (res.data.success) {
               ToastMessage("The account has been successfully deleted!");
             }
             await AsyncStorage.removeItem("token");
+            dispatch(setToken(""));
+            dispatch(userLogout());
             dispatch(notiLogout());
           } catch (error) {
             console.log("Error removing token from AsyncStorage:", error);
