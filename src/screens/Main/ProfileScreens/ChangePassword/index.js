@@ -64,7 +64,7 @@ const ChangePassword = () => {
     {
       id: 1,
       label: "Old Password",
-      placeholder: "Enter old Password",
+      placeholder: "Enter Old Password",
       value: state.password,
       onChange: (text) => setState({ ...state, password: text }),
       error: errors?.passwordError,

@@ -1,6 +1,10 @@
 import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import React, { useCallback, useState } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import {
+  GoogleSignin,
+  statusCodes,
+} from "@react-native-google-signin/google-signin";
 import CustomText from "../../../components/CustomText";
 import ScreenWrapper from "../../../components/ScreenWrapper";
 
@@ -23,6 +27,10 @@ import Header from "../../../components/Header";
 import { notiLogout } from "../../../store/reducer/unseenNotiSlice";
 import { ToastMessage } from "../../../utils/ToastMessage";
 
+GoogleSignin.configure({
+  webClientId:
+    "157599591616-dmlv0dbsrcc8cl71910fa01jh50pj8do.apps.googleusercontent.com", // From Firebase Console
+});
 const Profile = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -176,6 +184,7 @@ const Profile = () => {
           setLogoutModal(false);
           dispatch(setToken(""));
           dispatch(userLogout());
+          GoogleSignin.signOut();
           try {
             await AsyncStorage.removeItem("token");
           } catch (error) {
@@ -211,6 +220,7 @@ const Profile = () => {
               ToastMessage("The account has been successfully deleted!");
             }
             await AsyncStorage.removeItem("token");
+            GoogleSignin.signOut();
             dispatch(setToken(""));
             dispatch(userLogout());
             dispatch(notiLogout());

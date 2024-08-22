@@ -97,6 +97,7 @@ const EditProfile = () => {
       const response = await put("users/update-user", body);
       if (response.data.success) {
         getProfile();
+        ToastMessage(response.data?.message);
         navigation.goBack();
       } else {
         ToastMessage(response.data?.message);
@@ -300,7 +301,7 @@ const EditProfile = () => {
           )
         )}
       </View>
-      <View style={className("px-5 mb-6")}>
+      <View style={className("px-5 mb-6 mt-6")}>
         <CustomButton
           title="Save"
           loading={loading || imageLoading}

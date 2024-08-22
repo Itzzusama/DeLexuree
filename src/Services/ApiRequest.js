@@ -6,8 +6,15 @@ import { store } from "../store";
 import { setModal, setToken } from "../store/reducer/AuthConfig";
 import { notiLogout } from "../store/reducer/unseenNotiSlice";
 import { userLogout } from "../store/reducer/usersSlice";
+import {
+  GoogleSignin,
+  statusCodes,
+} from "@react-native-google-signin/google-signin";
 const baseURL = endPoints.BASE_URL;
-
+GoogleSignin.configure({
+  webClientId:
+    "157599591616-dmlv0dbsrcc8cl71910fa01jh50pj8do.apps.googleusercontent.com", // From Firebase Console
+});
 const createApi = () => {
   const instance = axios.create({
     baseURL,
@@ -57,4 +64,5 @@ const handleLogout = async () => {
   store.dispatch(setModal(true));
   store.dispatch(notiLogout());
   store.dispatch(userLogout());
+  GoogleSignin.signOut();
 };
