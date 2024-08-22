@@ -33,7 +33,7 @@ const GooglePlaces = ({
   useEffect(() => {
     setSearchQuery(value);
   }, [value]);
-  const apiKey = 'AIzaSyCxqIkOLrrj8jGBh9ciBGoksB-Wsyb4wQI';
+  const apiKey = 'AIzaSyC7DYo4kTTxYLPzpSB3afRrIMA4HVMJI5I';
 
   const handleSearch = async text => {
     setSearchQuery(text);
