@@ -91,6 +91,7 @@ const Login = ({ navigation }) => {
         email: state.email,
         password: state.password,
         fcmtoken: "fcmToken",
+        user_type: "employee",
       };
       const response = await post("auth/", body);
       if (response.data?.success) {

@@ -106,6 +106,7 @@ const Signup = ({ navigation }) => {
     try {
       const body = {
         email: state.email,
+        user_type: "employee",
       };
       const response = await post("users/check-email", body);
       if (!response.data?.success) {
@@ -151,6 +152,7 @@ const Signup = ({ navigation }) => {
       setLoading(true);
       const body = {
         email: state?.email,
+        user_type: "employee",
       };
       const response = await post("users/send-code", body);
       ToastMessage(response.data?.message);

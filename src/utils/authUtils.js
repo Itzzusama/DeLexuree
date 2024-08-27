@@ -31,6 +31,7 @@ export const signInWithGoogle = async (navigation, dispatch, setLoading) => {
     const reqData = {
       email: email,
       fcmtoken: fcmtoken,
+      user_type: "employee",
     };
     try {
       const response = await post("auth/social-login", reqData);
@@ -87,6 +88,7 @@ export const signInWithApple = async (navigation, dispatch, setLoading) => {
       email: res.email,
       fcmtoken: fcmtoken,
       name: appleData?.fullName || "",
+      user_type: "employee",
     };
     try {
       const response = await post("auth/social-login", reqData);

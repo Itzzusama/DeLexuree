@@ -44,9 +44,13 @@ const Home = ({ navigation }) => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    getOrders(); //
-  }, [tab]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getOrders();
+      return () => {};
+    }, [tab])
+  );
   return (
     <ScreenWrapper
       paddingHorizontal={16}

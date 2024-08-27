@@ -23,10 +23,19 @@ const ServiceCard = ({
       activeOpacity={0.6}
       style={styles.cardContainer}
     >
-      {isPaid && (
+      {isPaid ? (
         <View style={styles.badgeStyle}>
           <CustomText
             label={"Paid"}
+            color={COLORS.white}
+            fontFamily={fonts.bold}
+            fontSize={12}
+          />
+        </View>
+      ) : (
+        <View style={styles.badgeStyle}>
+          <CustomText
+            label={"Unpaid"}
             color={COLORS.white}
             fontFamily={fonts.bold}
             fontSize={12}

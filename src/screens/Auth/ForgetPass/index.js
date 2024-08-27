@@ -30,6 +30,7 @@ const ForgetPass = ({ navigation }) => {
       setLoading(true);
       const body = {
         email: email,
+        user_type: "employee",
       };
       const response = await post("users/forget-password", body);
       console.log("res-------------", response.data);
