@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>157599591616-lhe0upq182pdl3ueuhs7b8ajpb5fm210.apps.googleusercontent.com</string>
+	<string>40372426505-325tfpvge4tokbpkkhg5aivfb6otb5r7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.157599591616-lhe0upq182pdl3ueuhs7b8ajpb5fm210</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>157599591616-3s449svqdsrfg0ttp0s0fua2inbif37m.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.40372426505-325tfpvge4tokbpkkhg5aivfb6otb5r7</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAajmL2od-GVUKyrXJc4VR4xWpgf4Jx0Q0</string>
+	<string>AIzaSyBpVJpekNqf3uRGFgpWZAKWdNOEV5thg6g</string>
 	<key>GCM_SENDER_ID</key>
-	<string>157599591616</string>
+	<string>40372426505</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.deeluxreeserviceprovider.app</string>
 	<key>PROJECT_ID</key>
-	<string>deluxcleaning-f860b</string>
+	<string>deluxree</string>
 	<key>STORAGE_BUCKET</key>
-	<string>deluxcleaning-f860b.appspot.com</string>
+	<string>deluxree.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:157599591616:ios:d0d53109a3920f419b9125</string>
+	<string>1:40372426505:ios:1f414972b8c3ccd30565d8</string>
 </dict>
 </plist>

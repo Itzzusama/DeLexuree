@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* DeluxureeCleanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DeluxureeCleanTests.m */; };
-		048575962C6E2EAA006A2CDE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048575952C6E2EAA006A2CDE /* GoogleService-Info.plist */; };
+		048E77202CC7F1590090505B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048E771F2CC7F1590090505B /* GoogleService-Info.plist */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -66,7 +66,8 @@
 		00E356EE1AD99517003FC87E /* DeluxureeCleanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeluxureeCleanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* DeluxureeCleanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeluxureeCleanTests.m; sourceTree = "<group>"; };
-		048575952C6E2EAA006A2CDE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		048E771F2CC7F1590090505B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		048E77212CC7F17A0090505B /* DeluxureeClean.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = DeluxureeClean.entitlements; path = DeluxureeClean/DeluxureeClean.entitlements; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* DeluxureeClean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeluxureeClean.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = DeluxureeClean/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = DeluxureeClean/AppDelegate.mm; sourceTree = "<group>"; };
@@ -158,7 +159,8 @@
 		13B07FAE1A68108700A75B9A /* DeluxureeClean */ = {
 			isa = PBXGroup;
 			children = (
-				048575952C6E2EAA006A2CDE /* GoogleService-Info.plist */,
+				048E77212CC7F17A0090505B /* DeluxureeClean.entitlements */,
+				048E771F2CC7F1590090505B /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -379,7 +381,7 @@
 				97A376442AEF6F3B007BD60A /* Zocial.ttf in Resources */,
 				97A3763F2AEF6F3B007BD60A /* Foundation.ttf in Resources */,
 				97A376482AEF6F3B007BD60A /* FontAwesome6_Brands.ttf in Resources */,
-				048575962C6E2EAA006A2CDE /* GoogleService-Info.plist in Resources */,
+				048E77202CC7F1590090505B /* GoogleService-Info.plist in Resources */,
 				97A376392AEF6F3A007BD60A /* Feather.ttf in Resources */,
 				97A376472AEF6F3B007BD60A /* SimpleLineIcons.ttf in Resources */,
 				97A376452AEF6F3B007BD60A /* EvilIcons.ttf in Resources */,
@@ -660,7 +662,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = DeluxureeClean/DeluxureeClean.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = ZPSW58UHAY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DeluxureeClean/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -673,8 +679,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.deeluxreeserviceprovider.app;
 				PRODUCT_NAME = DeluxureeClean;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -687,7 +694,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = DeluxureeClean/DeluxureeClean.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = ZPSW58UHAY;
 				INFOPLIST_FILE = DeluxureeClean/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -699,8 +710,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.deeluxreeserviceprovider.app;
 				PRODUCT_NAME = DeluxureeClean;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

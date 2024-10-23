@@ -29,7 +29,7 @@ import { ToastMessage } from "../../../utils/ToastMessage";
 
 GoogleSignin.configure({
   webClientId:
-    "157599591616-dmlv0dbsrcc8cl71910fa01jh50pj8do.apps.googleusercontent.com", // From Firebase Console
+    "40372426505-gad73g4168ia8h2qhsru726uc42bv9b2.apps.googleusercontent.com", // From Firebase Console
 });
 const Profile = () => {
   const navigation = useNavigation();

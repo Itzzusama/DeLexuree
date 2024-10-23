@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.157599591616-lhe0upq182pdl3ueuhs7b8ajpb5fm210</string>
+				<string>com.googleusercontent.apps.40372426505-325tfpvge4tokbpkkhg5aivfb6otb5r7</string>
 			</array>
 		</dict>
 	</array>
@@ -46,8 +46,20 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>DeeLuxureeClean requires access to your media library to allow you to upload and display photos and videos on your profile.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>DeeLuxureeClean wants to access camera to upload pictures for profile.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>DeeLuxureeClean wants to access location to add your location to your profile to help you to better find cleaning services</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>DeeLuxureeClean wants to access location to add your location to your profile to help you to better cleaning services</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>DeeLuxureeClean wants to access location to add your location to your profile to help you to better cleaning services</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>DeeLuxureeClean wants to access gallery to upload pictures for profile</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>DeeLuxureeClean wants to access gallery to upload pictures for profile</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -83,6 +95,11 @@
 		<string>Helvetica-Oblique.ttf</string>
 		<string>Helvetica.ttf</string>
 		<string>helvetica-light-587ebe5a59211.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>BootSplash.storyboard</string>

@@ -12,8 +12,7 @@ import { setToken } from "../store/reducer/AuthConfig";
 import { setUserData } from "../store/reducer/usersSlice";
 
 GoogleSignin.configure({
-  webClientId:
-    "157599591616-dmlv0dbsrcc8cl71910fa01jh50pj8do.apps.googleusercontent.com", // From Firebase Console
+  webClientId:"40372426505-gad73g4168ia8h2qhsru726uc42bv9b2.apps.googleusercontent.com"
 });
 
 export const signInWithGoogle = async (navigation, dispatch, setLoading) => {
@@ -32,6 +31,7 @@ export const signInWithGoogle = async (navigation, dispatch, setLoading) => {
       email: email,
       fcmtoken: fcmtoken,
       user_type: "employee",
+      name:userCredential.user?.displayName||""
     };
     try {
       const response = await post("auth/social-login", reqData);
@@ -49,13 +49,12 @@ export const signInWithGoogle = async (navigation, dispatch, setLoading) => {
           ],
         });
       } else {
-        console.log("Please select");
-        ToastMessage("Invalid credentials");
+        ToastMessage("That email has already been registered with other account type.");
         await GoogleSignin.signOut();
       }
     } catch (err) {
       await GoogleSignin.signOut();
-      ToastMessage(err.response?.data?.message || "Something went wrong");
+      ToastMessage("That email has already been registered with other account type.");
     }
   } catch (error) {
     await GoogleSignin.signOut();
@@ -105,11 +104,11 @@ export const signInWithApple = async (navigation, dispatch, setLoading) => {
           ],
         });
       } else {
-        ToastMessage("Invalid credentials");
+        ToastMessage("That email has already been registered with other account type.");
       }
     } catch (err) {
       console.log(err);
-      ToastMessage(err?.response?.data?.message || "Something went wrong");
+      ToastMessage("That email has already been registered with other account type.");
     }
   } catch (error) {
     ToastMessage("An error occurred during Apple sign in");
