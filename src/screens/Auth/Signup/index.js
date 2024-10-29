@@ -68,7 +68,7 @@ const Signup = ({ navigation }) => {
   const array = [
     {
       id: 1,
-      placeholder: "First Name",
+      placeholder: "Full Name",
       label: "Full Name",
       value: state.fName,
       onChange: (text) => setState({ ...state, fName: text }),
@@ -182,7 +182,7 @@ const Signup = ({ navigation }) => {
   const errorCheck = useMemo(() => {
     return () => {
       let newErrors = {};
-      if (!state.fName) newErrors.fNameError = "Please enter first name";
+      if (!state.fName) newErrors.fNameError = "Please enter Full name";
       else if (!state.email)
         newErrors.emailError = "Please enter Email address";
       else if (!regEmail.test(state.email))

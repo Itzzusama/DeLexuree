@@ -54,7 +54,7 @@ export const signInWithGoogle = async (navigation, dispatch, setLoading) => {
       }
     } catch (err) {
       await GoogleSignin.signOut();
-      ToastMessage("That email has already been registered with other account type.");
+      ToastMessage(err?.response?.data?.message);
     }
   } catch (error) {
     await GoogleSignin.signOut();
@@ -108,7 +108,7 @@ export const signInWithApple = async (navigation, dispatch, setLoading) => {
       }
     } catch (err) {
       console.log(err);
-      ToastMessage("That email has already been registered with other account type.");
+      ToastMessage(err?.response?.data?.message);
     }
   } catch (error) {
     ToastMessage("An error occurred during Apple sign in");
