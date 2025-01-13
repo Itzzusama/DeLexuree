@@ -86,7 +86,7 @@ export const signInWithApple = async (navigation, dispatch, setLoading) => {
     const reqData = {
       email: res.email,
       fcmtoken: fcmtoken,
-      name: appleData?.fullName || "",
+      name: appleData?.fullName?.familyName || "",
       user_type: "employee",
     };
     try {
