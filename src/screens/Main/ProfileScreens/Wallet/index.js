@@ -9,11 +9,13 @@ import TransactionCard from "./molecules/TransactionCard";
 import { useFocusEffect } from "@react-navigation/native";
 import { get } from "../../../../Services/ApiRequest";
 import NoShow from "../../../../components/NoShow";
+import { useSelector } from "react-redux";
+import CustomButton from "../../../../components/CustomButton";
 
 const Wallet = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [transaction, setTransaction] = useState([]);
-
+  const { userData } = useSelector((state) => state.users);
   const fetchTransactions = async () => {
     try {
       setLoading(true);
@@ -63,6 +65,15 @@ const Wallet = ({ navigation }) => {
       scrollEnabled
       headerUnScrollable={() => <Header title={"Wallet"} />}
     >
+      <CustomButton
+        title={
+          userData?.acc_title
+            ? "Update Account Details"
+            : "Connect Bank Account"
+        }
+        customStyle={{ marginTop: 30 }}
+        onPress={() => navigation?.navigate("BankDetail")}
+      />
       <View style={styles.walletCard}>
         <CustomText label={"Your Earnings"} color={COLORS.white} />
         <CustomText

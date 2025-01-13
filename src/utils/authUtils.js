@@ -12,7 +12,8 @@ import { setToken } from "../store/reducer/AuthConfig";
 import { setUserData } from "../store/reducer/usersSlice";
 
 GoogleSignin.configure({
-  webClientId:"40372426505-gad73g4168ia8h2qhsru726uc42bv9b2.apps.googleusercontent.com"
+  webClientId:
+    "40372426505-gad73g4168ia8h2qhsru726uc42bv9b2.apps.googleusercontent.com",
 });
 
 export const signInWithGoogle = async (navigation, dispatch, setLoading) => {
@@ -31,7 +32,7 @@ export const signInWithGoogle = async (navigation, dispatch, setLoading) => {
       email: email,
       fcmtoken: fcmtoken,
       user_type: "employee",
-      name:userCredential.user?.displayName||""
+      name: userCredential.user?.displayName || "",
     };
     try {
       const response = await post("auth/social-login", reqData);
@@ -49,7 +50,9 @@ export const signInWithGoogle = async (navigation, dispatch, setLoading) => {
           ],
         });
       } else {
-        ToastMessage("That email has already been registered with other account type.");
+        ToastMessage(
+          "That email has already been registered with other account type."
+        );
         await GoogleSignin.signOut();
       }
     } catch (err) {
@@ -104,7 +107,9 @@ export const signInWithApple = async (navigation, dispatch, setLoading) => {
           ],
         });
       } else {
-        ToastMessage("That email has already been registered with other account type.");
+        ToastMessage(
+          "That email has already been registered with other account type."
+        );
       }
     } catch (err) {
       console.log(err);

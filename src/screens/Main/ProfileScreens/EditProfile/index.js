@@ -48,9 +48,6 @@ const EditProfile = () => {
     fName: userData?.name,
     email: userData?.email,
     phone: userData?.phone,
-    acc_title: userData?.acc_title,
-    acc_number: userData?.acc_numb,
-    bank_name: userData?.bank_name,
   };
 
   const [state, setState] = useState(init);
@@ -67,32 +64,32 @@ const EditProfile = () => {
       setLoading(false);
       return;
     }
-    if (!state.acc_title) {
-      ToastMessage("Please enter account title");
-      setLoading(false);
-      return;
-    }
-    if (!state.acc_number) {
-      ToastMessage("Please enter account number");
-      setLoading(false);
-      return;
-    }
-    if (!state.bank_name) {
-      ToastMessage("Please enter bank name");
-      setLoading(false);
-      return;
-    }
+    // if (!state.acc_title) {
+    //   ToastMessage("Please enter account title");
+    //   setLoading(false);
+    //   return;
+    // }
+    // if (!state.acc_number) {
+    //   ToastMessage("Please enter account number");
+    //   setLoading(false);
+    //   return;
+    // }
+    // if (!state.bank_name) {
+    //   ToastMessage("Please enter bank name");
+    //   setLoading(false);
+    //   return;
+    // }
     try {
       const body = {
         dob: birthdate,
         email: state.email,
         name: state.fName,
         phone: state.phone,
-        acc_title: state.acc_title,
-        acc_numb: state.acc_number,
+        // acc_title: state.acc_title,
+        // acc_numb: state.acc_number,
+        // bank_name: state.bank_name,
         gender: gender,
         profilePicture: image,
-        bank_name: state.bank_name,
       };
       const response = await put("users/update-user", body);
       if (response.data.success) {
@@ -132,27 +129,7 @@ const EditProfile = () => {
       value: state.phone,
       onChange: (text) => setState({ ...state, phone: text }),
     },
-    {
-      id: 4,
-      placeholder: "Enter account title",
-      label: "Account Title",
-      value: state.acc_title,
-      onChange: (text) => setState({ ...state, acc_title: text }),
-    },
-    {
-      id: 5,
-      placeholder: "Enter account number",
-      label: "Account Number",
-      value: state.acc_number,
-      onChange: (text) => setState({ ...state, acc_number: text }),
-    },
-    {
-      id: 6,
-      placeholder: "Enter bank name",
-      label: "Bank Name",
-      value: state.bank_name,
-      onChange: (text) => setState({ ...state, bank_name: text }),
-    },
+
     { id: 3.1 },
     { id: 3.2 },
   ];

@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
 
 import ScreenWrapper from "../../../components/ScreenWrapper";
@@ -6,12 +6,20 @@ import CustomButton from "../../../components/CustomButton";
 import AuthWrapper from "../../../components/AuthWrapper";
 import CustomInput from "../../../components/CustomInput";
 import CustomText from "../../../components/CustomText";
+import Header from "../../../components/Header";
+import { get, put } from "../../../Services/ApiRequest";
+import { setUserData } from "../../../store/reducer/usersSlice";
+import { ToastMessage } from "../../../utils/ToastMessage";
+import { className } from "../../../global-styles";
+import { useSelector } from "react-redux";
 
 const BankDetail = ({ navigation, route }) => {
+  const { userData } = useSelector((state) => state.users);
+
   const init = {
-    acc_title: "",
-    acc_numb: "",
-    bank_name: "",
+    acc_title: userData?.acc_title || "",
+    acc_numb: userData?.acc_numb || "",
+    bank_name: userData?.bank_name || "",
   };
   const [state, setState] = useState(init);
   const inits = {
@@ -66,49 +74,61 @@ const BankDetail = ({ navigation, route }) => {
     errorCheck();
   }, [errorCheck]);
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
+    setLoading(true);
     const body = {
-      ...route.params.body,
       acc_title: state.acc_title,
       acc_numb: state.acc_numb,
       bank_name: state.bank_name,
     };
-    console.log(body);
-    navigation.reset({
-      index: 0,
-      routes: [
-        {
-          name: "Information",
-          params: { body },
-        },
-      ],
-    });
+    try {
+      const response = await put("users/update-user", body);
+      if (response.data.success) {
+        getProfile();
+        ToastMessage(response.data?.message);
+        navigation.goBack();
+      } else {
+        ToastMessage(response.data?.message);
+      }
+    } catch (error) {
+      ToastMessage(error.response?.data?.error);
+      console.log(error.response.data.error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getProfile = async () => {
+    try {
+      const response = await get("users/me");
+      dispatch(setUserData(response.data?.user));
+    } catch (error) {}
   };
   return (
-    <ScreenWrapper scrollEnabled footerUnScrollable={() => <></>}>
-      <AuthWrapper
-        heading="Create Account"
-        desc="Enter Bank Detail"
-        showStatus={true}
-        index={1}
-      >
-        {array.map((item) => (
-          <CustomInput
-            key={item?.id}
-            placeholder={item.placeholder}
-            value={item.value}
-            onChangeText={item.onChange}
-            error={item.error}
-            withLabel={item.label}
-          />
-        ))}
-        <CustomButton
-          title="Continue"
-          marginTop={50}
-          onPress={handleRegister}
-          disabled={!Object.values(errors).every((error) => error === "")}
+    <ScreenWrapper
+      scrollEnabled
+      footerUnScrollable={() => <></>}
+      headerUnScrollable={() => <Header title={"Account Details"} />}
+    >
+      <View style={className("mt-12")} />
+      {array.map((item) => (
+        <CustomInput
+          key={item?.id}
+          placeholder={item.placeholder}
+          value={item.value}
+          onChangeText={item.onChange}
+          error={item.error}
+          withLabel={item.label}
         />
-      </AuthWrapper>
+      ))}
+      <CustomButton
+        title="Submit"
+        marginTop={50}
+        onPress={handleRegister}
+        loading={loading}
+        disabled={
+          loading || !Object.values(errors).every((error) => error === "")
+        }
+      />
     </ScreenWrapper>
   );
 };

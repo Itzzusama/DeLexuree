@@ -16,6 +16,7 @@ import { View } from "react-native";
 import moment from "moment";
 import CustomDropDown from "../../../components/CustomDropDown";
 import { useFocusEffect } from "@react-navigation/native";
+import Header from "../../../components/Header";
 
 const Signup = ({ navigation }) => {
   const [allCat, setAllCat] = useState([]);
@@ -236,7 +237,11 @@ const Signup = ({ navigation }) => {
     }
   };
   return (
-    <ScreenWrapper scrollEnabled footerUnScrollable={() => <></>}>
+    <ScreenWrapper
+      scrollEnabled
+      footerUnScrollable={() => <></>}
+      headerUnScrollable={() => <Header hideBackArrow />}
+    >
       <AuthWrapper heading="Create Account" desc="signUpDesc" showStatus={true}>
         {array.map((item) =>
           item.id === 4 ? (

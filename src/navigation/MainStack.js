@@ -23,6 +23,7 @@ import Wallet from "../screens/Main/ProfileScreens/Wallet";
 import PastBooking from "../screens/Main/ProfileScreens/PastBooking";
 import Availability from "../screens/Auth/Availability";
 import Maps from "../screens/Main/Maps";
+import BankDetail from "../screens/Auth/BankDetail";
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
@@ -54,6 +55,7 @@ const MainStack = () => {
       <Stack.Screen name="Wallet" component={Wallet} />
       <Stack.Screen name="PastBooking" component={PastBooking} />
       <Stack.Screen name="Availability" component={Availability} />
+      <Stack.Screen name="BankDetail" component={BankDetail} />
     </Stack.Navigator>
   );
 };

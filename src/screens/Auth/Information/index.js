@@ -23,6 +23,7 @@ import Gallery from "../../../components/Gallery";
 import { useSelector } from "react-redux";
 import { className } from "../../../global-styles";
 import InformationItem from "./molecules/InformationItem";
+import Header from "../../../components/Header";
 const Information = ({ navigation, route }) => {
   const { userCategory } = useSelector((state) => state.authConfigs);
 
@@ -140,6 +141,7 @@ const Information = ({ navigation, route }) => {
   return (
     <ScreenWrapper
       scrollEnabled
+      headerUnScrollable={() => <Header hideBackArrow />}
       footerUnScrollable={() => (
         <>
           <CustomButton

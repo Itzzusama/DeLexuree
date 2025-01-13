@@ -97,7 +97,7 @@ const OTPScreen = ({ navigation, route }) => {
       index: 0,
       routes: [
         {
-          name: "BankDetail",
+          name: "Information",
           params: { body },
         },
       ],
@@ -114,36 +114,7 @@ const OTPScreen = ({ navigation, route }) => {
           marginBottom={30}
           loading={loading}
           disabled={loading || otp.length < 4}
-          // onPress={
-          //   isAccountCreated
-          //     ? () => navigation.navigate('Success', {isAccountCreated})
-          //     : () => navigation.navigate('ResetPass')
-          // }
           onPress={isAccountCreated ? handleVerifyOtp : handleCheckOtp}
-          // onPress={
-          //   isAccountCreated
-          //     ? () =>
-          //         navigation.reset({
-          //           index: 0,
-          //           routes: [
-          //             {
-          //               name: "ResetPass",
-          //               params: {
-          //                 token: token,
-          //               },
-          //             },
-          //           ],
-          //         })
-          //     : () =>
-          //         navigation.reset({
-          //           index: 0,
-          //           routes: [
-          //             {
-          //               name: "Availability",
-          //             },
-          //           ],
-          //         })
-          // }
         />
       )}
     >

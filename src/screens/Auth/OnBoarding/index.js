@@ -140,7 +140,7 @@ export default OnBoarding;
 const styles = StyleSheet.create({
   sliderItem: {
     width: width,
-    height: height / 1.3,
+    height: height / 1.4,
     backgroundColor: COLORS.white,
     alignItems: "center",
     justifyContent: "center",
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   },
   container: {
     width: width,
-    height: height / 2.7,
+    height: height / 2.6,
     alignItems: "center",
     backgroundColor: COLORS.white,
     position: "absolute",

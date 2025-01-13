@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setToken } from "../../../store/reducer/AuthConfig";
 import { setUserData } from "../../../store/reducer/usersSlice";
+import Header from "../../../components/Header";
 
 const Availability = ({ navigation }) => {
   const route = useRoute();
@@ -160,12 +161,16 @@ const Availability = ({ navigation }) => {
 
           if (response.data.success) {
             console.log(response.data);
-            await AsyncStorage.setItem("token", response.data?.token);
-            dispatch(setToken(response.data?.token));
-            dispatch(setUserData(response.data?.user));
+            // await AsyncStorage.setItem("token", response.data?.token);
+            // dispatch(setToken(response.data?.token));
+            // dispatch(setUserData(response.data?.user));
             navigation.reset({
               index: 0,
-              routes: [{ name: "MainStack" }],
+              routes: [
+                {
+                  name: "Login",
+                },
+              ],
             });
           }
         } catch (err) {
@@ -227,11 +232,12 @@ const Availability = ({ navigation }) => {
     <ScreenWrapper
       scrollEnabled
       paddingHorizontal={14}
+      headerUnScrollable={() => <Header hideBackArrow />}
       footerUnScrollable={() => (
         <>
           <CustomButton
             width="90%"
-            marginBottom={12}
+            marginBottom={30}
             title={showSkip ? "Create Account" : "Save"}
             onPress={saveAvailability}
             loading={loading}
