@@ -33,23 +33,22 @@ const AuthWrapper = ({
       {showStatus && (
         <View
           style={[
-            className("flex mt-7  align-center"),
-            { width: "100%", justifyContent: "space-between" },
+            className("flex mt-7  align-center justify-center"),
+            { width: "98%" },
           ]}
         >
           <View
             style={[
-              className("rounded-1 h-1 bg-DD "),
+              className("rounded-1 h-1 bg-DD flex-1"),
               {
                 backgroundColor:
                   index == 0 || index == 1 || index == 2 || index == 3
                     ? COLORS.primaryColor
                     : COLORS.DD,
-                width: "23%",
               },
             ]}
           />
-          <View
+          {/* <View
             style={[
               className(" rounded-1 h-1 bg-DD mx-2"),
               {
@@ -60,24 +59,21 @@ const AuthWrapper = ({
                 width: "23%",
               },
             ]}
-          />
+          /> */}
           <View
             style={[
-              className(" rounded-1 h-1 bg-DD "),
+              className(" rounded-1 h-1 bg-DD flex-1 mx-2"),
               {
                 backgroundColor:
                   index == 2 || index == 3 ? COLORS.primaryColor : COLORS.DD,
-                width: "23%",
               },
             ]}
           />
           <View
             style={[
-              className("rounded-1 h-1 bg-DD "),
+              className("rounded-1 h-1 bg-DD flex-1"),
               {
                 backgroundColor: index == 3 ? COLORS.primaryColor : COLORS.DD,
-                width: "23%",
-                marginLeft: 5,
               },
             ]}
           />

@@ -12,8 +12,13 @@ const InformationItem = ({
   error,
 }) => {
   return (
-    <View style={{ borderBottomWidth: 0.2, borderColor:COLORS.gray }}>
-      <CustomText label={question} marginBottom={8}marginTop={28} fontSize={15} />
+    <View style={{ borderBottomWidth: 0.2, borderColor: COLORS.gray }}>
+      <CustomText
+        label={question}
+        marginBottom={8}
+        marginTop={28}
+        fontSize={15}
+      />
       <CustomInput
         placeholder={placeholder}
         value={value}
