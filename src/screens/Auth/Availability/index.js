@@ -230,7 +230,7 @@ const Availability = ({ navigation }) => {
 
   return (
     <ScreenWrapper
-      scrollEnabled
+      scrollEnabled={false}
       paddingHorizontal={14}
       headerUnScrollable={() => <Header hideBackArrow />}
       footerUnScrollable={() => (
@@ -252,12 +252,14 @@ const Availability = ({ navigation }) => {
         showStatus={showSkip ? true : false}
         index={3}
       >
-        <FlatList
+        <View style={{maxHeight:"85%"}}>
+         <FlatList
           data={daysOfWeek}
           renderItem={renderItem}
           keyExtractor={(item) => item}
           contentContainerStyle={styles.listContainer}
-        />
+          />
+        </View>
         {openFromPicker && (
           <DatePicker
             modal
