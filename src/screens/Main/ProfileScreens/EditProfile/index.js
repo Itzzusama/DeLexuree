@@ -59,35 +59,14 @@ const EditProfile = () => {
 
   const handleUpdateUser = async () => {
     setLoading(true);
-    if (!state.fName) {
-      ToastMessage("Please enter your name");
-      setLoading(false);
-      return;
-    }
-    // if (!state.acc_title) {
-    //   ToastMessage("Please enter account title");
-    //   setLoading(false);
-    //   return;
-    // }
-    // if (!state.acc_number) {
-    //   ToastMessage("Please enter account number");
-    //   setLoading(false);
-    //   return;
-    // }
-    // if (!state.bank_name) {
-    //   ToastMessage("Please enter bank name");
-    //   setLoading(false);
-    //   return;
-    // }
+
     try {
       const body = {
         dob: birthdate,
         email: state.email,
         name: state.fName,
         phone: state.phone,
-        // acc_title: state.acc_title,
-        // acc_numb: state.acc_number,
-        // bank_name: state.bank_name,
+
         gender: gender,
         profilePicture: image,
       };
@@ -135,7 +114,6 @@ const EditProfile = () => {
   ];
 
   const uploadAndGetUrl = async (file) => {
-    console.log("this is", file);
     setImageLoading(true);
     const token = await AsyncStorage.getItem("token");
     console.log(token);

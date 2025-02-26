@@ -11,13 +11,16 @@ const UserDetail = ({ name, email, avatar }) => {
     <View style={styles.container}>
       <ImageFast isView source={avatar} style={styles.avatar} />
       <View style={{ marginLeft: 12 }}>
-        <CustomText
-          label={name}
-          fontSize={18}
-          fontFamily={fonts.bold}
-          color={COLORS[22]}
-          style={styles.name}
-        />
+        {name && (
+          <CustomText
+            label={name}
+            fontSize={18}
+            fontFamily={fonts.bold}
+            color={COLORS[22]}
+            style={styles.name}
+          />
+        )}
+
         <CustomText
           label={email}
           fontSize={14}

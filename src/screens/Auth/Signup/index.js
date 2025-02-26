@@ -1,4 +1,9 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import ScreenWrapper from "../../../components/ScreenWrapper";
 import CustomButton from "../../../components/CustomButton";
@@ -17,6 +22,13 @@ import moment from "moment";
 import CustomDropDown from "../../../components/CustomDropDown";
 import { useFocusEffect } from "@react-navigation/native";
 import Header from "../../../components/Header";
+import ImageFast from "../../../components/ImageFast";
+import { Images } from "../../../assets/images";
+import UploadImage from "../../../components/UploadImage";
+import { className } from "../../../global-styles";
+import { endPoints } from "../../../Services/ENV";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 const Signup = ({ navigation }) => {
   const [allCat, setAllCat] = useState([]);
@@ -27,6 +39,8 @@ const Signup = ({ navigation }) => {
     password: "",
   };
   const phoneInput = useRef(null);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [image, setImage] = useState("");
   const [state, setState] = useState(init);
   const inits = {
     fNameError: "",
@@ -65,7 +79,7 @@ const Signup = ({ navigation }) => {
   const [birthdate, setBirthdate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const formattedDate = moment(birthdate).format("DD-MM-YYYY");
-
+  const [gender, setGender] = useState("male");
   const array = [
     {
       id: 1,
@@ -84,6 +98,7 @@ const Signup = ({ navigation }) => {
       error: errors.emailError,
     },
     { id: 2.1 },
+    { id: 2.2 },
     {
       id: 4,
       placeholder: "Phone Number",
@@ -171,6 +186,8 @@ const Signup = ({ navigation }) => {
           bodySignUp: apiBody,
           category: category,
           dob: birthdate,
+          gender: gender,
+          image: image,
         });
       }
     } catch (error) {
@@ -183,9 +200,7 @@ const Signup = ({ navigation }) => {
   const errorCheck = useMemo(() => {
     return () => {
       let newErrors = {};
-      if (!state.fName) newErrors.fNameError = "Please enter Full name";
-      else if (!state.email)
-        newErrors.emailError = "Please enter Email address";
+      if (!state.email) newErrors.emailError = "Please enter Email address";
       else if (!regEmail.test(state.email))
         newErrors.emailError = "Please enter valid email";
       else if (!state.phone) newErrors.phoneError = "Please enter phone number";
@@ -199,7 +214,8 @@ const Signup = ({ navigation }) => {
       else if (!passwordRegex.test(state.password))
         newErrors.passwordError =
           "Password must contain 1 number, 1 special character, Uppercase and 8 digits";
-      else if (!category) newErrors.categoryError = "Please select a category";
+      else if (!category || category.length === 0)
+        newErrors.categoryError = "Please select a category";
 
       setErrors(newErrors);
     };
@@ -236,6 +252,34 @@ const Signup = ({ navigation }) => {
       handleSendOtp();
     }
   };
+  const uploadAndGetUrl = async (file) => {
+    setImageLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("image", {
+        uri: file?.path || file?.fileCopyUri || "",
+        type: "image/jpeg",
+        name: "photo.jpg",
+      });
+      const res = await axios.post(
+        `${endPoints.BASE_URL}/image/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            // "x-auth-token": token,
+          },
+        }
+      );
+      setImage(res?.data?.image);
+      return res?.data?.image;
+    } catch (err) {
+      ToastMessage("Upload Again");
+    } finally {
+      setImageLoading(false);
+    }
+  };
   return (
     <ScreenWrapper
       scrollEnabled
@@ -243,6 +287,34 @@ const Signup = ({ navigation }) => {
       headerUnScrollable={() => <Header hideBackArrow />}
     >
       <AuthWrapper heading="Create Account" desc="signUpDesc" showStatus={true}>
+        {imageLoading ? (
+          <ActivityIndicator size={"small"} />
+        ) : (
+          <UploadImage
+            handleChange={async (res) => {
+              const url = await uploadAndGetUrl(res);
+              // setImage(url);
+            }}
+            renderButton={(res) => (
+              <View style={className("align-center justify-center")}>
+                <Pressable
+                  onPress={res}
+                  style={className("align-center justify-center mb-4 ")}
+                >
+                  <ImageFast
+                    source={image ? { uri: image } : Images.sampleProfile}
+                    style={{ height: 90, width: 90, borderRadius: 50 }}
+                  />
+                  <CustomText
+                    label={"Choose Profile Picture"}
+                    fontSize={14}
+                    fontFamily={fonts.semiBold}
+                  />
+                </Pressable>
+              </View>
+            )}
+          />
+        )}
         {array.map((item) =>
           item.id === 4 ? (
             <>
@@ -299,6 +371,21 @@ const Signup = ({ navigation }) => {
                 onCancel={() => {
                   setOpen(false);
                 }}
+              />
+            </View>
+          ) : item?.id == 2.2 ? (
+            <View style={{ marginBottom: 20 }}>
+              <CustomText
+                label={"Gender"}
+                marginBottom={5}
+                fontSize={14}
+                fontFamily={fonts.semiBold}
+              />
+              <CustomDropDown
+                placeholder={"Select your Gender"}
+                value={gender}
+                setValue={setGender}
+                options={["male", "female"]}
               />
             </View>
           ) : item?.id == 6 ? (

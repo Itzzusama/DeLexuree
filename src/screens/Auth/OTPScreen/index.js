@@ -20,7 +20,8 @@ const OTPScreen = ({ navigation, route }) => {
   const category = route?.params?.category;
   const token = route?.params?.token;
   const dob = route?.params?.dob;
-
+  const gender = route?.params?.gender;
+  const image = route?.params?.image;
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -91,6 +92,8 @@ const OTPScreen = ({ navigation, route }) => {
       name: bodySignUp?.fName,
       dob: dob,
       category: category,
+      gender: gender,
+      profilePicture: image,
     };
 
     navigation.reset({
