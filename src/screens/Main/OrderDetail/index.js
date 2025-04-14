@@ -13,6 +13,7 @@ import { formatDate, formatTime } from "../../../utils/dateUtils";
 const OrderDetail = ({ navigation }) => {
   const route = useRoute();
   const { detail } = route.params;
+
   const onChatPress = async (item) => {
     const dataToSend = {
       id: detail?.user?._id,
@@ -51,6 +52,11 @@ const OrderDetail = ({ navigation }) => {
         address={detail?.location?.address}
         description={detail?.user?.email}
         onChatPress={onChatPress}
+        state={detail?.state}
+        city={detail?.city}
+        street={detail?.street}
+        apartmentnumber={detail?.apartmentnumber}
+        zip={detail?.zip}
       />
     </ScreenWrapper>
   );

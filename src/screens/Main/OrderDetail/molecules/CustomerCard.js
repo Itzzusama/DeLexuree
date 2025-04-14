@@ -17,6 +17,11 @@ const CustomerCard = ({
   date = "Monday, May 12",
   time = "11:00",
   address = "5th avenue, apartment 456, New York, USA",
+  zip,
+  street,
+  city,
+  apartmentnumber,
+  state,
 }) => {
   return (
     <View
@@ -30,7 +35,10 @@ const CustomerCard = ({
       }}
     >
       <View style={[styles.container]}>
-        <Image source={{ uri: imageUrl }} style={styles.image} />
+        <Image
+          source={imageUrl ? { uri: imageUrl } : Images.sampleProfile}
+          style={styles.image}
+        />
         <View style={styles.textContainer}>
           <CustomText
             style={styles.name}
@@ -68,6 +76,14 @@ const CustomerCard = ({
         fontSize={12}
       />
       <CustomText label={address} fontSize={12} />
+      <CustomText
+        fontSize={12}
+        label={
+          `${street}, ` +
+          (apartmentnumber ? `Apt ${apartmentnumber}, ` : "") +
+          `${city}, ${state}, ${zip}`
+        }
+      />
     </View>
   );
 };

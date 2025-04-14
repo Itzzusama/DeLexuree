@@ -44,10 +44,10 @@ const ServiceCard = ({
           </Text>
           <View style={styles.footer}>
             <Text style={styles.date}>{date}</Text>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               activeOpacity={0.6}
               style={styles.mapContainer}
-              onPress={onOpenMaps}
+               onPress={onOpenMaps}
             >
               <Icons
                 name={past ? "text-document" : "map"}
@@ -62,7 +62,7 @@ const ServiceCard = ({
               >
                 {past ? "Details" : "Open Maps"}
               </CustomText>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </View>
