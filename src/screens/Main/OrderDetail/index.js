@@ -49,7 +49,7 @@ const OrderDetail = ({ navigation }) => {
         name={detail?.user?.name}
         date={formatDate(detail?.date)}
         time={formatTime(detail?.time)}
-        address={detail?.location?.address}
+        // address={detail?.location?.address}
         description={detail?.user?.email}
         onChatPress={onChatPress}
         state={detail?.state}

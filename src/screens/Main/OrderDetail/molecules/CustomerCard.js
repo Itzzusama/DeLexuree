@@ -75,7 +75,6 @@ const CustomerCard = ({
         fontFamily={fonts.bold}
         fontSize={12}
       />
-      <CustomText label={address} fontSize={12} />
       <CustomText
         fontSize={12}
         label={

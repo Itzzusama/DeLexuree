@@ -47,7 +47,7 @@ const Header = ({ title, marginBottom, rightPress, source, desc }) => {
           <CustomText label={desc} fontSize={12} fontFamily={fonts.medium} />
         </View>
       </View>
-      <View style={styles.thirdContainer}>
+      {/* <View style={styles.thirdContainer}>
         <TouchableOpacity activeOpacity={0.6} onPress={rightPress}>
           <Icons
             family="Entypo"
@@ -56,7 +56,7 @@ const Header = ({ title, marginBottom, rightPress, source, desc }) => {
             size={22}
           />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };

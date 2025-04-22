@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     color: "#555",
   },
   line: {
-    height: 0.4,
+    height: 0.9,
     marginVertical: 26,
     backgroundColor: COLORS.gray,
   },

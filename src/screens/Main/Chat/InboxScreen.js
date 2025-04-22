@@ -24,6 +24,7 @@ import { get } from "../../../Services/ApiRequest";
 import ChatBubble from "./molecules/ChatBubble";
 import { formatDate, formatRelativeDate } from "../../../utils/dateUtils";
 import fonts from "../../../assets/fonts";
+import { endPoints } from "../../../Services/ENV";
 
 const InboxScreen = ({ route }) => {
   const flatListRef = useRef(null);
@@ -96,7 +97,7 @@ const InboxScreen = ({ route }) => {
   };
 
   useEffect(() => {
-    const newSocket = io("https://deluxcleaning.onrender.com");
+    const newSocket = io(endPoints?.socket_BASE_URL);
 
     newSocket.on("connect", async () => {
       const token = await AsyncStorage.getItem("token");
