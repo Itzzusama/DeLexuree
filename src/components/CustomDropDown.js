@@ -18,6 +18,7 @@ import { COLORS } from "../utils/COLORS";
 import fonts from "../assets/fonts";
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
+
 const CustomDropDown = ({
   options,
   value,
@@ -65,7 +66,7 @@ const CustomDropDown = ({
           {isRequired && <Text style={{ color: COLORS.red }}> *</Text>}
         </Text>
       ) : null}
-      <View style={[styles.dropdownMainContainer, { height: !isOpen && 49 }]}>
+      <View style={[styles.dropdownMainContainer, { height: !isOpen? 49 : 130 }]}>
         <TouchableOpacity
           style={[styles.mainContainer, { marginBottom: isOpen ? 5 : 20 }]}
           onPress={toggleDropdown}
@@ -94,7 +95,8 @@ const CustomDropDown = ({
         </TouchableOpacity>
 
         {isOpen && (
-          <ScrollView nestedScrollEnabled>
+          <ScrollView nestedScrollEnabled
+          style={{ maxHeight:450 }}>
             {options?.map((option) => (
               <TouchableOpacity
                 activeOpacity={1}

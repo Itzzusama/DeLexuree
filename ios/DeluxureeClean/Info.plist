@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>DeluxureeClean</string>
+	<string>DeeLuxuree Clean</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -47,19 +47,19 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>DeeLuxureeClean requires access to your media library to allow you to upload and display photos and videos on your profile.</string>
+	<string>DeeLuxuree Clean requires access to your media library to allow you to upload and display photos and videos on your profile.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>DeeLuxureeClean wants to access camera to upload pictures for profile.</string>
+	<string>DeeLuxuree Clean wants to access camera to upload pictures for profile.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>DeeLuxureeClean wants to access location to add your location to your profile to help you to better find cleaning services</string>
+	<string>DeeLuxuree Clean wants to access location to add your location to your profile to help you to better find cleaning services</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>DeeLuxureeClean wants to access location to add your location to your profile to help you to better cleaning services</string>
+	<string>DeeLuxuree Clean wants to access location to add your location to your profile to help you to better cleaning services</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>DeeLuxureeClean wants to access location to add your location to your profile to help you to better cleaning services</string>
+	<string>DeeLuxuree Clean wants to access location to add your location to your profile to help you to better cleaning services</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>DeeLuxureeClean wants to access gallery to upload pictures for profile</string>
+	<string>DeeLuxuree Clean wants to access gallery to upload pictures for profile</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>DeeLuxureeClean wants to access gallery to upload pictures for profile</string>
+	<string>DeeLuxuree Clean wants to access gallery to upload pictures for profile</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
