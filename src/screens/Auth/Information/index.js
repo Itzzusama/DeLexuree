@@ -30,6 +30,9 @@ const Information = ({ navigation, route }) => {
   const { userCategory } = useSelector((state) => state.authConfigs);
 
   const init = {
+    q0: "",
+    q01: "",
+    q02: "",
     q1: "",
     q2: "",
     q3: "",
@@ -48,6 +51,9 @@ const Information = ({ navigation, route }) => {
   };
 
   const inits = {
+    q0Error: "",
+    q01Error: "",
+    q02Error: "",
     q1Error: "",
     q2Error: "",
     q3Error: "",
@@ -73,9 +79,34 @@ const Information = ({ navigation, route }) => {
 
   const array = [
     {
+      id: 0,
+      question: "1. What is your age?",
+      placeholder: "Please enter information",
+      value: state.q0,
+      onChange: (text) => setState({ ...state, q0: text }),
+      error: errors.q0Error,
+    },
+    {
+      id: 0.1,
+      question: "2. Which borough do you currently live in?",
+      placeholder: "Please enter information",
+      value: state.q01,
+      onChange: (text) => setState({ ...state, q01: text }),
+      error: errors.q01Error,
+    },
+    {
+      id: 0.2,
+      question:
+        "3. Which boroughs are you willing to travel to for cleaning jobs?",
+      placeholder: "Please enter information",
+      value: state.q02,
+      onChange: (text) => setState({ ...state, q02: text }),
+      error: errors.q02Error,
+    },
+    {
       id: 1,
       question:
-        "1. Describe the steps you would take to thoroughly clean a client’s bathroom from top to bottom.",
+        "4. Describe the steps you would take to thoroughly clean a client’s bathroom from top to bottom.",
       placeholder: "Please enter information",
       value: state.q1,
       onChange: (text) => setState({ ...state, q1: text }),
@@ -84,7 +115,7 @@ const Information = ({ navigation, route }) => {
     {
       id: 2,
       question:
-        "2. If you arrive at a home and the client asks for an additional service that was not included in the booking, how would you handle this request?",
+        "5. If you arrive at a home and the client asks for an additional service that was not included in the booking, how would you handle this request?",
       placeholder: "Please enter information",
       value: state.q2,
       onChange: (text) => setState({ ...state, q2: text }),
@@ -93,7 +124,7 @@ const Information = ({ navigation, route }) => {
     {
       id: 3,
       question:
-        "3. A client complains about streaks on their glass and mirrors after you’ve cleaned them. How would you ensure streak-free results in the future?",
+        "6. A client complains about streaks on their glass and mirrors after you’ve cleaned them. How would you ensure streak-free results in the future?",
       placeholder: "Please enter information",
       value: state.q3,
       onChange: (text) => setState({ ...state, q3: text }),
@@ -102,7 +133,7 @@ const Information = ({ navigation, route }) => {
     {
       id: 4,
       question:
-        "4. Explain your process for ensuring all areas of a kitchen are deep-cleaned, including less obvious spots like handles, light switches, and appliance exteriors.",
+        "7. Explain your process for ensuring all areas of a kitchen are deep-cleaned, including less obvious spots like handles, light switches, and appliance exteriors.",
       placeholder: "Please enter information",
       value: state.q4,
       onChange: (text) => setState({ ...state, q4: text }),
@@ -111,7 +142,7 @@ const Information = ({ navigation, route }) => {
     {
       id: 5,
       question:
-        "5. Imagine you’re asked to do a last-minute cleaning for a client expecting guests in an hour. Which areas would you prioritize, and how would you work efficiently?",
+        "8. Imagine you’re asked to do a last-minute cleaning for a client expecting guests in an hour. Which areas would you prioritize, and how would you work efficiently?",
       placeholder: "Please enter information",
       value: state.q5,
       onChange: (text) => setState({ ...state, q5: text }),
@@ -120,7 +151,7 @@ const Information = ({ navigation, route }) => {
     {
       id: 6,
       question:
-        "6. What motivates you to do a thorough job when cleaning a client’s home?",
+        "9. What motivates you to do a thorough job when cleaning a client’s home?",
       placeholder: "Please enter information",
       value: state.q6,
       onChange: (text) => setState({ ...state, q6: text }),
@@ -129,7 +160,7 @@ const Information = ({ navigation, route }) => {
     {
       id: 7,
       question:
-        "7. Describe a situation where you went above and beyond for a client. How did they react?",
+        "10. Describe a situation where you went above and beyond for a client. How did they react?",
       placeholder: "Please enter information",
       value: state.q7,
       onChange: (text) => setState({ ...state, q7: text }),
@@ -138,7 +169,7 @@ const Information = ({ navigation, route }) => {
     {
       id: 8,
       question:
-        "8. How do you handle situations where a client has very specific cleaning preferences or instructions?",
+        "11. How do you handle situations where a client has very specific cleaning preferences or instructions?",
       placeholder: "Please enter information",
       value: state.q8,
       onChange: (text) => setState({ ...state, q8: text }),
@@ -147,7 +178,7 @@ const Information = ({ navigation, route }) => {
     {
       id: 9,
       question:
-        "9. What do you find most rewarding about working in the cleaning industry?",
+        "12. What do you find most rewarding about working in the cleaning industry?",
       placeholder: "Please enter information",
       value: state.q9,
       onChange: (text) => setState({ ...state, q9: text }),
@@ -156,7 +187,7 @@ const Information = ({ navigation, route }) => {
     {
       id: 10,
       question:
-        "10. If you ever encounter a client who is not fully satisfied with your work, how would you approach the situation?",
+        "13. If you ever encounter a client who is not fully satisfied with your work, how would you approach the situation?",
       placeholder: "Please enter information",
       value: state.q10,
       onChange: (text) => setState({ ...state, q10: text }),
@@ -234,8 +265,10 @@ const Information = ({ navigation, route }) => {
   const errorCheck = useMemo(() => {
     return () => {
       let newErrors = {};
-
-      if (!state.q1) newErrors.q1Error = "Please enter Information";
+      if (!state.q0) newErrors.q0Error = "Please enter Information";
+      else if (!state.q01) newErrors.q01Error = "Please enter Information";
+      else if (!state.q02) newErrors.q02Error = "Please enter Information";
+      else if (!state.q1) newErrors.q1Error = "Please enter Information";
       else if (!state.q2) newErrors.q2Error = "Please enter Information";
       else if (!state.q3) newErrors.q3Error = "Please enter Information";
       else if (!state.q4) newErrors.q4Error = "Please enter Information";
@@ -263,6 +296,9 @@ const Information = ({ navigation, route }) => {
     const body = {
       ...route.params.body,
       ques_forms: {
+        age: state.q0,
+        borough: state.q01,
+        travel_boroughs: state.q02,
         bathroomSteps: state.q1,
         additionalService: state.q2,
         streakFreeGlass: state.q3,

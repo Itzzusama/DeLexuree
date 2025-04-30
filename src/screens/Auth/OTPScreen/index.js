@@ -94,6 +94,8 @@ const OTPScreen = ({ navigation, route }) => {
       category: category,
       gender: gender,
       profilePicture: image,
+      city: bodySignUp?.city,
+      state: bodySignUp?.state,
     };
 
     navigation.reset({

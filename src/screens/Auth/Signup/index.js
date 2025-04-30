@@ -37,6 +37,8 @@ const Signup = ({ navigation }) => {
     email: "",
     phone: "",
     password: "",
+    city: "",
+    state: "",
   };
   const phoneInput = useRef(null);
   const [imageLoading, setImageLoading] = useState(false);
@@ -48,6 +50,8 @@ const Signup = ({ navigation }) => {
     phoneError: "",
     passwordError: "",
     categoryError: "",
+    cityError: "",
+    stateError: "",
   };
 
   useFocusEffect(
@@ -114,6 +118,22 @@ const Signup = ({ navigation }) => {
       value: state.password,
       onChange: (text) => setState({ ...state, password: text }),
       error: errors.passwordError,
+    },
+    {
+      id: 5.1,
+      placeholder: "City",
+      label: "City",
+      value: state.city,
+      onChange: (text) => setState({ ...state, city: text }),
+      error: errors.cityError,
+    },
+    {
+      id: 5.2,
+      placeholder: "State",
+      label: "State",
+      value: state.state,
+      onChange: (text) => setState({ ...state, state: text }),
+      error: errors.stateError,
     },
     { id: 6 },
   ];
